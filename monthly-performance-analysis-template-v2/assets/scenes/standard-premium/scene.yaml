@@ -1,0 +1,158 @@
+scene:
+  id: standard-premium
+  version: 2.0.0
+  title: 标保
+  description: 按手工分析步骤汇总标保指标并对机构进行阈值分类。
+  match:
+    keywords:
+      - 标保
+      - 标准保费
+      - 标保达成率
+      - 全年标保进度
+    questions:
+      - 本月标保达成情况如何？
+      - 哪些机构标保达标或进度偏低？
+
+metric_catalog: ../../metrics/standard-premium.yaml
+
+inputs:
+  parameters:
+    data_month_name:
+      type: string
+      required: true
+      description: 用于解析动态月份列，例如5月。
+    cutoff_date:
+      type: string
+      required: true
+      description: 报告数据截止日期，例如5月31日。
+    monthly_high_threshold:
+      type: number
+      default: 70
+      description: 月度标保达成率较高阈值。
+    monthly_target_threshold:
+      type: number
+      default: 100
+      description: 月度标保目标达成阈值。
+    monthly_low_threshold:
+      type: number
+      default: 50
+      description: 月度标保达成率较低阈值。
+    monthly_very_low_threshold:
+      type: number
+      default: 5
+      description: 月度标保达成率严重偏低阈值。
+    yearly_high_threshold:
+      type: number
+      default: 60
+      description: 全年标保进度较高阈值。
+    yearly_very_high_threshold:
+      type: number
+      default: 80
+      description: 全年标保进度突出阈值。
+    yearly_low_threshold:
+      type: number
+      default: 45
+      description: 全年标保进度较低阈值。
+
+analysis_instructions:
+  - 汇总全系统标保的{总量}、{达成率}、{同比增速}、{年度进度}。
+  - 按{达成率}列出高于{月度较高阈值}和低于{月度较低阈值}的机构。
+  - 按{年度进度}列出高于{年度较高阈值}和低于{年度较低阈值}的机构。
+
+steps:
+  - id: overall_summary
+    type: summarize
+    metrics:
+      - metric: month_amount
+        prefix: ${data_month_name}标保共达成
+      - metric: month_rate
+        prefix: "达成率 "
+      - metric: month_yoy
+        prefix: ""
+      - metric: year_amount
+        prefix: 全年达成
+      - metric: year_progress
+        prefix: "全年进度 "
+      - metric: year_yoy
+        prefix: 全年标保
+    presentation:
+      prefix: 截至${cutoff_date}，全系统
+      separator: "，"
+      terminator: "。"
+
+  - id: monthly_rate_classification
+    type: classify
+    metric: month_rate
+    display_order: source
+    bands:
+      - id: high
+        operator: gt
+        threshold_param: monthly_high_threshold
+        presentation:
+          style: threshold_list
+          subject: ${data_month_name}标保达成率
+          comparison: "高于 "
+      - id: target_met
+        operator: gte
+        threshold_param: monthly_target_threshold
+        presentation:
+          style: organization_text
+          prefix: 其中
+          suffix: 达成${data_month_name}标保目标
+      - id: low
+        operator: lt
+        threshold_param: monthly_low_threshold
+        presentation:
+          style: threshold_list
+          subject: ${data_month_name}标保达成率
+          comparison: "低于 "
+      - id: very_low
+        operator: lt
+        threshold_param: monthly_very_low_threshold
+        presentation:
+          style: organization_threshold
+          prefix: 其中
+          text: "达成率不足 "
+    presentation:
+      separator: "；"
+      terminator: "；"
+
+  - id: yearly_progress_classification
+    type: classify
+    metric: year_progress
+    display_order: source
+    bands:
+      - id: high
+        operator: gt
+        threshold_param: yearly_high_threshold
+        presentation:
+          style: threshold_list
+          subject: 全年标保进度达成
+          comparison: "高于 "
+      - id: very_high
+        operator: gt
+        threshold_param: yearly_very_high_threshold
+        presentation:
+          style: organization_threshold
+          prefix: 其中
+          text: "达成进度超 "
+      - id: low
+        operator: lt
+        threshold_param: yearly_low_threshold
+        presentation:
+          style: threshold_list
+          subject: 全年标保进度达成
+          comparison: "低于 "
+    presentation:
+      separator: "；"
+      terminator: "。"
+
+signals:
+  target_met:
+    from:
+      step: monthly_rate_classification
+      band: target_met
+
+render:
+  template: scene.md.j2
+  type: markdown_fragment

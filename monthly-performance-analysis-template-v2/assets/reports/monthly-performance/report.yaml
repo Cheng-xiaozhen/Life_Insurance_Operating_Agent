@@ -1,0 +1,47 @@
+report:
+  id: monthly-performance
+  version: 2.0.0
+  title: ${report_month_name}工作总结
+
+inputs:
+  parameters:
+    report_month_name:
+      type: string
+      required: true
+      description: 报告标题月份，例如五月。
+    data_month_name:
+      type: string
+      required: true
+      description: CSV动态列月份，例如5月。
+    quarter_name:
+      type: string
+      required: true
+      description: CSV动态列季度，例如二季度。
+    cutoff_date:
+      type: string
+      required: true
+      description: 报告数据截止日期，例如5月31日。
+
+scenes:
+  - id: standard-premium
+    config: ../../scenes/standard-premium/scene.yaml
+  - id: value
+    config: ../../scenes/value/scene.yaml
+  - id: active-manpower
+    config: ../../scenes/active-manpower/scene.yaml
+  - id: sunshine-manpower
+    config: ../../scenes/sunshine-manpower/scene.yaml
+  - id: supervisor-activity
+    config: ../../scenes/supervisor-activity/scene.yaml
+  - id: supervisor-double-star
+    config: ../../scenes/supervisor-double-star/scene.yaml
+  - id: standard-team
+    config: ../../scenes/standard-team/scene.yaml
+  - id: recruitment
+    config: ../../scenes/recruitment/scene.yaml
+  - id: co-recruitment
+    config: ../../scenes/co-recruitment/scene.yaml
+
+render:
+  template: report.md.j2
+  type: markdown

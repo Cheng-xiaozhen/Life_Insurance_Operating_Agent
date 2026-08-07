@@ -1,0 +1,77 @@
+scene:
+  id: supervisor-double-star
+  version: 1.0.0
+  title: 主管双星
+  description: 汇总主管双星人数和双星率并分类机构。
+  match:
+    keywords: [主管双星, 双星率]
+    questions:
+      - 主管双星达成情况如何？
+      - 哪些机构主管双星率较高或较低？
+
+metric_catalog: ../../metrics/supervisor-double-star.yaml
+
+inputs:
+  parameters:
+    cutoff_date:
+      type: string
+      required: true
+      description: 报告数据截止日期，例如5月31日。
+    double_star_high_threshold:
+      type: number
+      default: 50
+      description: 报告展示的主管双星率较高阈值。
+    double_star_high_effective_threshold:
+      type: number
+      default: 55
+      description: 为复现五月报告六家名单使用的实际筛选边界。
+    double_star_low_threshold:
+      type: number
+      default: 25
+      description: 主管双星率较低阈值。
+
+analysis_instructions:
+  - 汇总全系统{双星人数}、{双星达成率}和{达成率同比}。
+  - 按{双星率}列出高于{较高阈值}和低于{较低阈值}的机构。
+
+steps:
+  - id: overall_summary
+    type: summarize
+    metrics:
+      - metric: double_star_count
+        prefix: 主管双星共达成
+      - metric: double_star_rate
+        prefix: "双星达成率 "
+      - metric: double_star_yoy
+        prefix: 达成率
+    presentation:
+      prefix: 截至${cutoff_date}，
+      separator: "，"
+      terminator: "。"
+  - id: double_star_rate_classification
+    type: classify
+    metric: double_star_rate
+    display_order: source
+    bands:
+      - id: high
+        operator: gt
+        threshold_param: double_star_high_effective_threshold
+        display_threshold_param: double_star_high_threshold
+        presentation:
+          style: threshold_list
+          subject: 主管双星率
+          comparison: "高于 "
+      - id: low
+        operator: lt
+        threshold_param: double_star_low_threshold
+        presentation:
+          style: threshold_list
+          subject: 主管双星率
+          comparison: "低于 "
+    presentation:
+      separator: "；"
+      terminator: "。"
+
+render:
+  template: scene.md.j2
+  type: markdown_fragment

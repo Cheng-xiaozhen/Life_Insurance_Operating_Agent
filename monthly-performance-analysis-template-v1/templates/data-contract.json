@@ -1,0 +1,778 @@
+{
+  "contract_version": "4.0.0",
+  "template": "report.md.j2",
+  "source_encoding": "UTF-8",
+  "normalization": {
+    "trim_headers": true,
+    "trim_string_values": true,
+    "percent_storage": "Store 61.8% as numeric 61.8.",
+    "point_storage": "Store -1.1pt as numeric -1.1.",
+    "missing_markers": [
+      "",
+      "-"
+    ],
+    "organization_order": "Rank by the configured metric to select organizations, then restore source CSV row order for display.",
+    "total_row": "Select the row whose first column equals 全系统."
+  },
+  "meta": {
+    "report_month_name": {
+      "type": "string",
+      "example": "五月",
+      "description": "用于封面标题，不可从 PDF 文件名直接推断。"
+    },
+    "data_month_name": {
+      "type": "string",
+      "example": "5月",
+      "description": "用于指标名称和正文。"
+    },
+    "cutoff_date": {
+      "type": "string",
+      "example": "5月31日"
+    },
+    "quarter_name": {
+      "type": "string",
+      "example": "二季度"
+    }
+  },
+  "summary": {
+    "standard_premium": {
+      "source": "标保.csv",
+      "row": "全系统",
+      "fields": {
+        "month_amount": {
+          "column": "{data_month_name}达成",
+          "format": "amount_wan"
+        },
+        "month_rate": {
+          "column": "{data_month_name}达成率",
+          "format": "pct"
+        },
+        "month_yoy": {
+          "column": "{data_month_name}同比",
+          "format": "yoy_pct_phrase"
+        },
+        "year_amount": {
+          "column": "全年标保达成",
+          "format": "amount_wan"
+        },
+        "year_progress": {
+          "column": "全年进度",
+          "format": "pct"
+        },
+        "year_yoy": {
+          "column": "全年同比",
+          "format": "yoy_pct_phrase"
+        }
+      }
+    },
+    "value": {
+      "source": "价值.csv",
+      "row": "全系统",
+      "fields": {
+        "month_amount": {
+          "column": "{data_month_name}达成",
+          "format": "amount_wan"
+        },
+        "month_rate": {
+          "column": "{data_month_name}达成率",
+          "format": "pct"
+        },
+        "month_yoy": {
+          "column": "{data_month_name}序时同比",
+          "format": "yoy_pct_phrase"
+        },
+        "year_progress": {
+          "column": "全年进度",
+          "format": "pct"
+        },
+        "year_yoy": {
+          "column": "全年同比",
+          "format": "yoy_pct_phrase"
+        }
+      }
+    },
+    "active_manpower": {
+      "source": "活动人力.csv",
+      "row": "全系统",
+      "fields": {
+        "headcount": {
+          "column": "活动人力",
+          "format": "integer"
+        },
+        "yoy": {
+          "column": "同比",
+          "format": "yoy_pct_phrase"
+        },
+        "rate": {
+          "column": "活动人力达成率",
+          "format": "pct"
+        }
+      }
+    },
+    "sunshine_manpower": {
+      "source": "阳光人力.csv",
+      "row": "全系统",
+      "fields": {
+        "headcount": {
+          "column": "阳光人力达成",
+          "format": "integer"
+        },
+        "yoy": {
+          "column": "同比",
+          "format": "yoy_pct_phrase"
+        },
+        "rate": {
+          "column": "阳光人力达成率",
+          "format": "pct"
+        },
+        "share_of_active": {
+          "column": "阳光占比活动",
+          "format": "pct"
+        }
+      }
+    },
+    "supervisor": {
+      "fields": {
+        "in_service": {
+          "source": "主管活动.csv",
+          "row": "全系统",
+          "column": "在职主管",
+          "format": "integer"
+        },
+        "active": {
+          "source": "主管活动.csv",
+          "row": "全系统",
+          "column": "活动人数",
+          "format": "integer"
+        },
+        "active_rate": {
+          "source": "主管活动.csv",
+          "row": "全系统",
+          "column": "活动率",
+          "format": "pct"
+        },
+        "active_rate_yoy": {
+          "source": "主管活动.csv",
+          "row": "全系统",
+          "column": "活动率同比",
+          "format": "yoy_pt_phrase"
+        },
+        "double_star": {
+          "source": "主管双星.csv",
+          "row": "全系统",
+          "column": "双星人数",
+          "format": "integer"
+        },
+        "double_star_rate": {
+          "source": "主管双星.csv",
+          "row": "全系统",
+          "column": "双星率",
+          "format": "pct"
+        },
+        "double_star_rate_yoy": {
+          "source": "主管双星.csv",
+          "row": "全系统",
+          "column": "双星率同比",
+          "format": "yoy_pt_phrase"
+        }
+      }
+    },
+    "recruitment": {
+      "source": "新增.csv",
+      "row": "全系统",
+      "fields": {
+        "trained": {
+          "column": "新增_送训",
+          "format": "integer"
+        },
+        "added": {
+          "column": "新增_新增",
+          "format": "integer"
+        },
+        "rate": {
+          "column": "新增_达成率",
+          "format": "pct"
+        },
+        "yoy": {
+          "column": "新增_序时同比",
+          "format": "yoy_pct_phrase"
+        },
+        "first_month_sunshine": {
+          "column": "首阳（起聘）_首阳",
+          "format": "integer"
+        },
+        "first_month_sunshine_rate": {
+          "column": "首阳（起聘）_首阳率",
+          "format": "pct"
+        },
+        "college_share": {
+          "column": "大专+_占比",
+          "format": "pct"
+        },
+        "college_share_yoy": {
+          "column": "大专+_序时同比",
+          "format": "yoy_pt_phrase"
+        },
+        "bachelor_share": {
+          "column": "本科+_占比",
+          "format": "pct"
+        },
+        "bachelor_gap": {
+          "column": "本科+_差额",
+          "format": "gap_pt_phrase"
+        }
+      }
+    },
+    "co_recruitment": {
+      "source": "同引.csv",
+      "row": "全系统",
+      "fields": {
+        "month_trained": {
+          "column": "{data_month_name}送训_送训",
+          "format": "integer"
+        },
+        "month_trained_yoy": {
+          "column": "{data_month_name}送训_同比",
+          "format": "yoy_pct_phrase"
+        },
+        "quarter_onboarded": {
+          "column": "{quarter_name}同引_达成",
+          "format": "integer"
+        },
+        "quarter_rate": {
+          "column": "{quarter_name}同引_达成率",
+          "format": "pct"
+        },
+        "quarter_yoy": {
+          "column": "{quarter_name}同引_同比",
+          "format": "yoy_pct_phrase"
+        },
+        "college_share": {
+          "column": "{quarter_name}大专+学历_占比",
+          "format": "pct"
+        },
+        "college_share_yoy": {
+          "column": "{quarter_name}大专+学历_同比",
+          "format": "yoy_pt_phrase"
+        },
+        "bachelor_share": {
+          "column": "{quarter_name}本科+学历_占比",
+          "format": "pct"
+        },
+        "bachelor_share_yoy": {
+          "column": "{quarter_name}本科+学历_同比",
+          "format": "yoy_pt_phrase"
+        }
+      }
+    }
+  },
+  "derived": {
+    "selection_runtime": {
+      "strategy": "threshold_range_then_ranked_limit",
+      "eligible_rows": "Exclude the 全系统 row, empty 机构, and missing metric values unless a rule explicitly says otherwise.",
+      "default_selection": "Apply the configured default threshold first. Accept and display that result when selection.min <= count <= selection.max, even when count differs from selection.limit.",
+      "fallback_selection": "If the default-threshold count is below selection.min or above selection.max, rank by selection.direction, take the configured offset/limit segment, infer a business-tick threshold that filters exactly that fixed set, and display the inferred-threshold result.",
+      "selection_order": "Use source row order as the stable tie-breaker during ranking.",
+      "display_order": "After selection, restore source CSV row order.",
+      "threshold_strategy": "default_then_inferred_separating_business_tick",
+      "threshold_definition": "The default threshold is authoritative while its result count is inside the configured inclusive range. Outside that range, choose a multiple of step that makes the configured operator return exactly the selection.limit ranked fallback set. If multiple ticks are valid, choose the numerically lowest valid tick.",
+      "threshold_failure": "Fail validation when no configured business tick filters exactly the fixed ranked selection, including a tie split at the selection boundary.",
+      "output_shape": {
+        "organizations": "string[]",
+        "threshold": "number for one-sided rules",
+        "lower_threshold": "number for ranked-window rules",
+        "upper_threshold": "number for ranked-window rules",
+        "selection_mode": "default_threshold or inferred_threshold"
+      },
+      "selection_range": "selection.min and selection.max are inclusive. Require min <= limit <= max."
+    },
+    "standard_premium": {
+      "source": "标保.csv",
+      "organization_column": "机构",
+      "rules": {
+        "month_rate_high": {
+          "column": "{data_month_name}达成率",
+          "selection": {
+            "direction": "descending",
+            "limit": 9,
+            "min": 0,
+            "max": 10
+          },
+          "threshold": {
+            "operator": ">",
+            "step": 10,
+            "default": 70
+          }
+        },
+        "month_target_met": {
+          "column": "{data_month_name}达成率",
+          "selection": {
+            "direction": "descending",
+            "limit": 2,
+            "min": 0,
+            "max": 10
+          },
+          "threshold": {
+            "operator": ">=",
+            "step": 10,
+            "default": 100
+          }
+        },
+        "month_rate_low": {
+          "column": "{data_month_name}达成率",
+          "selection": {
+            "direction": "ascending",
+            "limit": 8,
+            "min": 0,
+            "max": 10
+          },
+          "threshold": {
+            "operator": "<",
+            "step": 10,
+            "default": 50
+          }
+        },
+        "month_rate_very_low": {
+          "column": "{data_month_name}达成率",
+          "selection": {
+            "direction": "ascending",
+            "limit": 1,
+            "min": 0,
+            "max": 10
+          },
+          "threshold": {
+            "operator": "<",
+            "step": 5,
+            "default": 5
+          }
+        },
+        "year_progress_high": {
+          "column": "全年进度",
+          "selection": {
+            "direction": "descending",
+            "limit": 7,
+            "min": 0,
+            "max": 10
+          },
+          "threshold": {
+            "operator": ">",
+            "step": 10,
+            "default": 60
+          }
+        },
+        "year_progress_very_high": {
+          "column": "全年进度",
+          "selection": {
+            "direction": "descending",
+            "limit": 1,
+            "min": 0,
+            "max": 10
+          },
+          "threshold": {
+            "operator": ">",
+            "step": 10,
+            "default": 80
+          }
+        },
+        "year_progress_low": {
+          "column": "全年进度",
+          "selection": {
+            "direction": "ascending",
+            "limit": 6,
+            "min": 0,
+            "max": 10
+          },
+          "threshold": {
+            "operator": "<",
+            "step": 5,
+            "default": 45
+          }
+        }
+      }
+    },
+    "value": {
+      "source": "价值.csv",
+      "organization_column": "机构",
+      "rules": {
+        "month_rate_high": {
+          "column": "{data_month_name}达成率",
+          "selection": {
+            "direction": "descending",
+            "limit": 5,
+            "min": 0,
+            "max": 10
+          },
+          "threshold": {
+            "operator": ">",
+            "step": 5,
+            "default": 85
+          }
+        },
+        "month_rate_low": {
+          "column": "{data_month_name}达成率",
+          "selection": {
+            "direction": "ascending",
+            "limit": 8,
+            "min": 0,
+            "max": 10
+          },
+          "threshold": {
+            "operator": "<",
+            "step": 5,
+            "default": 55
+          }
+        }
+      }
+    },
+    "active_manpower": {
+      "source": "活动人力.csv",
+      "organization_column": "机构",
+      "rules": {
+        "rate_high": {
+          "column": "活动人力达成率",
+          "selection": {
+            "direction": "descending",
+            "limit": 6,
+            "min": 0,
+            "max": 10
+          },
+          "threshold": {
+            "operator": ">",
+            "step": 10,
+            "default": 90
+          }
+        },
+        "target_met": {
+          "column": "活动人力达成率",
+          "selection": {
+            "direction": "descending",
+            "limit": 1,
+            "min": 0,
+            "max": 10
+          },
+          "threshold": {
+            "operator": ">=",
+            "step": 10,
+            "default": 100
+          }
+        },
+        "rate_low": {
+          "column": "活动人力达成率",
+          "selection": {
+            "direction": "ascending",
+            "limit": 6,
+            "min": 0,
+            "max": 10
+          },
+          "threshold": {
+            "operator": "<",
+            "step": 10,
+            "default": 60
+          }
+        }
+      }
+    },
+    "sunshine_manpower": {
+      "source": "阳光人力.csv",
+      "organization_column": "机构",
+      "rules": {
+        "rate_high": {
+          "column": "阳光人力达成率",
+          "selection": {
+            "direction": "descending",
+            "limit": 8,
+            "min": 0,
+            "max": 10
+          },
+          "threshold": {
+            "operator": ">=",
+            "step": 10,
+            "default": 90
+          }
+        },
+        "rate_low": {
+          "column": "阳光人力达成率",
+          "selection": {
+            "direction": "ascending",
+            "limit": 7,
+            "min": 0,
+            "max": 10
+          },
+          "threshold": {
+            "operator": "<",
+            "step": 10,
+            "default": 70
+          }
+        }
+      }
+    },
+    "supervisor": {
+      "organization_column": "机构",
+      "rules": {
+        "active_rate_high": {
+          "source": "主管活动.csv",
+          "column": "活动率",
+          "selection": {
+            "direction": "descending",
+            "limit": 5,
+            "min": 0,
+            "max": 10
+          },
+          "threshold": {
+            "operator": ">",
+            "step": 10,
+            "default": 80
+          }
+        },
+        "active_rate_low": {
+          "source": "主管活动.csv",
+          "column": "活动率",
+          "selection": {
+            "direction": "ascending",
+            "limit": 6,
+            "min": 0,
+            "max": 10
+          },
+          "threshold": {
+            "operator": "<",
+            "step": 10,
+            "default": 60
+          }
+        },
+        "double_star_rate_high": {
+          "source": "主管双星.csv",
+          "column": "双星率",
+          "selection": {
+            "direction": "descending",
+            "limit": 7,
+            "min": 0,
+            "max": 10
+          },
+          "threshold": {
+            "operator": ">",
+            "step": 10,
+            "default": 50
+          }
+        },
+        "double_star_rate_low": {
+          "source": "主管双星.csv",
+          "column": "双星率",
+          "selection": {
+            "direction": "ascending",
+            "limit": 6,
+            "min": 0,
+            "max": 10
+          },
+          "threshold": {
+            "operator": "<",
+            "step": 5,
+            "default": 25
+          }
+        }
+      }
+    },
+    "standard_team": {
+      "source": "标准组.csv",
+      "organization_column": "机构",
+      "rules": {
+        "yoy_low": {
+          "column": "同比",
+          "selection": {
+            "direction": "ascending",
+            "limit": 11,
+            "min": 0,
+            "max": 20
+          },
+          "threshold": {
+            "operator": "<",
+            "step": 10,
+            "default": -20
+          },
+          "additional_output": {
+            "threshold_abs": "abs(threshold)"
+          }
+        },
+        "share_low": {
+          "column": "占比",
+          "selection": {
+            "direction": "ascending",
+            "limit": 16,
+            "min": 0,
+            "max": 20
+          },
+          "threshold": {
+            "operator": "<",
+            "step": 10,
+            "default": 30
+          }
+        }
+      }
+    },
+    "recruitment": {
+      "source": "新增.csv",
+      "organization_column": "机构",
+      "rules": {
+        "target_met": {
+          "column": "新增_达成率",
+          "selection": {
+            "direction": "descending",
+            "limit": 2,
+            "min": 0,
+            "max": 10
+          },
+          "threshold": {
+            "operator": ">=",
+            "step": 10,
+            "default": 100
+          }
+        },
+        "rate_middle": {
+          "column": "新增_达成率",
+          "selection": {
+            "strategy": "ranked_window",
+            "direction": "descending",
+            "offset": 2,
+            "limit": 4,
+            "min": 0,
+            "max": 10
+          },
+          "lower_threshold": {
+            "operator": ">",
+            "step": 10,
+            "boundary": "between window and following rows",
+            "default": 80
+          },
+          "upper_threshold": {
+            "reuse": "target_met.threshold",
+            "operator": "<",
+            "default": 100
+          }
+        },
+        "rate_low": {
+          "column": "新增_达成率",
+          "selection": {
+            "direction": "ascending",
+            "limit": 9,
+            "min": 0,
+            "max": 10
+          },
+          "threshold": {
+            "operator": "<",
+            "step": 10,
+            "default": 40
+          }
+        },
+        "bachelor_target_met": {
+          "column": "本科+_差额",
+          "selection": {
+            "direction": "descending",
+            "limit": 21,
+            "min": 0,
+            "max": 30
+          },
+          "threshold": {
+            "operator": ">=",
+            "step": 5,
+            "default": 0
+          }
+        },
+        "bachelor_gap_high": {
+          "column": "本科+_差额",
+          "selection": {
+            "direction": "descending",
+            "limit": 8,
+            "min": 0,
+            "max": 10
+          },
+          "threshold": {
+            "operator": ">",
+            "step": 10,
+            "default": 10
+          }
+        },
+        "bachelor_target_not_met": {
+          "selection": {
+            "strategy": "complement",
+            "of": "bachelor_target_met",
+            "include_missing": true
+          }
+        }
+      }
+    },
+    "co_recruitment": {
+      "source": "同引.csv",
+      "organization_column": "机构",
+      "rules": {
+        "target_met": {
+          "column": "{quarter_name}同引_达成率",
+          "selection": {
+            "direction": "descending",
+            "limit": 2,
+            "min": 0,
+            "max": 10
+          },
+          "threshold": {
+            "operator": ">=",
+            "step": 10,
+            "default": 100
+          }
+        },
+        "rate_middle": {
+          "column": "{quarter_name}同引_达成率",
+          "selection": {
+            "strategy": "ranked_window",
+            "direction": "descending",
+            "offset": 2,
+            "limit": 3,
+            "min": 0,
+            "max": 10
+          },
+          "lower_threshold": {
+            "operator": ">=",
+            "step": 10,
+            "boundary": "between window and following rows",
+            "default": 50
+          },
+          "upper_threshold": {
+            "reuse": "target_met.threshold",
+            "operator": "<",
+            "default": 100
+          }
+        },
+        "month_trained_zero_and_quarter_onboarded_zero": {
+          "selection": {
+            "strategy": "compound_condition",
+            "display_order": "source"
+          },
+          "all": [
+            {
+              "column": "{data_month_name}送训_送训",
+              "operator": "==",
+              "value": 0
+            },
+            {
+              "column": "{quarter_name}同引_达成",
+              "operator": "==",
+              "value": 0
+            }
+          ]
+        }
+      }
+    }
+  },
+  "validation": [
+    "Every summary field referenced by the template must exist and be non-missing.",
+    "The 全系统 row must occur exactly once in every source CSV.",
+    "Every derived organizations list must exclude the 全系统 row and rows with an empty 机构.",
+    "Apply the configured default threshold before using ranked fallback selection.",
+    "Every ranged selection must satisfy selection.min <= selection.limit <= selection.max.",
+    "A default-threshold result is accepted when selection.min <= count <= selection.max.",
+    "Use ranked fallback only when the default-threshold count is below selection.min or above selection.max.",
+    "Every ranked fallback rule must return exactly selection.limit organizations after applying its offset.",
+    "Every inferred threshold must filter exactly the ranked fallback organization set.",
+    "Displayed organizations must be restored to source CSV row order after selection.",
+    "Every displayed organization count must be computed from the corresponding organizations length.",
+    "Dynamic month and quarter column names must resolve exactly once.",
+    "Missing values must not be coerced to zero unless a rule explicitly says so."
+  ]
+}

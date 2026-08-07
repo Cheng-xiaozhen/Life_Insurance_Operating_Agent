@@ -1,0 +1,2118 @@
+{
+  "report": {
+    "id": "monthly-performance",
+    "version": "2.0.0",
+    "title": "五月工作总结"
+  },
+  "params": {
+    "report_month_name": "五月",
+    "data_month_name": "5月",
+    "quarter_name": "二季度",
+    "cutoff_date": "5月31日"
+  },
+  "scenes": {
+    "standard-premium": {
+      "scene": {
+        "id": "standard-premium",
+        "version": "2.0.0",
+        "title": "标保",
+        "description": "按手工分析步骤汇总标保指标并对机构进行阈值分类。",
+        "match": {
+          "keywords": [
+            "标保",
+            "标准保费",
+            "标保达成率",
+            "全年标保进度"
+          ],
+          "questions": [
+            "本月标保达成情况如何？",
+            "哪些机构标保达标或进度偏低？"
+          ]
+        }
+      },
+      "params": {
+        "data_month_name": "5月",
+        "cutoff_date": "5月31日",
+        "monthly_high_threshold": 70,
+        "monthly_target_threshold": 100,
+        "monthly_low_threshold": 50,
+        "monthly_very_low_threshold": 5,
+        "yearly_high_threshold": 60,
+        "yearly_very_high_threshold": 80,
+        "yearly_low_threshold": 45
+      },
+      "steps": [
+        {
+          "id": "overall_summary",
+          "type": "summarize",
+          "metrics": [
+            {
+              "id": "month_amount",
+              "label": "月度标保达成",
+              "value": 12444,
+              "unit": "wan",
+              "formatter": "amount_wan",
+              "prefix": "5月标保共达成",
+              "separator_after": null
+            },
+            {
+              "id": "month_rate",
+              "label": "月度标保达成率",
+              "value": 61.8,
+              "unit": "pct",
+              "formatter": "pct",
+              "prefix": "达成率 ",
+              "separator_after": null
+            },
+            {
+              "id": "month_yoy",
+              "label": "月度标保同比",
+              "value": -11.6,
+              "unit": "pct",
+              "formatter": "yoy_pct_phrase",
+              "prefix": "",
+              "separator_after": null
+            },
+            {
+              "id": "year_amount",
+              "label": "全年标保达成",
+              "value": 100538,
+              "unit": "wan",
+              "formatter": "amount_wan",
+              "prefix": "全年达成",
+              "separator_after": null
+            },
+            {
+              "id": "year_progress",
+              "label": "全年标保进度",
+              "value": 53.8,
+              "unit": "pct",
+              "formatter": "pct",
+              "prefix": "全年进度 ",
+              "separator_after": null
+            },
+            {
+              "id": "year_yoy",
+              "label": "全年标保同比",
+              "value": 20.6,
+              "unit": "pct",
+              "formatter": "yoy_pct_phrase",
+              "prefix": "全年标保",
+              "separator_after": null
+            }
+          ],
+          "presentation": {
+            "prefix": "截至5月31日，全系统",
+            "separator": "，",
+            "terminator": "。"
+          }
+        },
+        {
+          "id": "monthly_rate_classification",
+          "type": "classify",
+          "metric": {
+            "id": "month_rate",
+            "label": "月度标保达成率",
+            "unit": "pct",
+            "formatter": "pct"
+          },
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "high",
+              "metric": {
+                "id": "month_rate",
+                "label": "月度标保达成率",
+                "unit": "pct",
+                "formatter": "pct"
+              },
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "month_rate",
+                    "operator": "gt",
+                    "threshold": 70
+                  }
+                ]
+              },
+              "threshold": 70,
+              "organizations": [
+                "河南",
+                "天津",
+                "潍坊",
+                "云南",
+                "新疆",
+                "海南",
+                "内蒙古",
+                "宁波",
+                "甘肃"
+              ],
+              "count": 9,
+              "formatter": "pct",
+              "presentation": {
+                "style": "threshold_list",
+                "subject": "5月标保达成率",
+                "comparison": "高于 "
+              },
+              "operator": "gt"
+            },
+            {
+              "id": "target_met",
+              "metric": {
+                "id": "month_rate",
+                "label": "月度标保达成率",
+                "unit": "pct",
+                "formatter": "pct"
+              },
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "month_rate",
+                    "operator": "gte",
+                    "threshold": 100
+                  }
+                ]
+              },
+              "threshold": 100,
+              "organizations": [
+                "天津",
+                "新疆"
+              ],
+              "count": 2,
+              "formatter": "pct",
+              "presentation": {
+                "style": "organization_text",
+                "prefix": "其中",
+                "suffix": "达成5月标保目标"
+              },
+              "operator": "gte"
+            },
+            {
+              "id": "low",
+              "metric": {
+                "id": "month_rate",
+                "label": "月度标保达成率",
+                "unit": "pct",
+                "formatter": "pct"
+              },
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "month_rate",
+                    "operator": "lt",
+                    "threshold": 50
+                  }
+                ]
+              },
+              "threshold": 50,
+              "organizations": [
+                "上海",
+                "安徽",
+                "山西",
+                "北京",
+                "贵州",
+                "青岛",
+                "宁夏",
+                "深圳"
+              ],
+              "count": 8,
+              "formatter": "pct",
+              "presentation": {
+                "style": "threshold_list",
+                "subject": "5月标保达成率",
+                "comparison": "低于 "
+              },
+              "operator": "lt"
+            },
+            {
+              "id": "very_low",
+              "metric": {
+                "id": "month_rate",
+                "label": "月度标保达成率",
+                "unit": "pct",
+                "formatter": "pct"
+              },
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "month_rate",
+                    "operator": "lt",
+                    "threshold": 5
+                  }
+                ]
+              },
+              "threshold": 5,
+              "organizations": [
+                "深圳"
+              ],
+              "count": 1,
+              "formatter": "pct",
+              "presentation": {
+                "style": "organization_threshold",
+                "prefix": "其中",
+                "text": "达成率不足 "
+              },
+              "operator": "lt"
+            }
+          ],
+          "presentation": {
+            "separator": "；",
+            "terminator": "；"
+          }
+        },
+        {
+          "id": "yearly_progress_classification",
+          "type": "classify",
+          "metric": {
+            "id": "year_progress",
+            "label": "全年标保进度",
+            "unit": "pct",
+            "formatter": "pct"
+          },
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "high",
+              "metric": {
+                "id": "year_progress",
+                "label": "全年标保进度",
+                "unit": "pct",
+                "formatter": "pct"
+              },
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "year_progress",
+                    "operator": "gt",
+                    "threshold": 60
+                  }
+                ]
+              },
+              "threshold": 60,
+              "organizations": [
+                "天津",
+                "潍坊",
+                "云南",
+                "新疆",
+                "宁波",
+                "甘肃",
+                "贵州"
+              ],
+              "count": 7,
+              "formatter": "pct",
+              "presentation": {
+                "style": "threshold_list",
+                "subject": "全年标保进度达成",
+                "comparison": "高于 "
+              },
+              "operator": "gt"
+            },
+            {
+              "id": "very_high",
+              "metric": {
+                "id": "year_progress",
+                "label": "全年标保进度",
+                "unit": "pct",
+                "formatter": "pct"
+              },
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "year_progress",
+                    "operator": "gt",
+                    "threshold": 80
+                  }
+                ]
+              },
+              "threshold": 80,
+              "organizations": [
+                "宁波"
+              ],
+              "count": 1,
+              "formatter": "pct",
+              "presentation": {
+                "style": "organization_threshold",
+                "prefix": "其中",
+                "text": "达成进度超 "
+              },
+              "operator": "gt"
+            },
+            {
+              "id": "low",
+              "metric": {
+                "id": "year_progress",
+                "label": "全年标保进度",
+                "unit": "pct",
+                "formatter": "pct"
+              },
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "year_progress",
+                    "operator": "lt",
+                    "threshold": 45
+                  }
+                ]
+              },
+              "threshold": 45,
+              "organizations": [
+                "安徽",
+                "北京",
+                "海南",
+                "青岛",
+                "宁夏",
+                "深圳"
+              ],
+              "count": 6,
+              "formatter": "pct",
+              "presentation": {
+                "style": "threshold_list",
+                "subject": "全年标保进度达成",
+                "comparison": "低于 "
+              },
+              "operator": "lt"
+            }
+          ],
+          "presentation": {
+            "separator": "；",
+            "terminator": "。"
+          }
+        }
+      ],
+      "signals": {
+        "target_met": {
+          "organizations": [
+            "天津",
+            "新疆"
+          ],
+          "count": 2,
+          "step": "monthly_rate_classification",
+          "band": "target_met"
+        }
+      }
+    },
+    "value": {
+      "scene": {
+        "id": "value",
+        "version": "1.0.0",
+        "title": "价值",
+        "description": "按五月报告步骤汇总价值并分类机构达成率。",
+        "match": {
+          "keywords": [
+            "价值",
+            "价值达成率",
+            "全年价值进度"
+          ],
+          "questions": [
+            "本月价值达成情况如何？",
+            "哪些机构价值达成率较高或较低？"
+          ]
+        }
+      },
+      "params": {
+        "data_month_name": "5月",
+        "cutoff_date": "5月31日",
+        "value_high_threshold": 85,
+        "value_low_threshold": 55
+      },
+      "steps": [
+        {
+          "id": "overall_summary",
+          "type": "summarize",
+          "metrics": [
+            {
+              "id": "month_amount",
+              "label": "月度价值达成",
+              "value": 7045,
+              "unit": "wan",
+              "formatter": "amount_wan",
+              "prefix": "5月价值达成",
+              "separator_after": null
+            },
+            {
+              "id": "month_rate",
+              "label": "月度价值达成率",
+              "value": 74.1,
+              "unit": "pct",
+              "formatter": "pct",
+              "prefix": "价值达成率 ",
+              "separator_after": null
+            },
+            {
+              "id": "month_yoy",
+              "label": "月度价值同比",
+              "value": 9.8,
+              "unit": "pct",
+              "formatter": "yoy_pct_phrase",
+              "prefix": "",
+              "separator_after": null
+            },
+            {
+              "id": "year_progress",
+              "label": "全年价值进度",
+              "value": 54.2,
+              "unit": "pct",
+              "formatter": "pct",
+              "prefix": "全年进度 ",
+              "separator_after": null
+            },
+            {
+              "id": "year_yoy",
+              "label": "全年价值同比",
+              "value": 7.2,
+              "unit": "pct",
+              "formatter": "yoy_pct_phrase",
+              "prefix": "全年价值达成",
+              "separator_after": null
+            }
+          ],
+          "presentation": {
+            "prefix": "截至5月31日，全系统",
+            "separator": "，",
+            "terminator": "；"
+          }
+        },
+        {
+          "id": "month_rate_classification",
+          "type": "classify",
+          "metric": {
+            "id": "month_rate",
+            "label": "月度价值达成率",
+            "unit": "pct",
+            "formatter": "pct"
+          },
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "high",
+              "metric": {
+                "id": "month_rate",
+                "label": "月度价值达成率",
+                "unit": "pct",
+                "formatter": "pct"
+              },
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "month_rate",
+                    "operator": "gt",
+                    "threshold": 85
+                  }
+                ]
+              },
+              "threshold": 85,
+              "organizations": [
+                "河南",
+                "天津",
+                "云南",
+                "吉林",
+                "新疆"
+              ],
+              "count": 5,
+              "formatter": "pct",
+              "presentation": {
+                "style": "threshold_list",
+                "subject": "5月价值达成率",
+                "comparison": "高于 "
+              },
+              "operator": "gt"
+            },
+            {
+              "id": "low",
+              "metric": {
+                "id": "month_rate",
+                "label": "月度价值达成率",
+                "unit": "pct",
+                "formatter": "pct"
+              },
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "month_rate",
+                    "operator": "lt",
+                    "threshold": 55
+                  }
+                ]
+              },
+              "threshold": 55,
+              "organizations": [
+                "上海",
+                "山西",
+                "北京",
+                "宁波",
+                "贵州",
+                "青岛",
+                "宁夏",
+                "深圳"
+              ],
+              "count": 8,
+              "formatter": "pct",
+              "presentation": {
+                "style": "threshold_list",
+                "subject": "5月价值达成率",
+                "comparison": "低于 "
+              },
+              "operator": "lt"
+            }
+          ],
+          "presentation": {
+            "separator": "；",
+            "terminator": "。"
+          }
+        }
+      ],
+      "signals": {}
+    },
+    "active-manpower": {
+      "scene": {
+        "id": "active-manpower",
+        "version": "1.0.0",
+        "title": "活动人力",
+        "description": "汇总活动人力并按达成率分类机构。",
+        "match": {
+          "keywords": [
+            "活动人力",
+            "活动人力达成率"
+          ],
+          "questions": [
+            "本月活动人力达成情况如何？",
+            "哪些机构活动人力达标或偏低？"
+          ]
+        }
+      },
+      "params": {
+        "data_month_name": "5月",
+        "cutoff_date": "5月31日",
+        "activity_high_threshold": 90,
+        "activity_target_threshold": 100,
+        "activity_low_threshold": 60
+      },
+      "steps": [
+        {
+          "id": "overall_summary",
+          "type": "summarize",
+          "metrics": [
+            {
+              "id": "activity_count",
+              "label": "活动人力",
+              "value": 5531,
+              "unit": "person",
+              "formatter": "person",
+              "prefix": "5月活动人力共",
+              "separator_after": null
+            },
+            {
+              "id": "activity_rate",
+              "label": "活动人力达成率",
+              "value": 77.9,
+              "unit": "pct",
+              "formatter": "pct",
+              "prefix": "达成率 ",
+              "separator_after": null
+            },
+            {
+              "id": "activity_yoy",
+              "label": "活动人力同比",
+              "value": -9.4,
+              "unit": "pct",
+              "formatter": "yoy_pct_phrase",
+              "prefix": "",
+              "separator_after": null
+            }
+          ],
+          "presentation": {
+            "prefix": "截至5月31日，全系统",
+            "separator": "，",
+            "terminator": "；"
+          }
+        },
+        {
+          "id": "activity_rate_classification",
+          "type": "classify",
+          "metric": {
+            "id": "activity_rate",
+            "label": "活动人力达成率",
+            "unit": "pct",
+            "formatter": "pct"
+          },
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "high",
+              "metric": {
+                "id": "activity_rate",
+                "label": "活动人力达成率",
+                "unit": "pct",
+                "formatter": "pct"
+              },
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "activity_rate",
+                    "operator": "gt",
+                    "threshold": 90
+                  }
+                ]
+              },
+              "threshold": 90,
+              "organizations": [
+                "重庆",
+                "陕西",
+                "吉林",
+                "潍坊",
+                "宁波",
+                "新疆"
+              ],
+              "count": 6,
+              "formatter": "pct",
+              "presentation": {
+                "style": "threshold_list",
+                "subject": "活动人力达成率",
+                "comparison": "高于 "
+              },
+              "operator": "gt"
+            },
+            {
+              "id": "target_met",
+              "metric": {
+                "id": "activity_rate",
+                "label": "活动人力达成率",
+                "unit": "pct",
+                "formatter": "pct"
+              },
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "activity_rate",
+                    "operator": "gte",
+                    "threshold": 100
+                  }
+                ]
+              },
+              "threshold": 100,
+              "organizations": [
+                "宁波"
+              ],
+              "count": 1,
+              "formatter": "pct",
+              "presentation": {
+                "style": "organization_text",
+                "prefix": "其中",
+                "suffix": "达成5月活动人力目标"
+              },
+              "operator": "gte"
+            },
+            {
+              "id": "low",
+              "metric": {
+                "id": "activity_rate",
+                "label": "活动人力达成率",
+                "unit": "pct",
+                "formatter": "pct"
+              },
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "activity_rate",
+                    "operator": "lt",
+                    "threshold": 60
+                  }
+                ]
+              },
+              "threshold": 60,
+              "organizations": [
+                "上海",
+                "安徽",
+                "北京",
+                "内蒙古",
+                "贵州",
+                "深圳"
+              ],
+              "count": 6,
+              "formatter": "pct",
+              "presentation": {
+                "style": "threshold_list",
+                "subject": "活动人力达成率",
+                "comparison": "低于 "
+              },
+              "operator": "lt"
+            }
+          ],
+          "presentation": {
+            "separator": "；",
+            "terminator": "。"
+          }
+        }
+      ],
+      "signals": {
+        "target_met": {
+          "organizations": [
+            "宁波"
+          ],
+          "count": 1,
+          "step": "activity_rate_classification",
+          "band": "target_met"
+        }
+      }
+    },
+    "sunshine-manpower": {
+      "scene": {
+        "id": "sunshine-manpower",
+        "version": "1.0.0",
+        "title": "阳光人力",
+        "description": "汇总阳光人力及其活动占比并分类机构。",
+        "match": {
+          "keywords": [
+            "阳光人力",
+            "阳光占比活动"
+          ],
+          "questions": [
+            "阳光人力达成情况如何？",
+            "哪些机构阳光人力达成率偏低？"
+          ]
+        }
+      },
+      "params": {
+        "data_month_name": "5月",
+        "cutoff_date": "5月31日",
+        "sunshine_high_threshold": 90,
+        "sunshine_low_threshold": 70
+      },
+      "steps": [
+        {
+          "id": "overall_summary",
+          "type": "summarize",
+          "metrics": [
+            {
+              "id": "sunshine_count",
+              "label": "阳光人力达成",
+              "value": 4772,
+              "unit": "person",
+              "formatter": "person",
+              "prefix": "阳光人力共达成",
+              "separator_after": null
+            },
+            {
+              "id": "sunshine_rate",
+              "label": "阳光人力达成率",
+              "value": 82.2,
+              "unit": "pct",
+              "formatter": "pct",
+              "prefix": "达成率 ",
+              "separator_after": null
+            },
+            {
+              "id": "sunshine_yoy",
+              "label": "阳光人力同比",
+              "value": -2.1,
+              "unit": "pct",
+              "formatter": "yoy_pct_phrase",
+              "prefix": "",
+              "separator_after": null
+            },
+            {
+              "id": "sunshine_share",
+              "label": "阳光占比活动",
+              "value": 85.2,
+              "unit": "pct",
+              "formatter": "pct",
+              "prefix": "阳光占比活动 ",
+              "separator_after": null
+            }
+          ],
+          "presentation": {
+            "prefix": "截至5月31日，",
+            "separator": "，",
+            "terminator": "；"
+          }
+        },
+        {
+          "id": "sunshine_rate_classification",
+          "type": "classify",
+          "metric": {
+            "id": "sunshine_rate",
+            "label": "阳光人力达成率",
+            "unit": "pct",
+            "formatter": "pct"
+          },
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "high",
+              "metric": {
+                "id": "sunshine_rate",
+                "label": "阳光人力达成率",
+                "unit": "pct",
+                "formatter": "pct"
+              },
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "sunshine_rate",
+                    "operator": "gte",
+                    "threshold": 90
+                  }
+                ]
+              },
+              "threshold": 90,
+              "organizations": [
+                "重庆",
+                "河南",
+                "陕西",
+                "吉林",
+                "潍坊",
+                "湖南",
+                "宁波",
+                "新疆"
+              ],
+              "count": 8,
+              "formatter": "pct",
+              "presentation": {
+                "style": "threshold_list",
+                "subject": "阳光人力达成率",
+                "comparison": "高于 "
+              },
+              "operator": "gte"
+            },
+            {
+              "id": "low",
+              "metric": {
+                "id": "sunshine_rate",
+                "label": "阳光人力达成率",
+                "unit": "pct",
+                "formatter": "pct"
+              },
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "sunshine_rate",
+                    "operator": "lt",
+                    "threshold": 70
+                  }
+                ]
+              },
+              "threshold": 70,
+              "organizations": [
+                "上海",
+                "黑龙江",
+                "安徽",
+                "北京",
+                "内蒙古",
+                "贵州",
+                "深圳"
+              ],
+              "count": 7,
+              "formatter": "pct",
+              "presentation": {
+                "style": "threshold_list",
+                "subject": "阳光人力达成率",
+                "comparison": "低于 "
+              },
+              "operator": "lt"
+            }
+          ],
+          "presentation": {
+            "separator": "；",
+            "terminator": "。"
+          }
+        }
+      ],
+      "signals": {}
+    },
+    "supervisor-activity": {
+      "scene": {
+        "id": "supervisor-activity",
+        "version": "1.0.0",
+        "title": "主管活动",
+        "description": "汇总主管活动人数和活动率并分类机构。",
+        "match": {
+          "keywords": [
+            "主管活动",
+            "主管活动率"
+          ],
+          "questions": [
+            "主管活动情况如何？",
+            "哪些机构主管活动率较高或较低？"
+          ]
+        }
+      },
+      "params": {
+        "cutoff_date": "5月31日",
+        "supervisor_activity_high_threshold": 80,
+        "supervisor_activity_low_threshold": 60
+      },
+      "steps": [
+        {
+          "id": "overall_summary",
+          "type": "summarize",
+          "metrics": [
+            {
+              "id": "in_service",
+              "label": "在职主管",
+              "value": 3484,
+              "unit": "person",
+              "formatter": "person",
+              "prefix": "在职主管共",
+              "separator_after": null
+            },
+            {
+              "id": "active_count",
+              "label": "主管活动人数",
+              "value": 2485,
+              "unit": "person",
+              "formatter": "person",
+              "prefix": "主管活动",
+              "separator_after": null
+            },
+            {
+              "id": "activity_rate",
+              "label": "主管活动率",
+              "value": 71.3,
+              "unit": "pct",
+              "formatter": "pct",
+              "prefix": "活动率 ",
+              "separator_after": null
+            },
+            {
+              "id": "activity_yoy",
+              "label": "主管活动率同比",
+              "value": -1.1,
+              "unit": "pt",
+              "formatter": "yoy_pt_phrase",
+              "prefix": "活动率",
+              "separator_after": null
+            }
+          ],
+          "presentation": {
+            "prefix": "截至5月31日，全系统",
+            "separator": "，",
+            "terminator": "；"
+          }
+        },
+        {
+          "id": "activity_rate_classification",
+          "type": "classify",
+          "metric": {
+            "id": "activity_rate",
+            "label": "主管活动率",
+            "unit": "pct",
+            "formatter": "pct"
+          },
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "high",
+              "metric": {
+                "id": "activity_rate",
+                "label": "主管活动率",
+                "unit": "pct",
+                "formatter": "pct"
+              },
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "activity_rate",
+                    "operator": "gt",
+                    "threshold": 80
+                  }
+                ]
+              },
+              "threshold": 80,
+              "organizations": [
+                "重庆",
+                "浙江",
+                "江苏",
+                "潍坊",
+                "深圳"
+              ],
+              "count": 5,
+              "formatter": "pct",
+              "presentation": {
+                "style": "threshold_list",
+                "subject": "主管活动率",
+                "comparison": "高于 "
+              },
+              "operator": "gt"
+            },
+            {
+              "id": "low",
+              "metric": {
+                "id": "activity_rate",
+                "label": "主管活动率",
+                "unit": "pct",
+                "formatter": "pct"
+              },
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "activity_rate",
+                    "operator": "lt",
+                    "threshold": 60
+                  }
+                ]
+              },
+              "threshold": 60,
+              "organizations": [
+                "广东",
+                "上海",
+                "陕西",
+                "山西",
+                "宁夏",
+                "青岛"
+              ],
+              "count": 6,
+              "formatter": "pct",
+              "presentation": {
+                "style": "threshold_list",
+                "subject": "主管活动率",
+                "comparison": "低于 "
+              },
+              "operator": "lt"
+            }
+          ],
+          "presentation": {
+            "separator": "；",
+            "terminator": "。"
+          }
+        }
+      ],
+      "signals": {}
+    },
+    "supervisor-double-star": {
+      "scene": {
+        "id": "supervisor-double-star",
+        "version": "1.0.0",
+        "title": "主管双星",
+        "description": "汇总主管双星人数和双星率并分类机构。",
+        "match": {
+          "keywords": [
+            "主管双星",
+            "双星率"
+          ],
+          "questions": [
+            "主管双星达成情况如何？",
+            "哪些机构主管双星率较高或较低？"
+          ]
+        }
+      },
+      "params": {
+        "cutoff_date": "5月31日",
+        "double_star_high_threshold": 50,
+        "double_star_high_effective_threshold": 55,
+        "double_star_low_threshold": 25
+      },
+      "steps": [
+        {
+          "id": "overall_summary",
+          "type": "summarize",
+          "metrics": [
+            {
+              "id": "double_star_count",
+              "label": "主管双星人数",
+              "value": 1300,
+              "unit": "person",
+              "formatter": "person",
+              "prefix": "主管双星共达成",
+              "separator_after": null
+            },
+            {
+              "id": "double_star_rate",
+              "label": "主管双星率",
+              "value": 37.3,
+              "unit": "pct",
+              "formatter": "pct",
+              "prefix": "双星达成率 ",
+              "separator_after": null
+            },
+            {
+              "id": "double_star_yoy",
+              "label": "主管双星率同比",
+              "value": -4.3,
+              "unit": "pt",
+              "formatter": "yoy_pt_phrase",
+              "prefix": "达成率",
+              "separator_after": null
+            }
+          ],
+          "presentation": {
+            "prefix": "截至5月31日，",
+            "separator": "，",
+            "terminator": "。"
+          }
+        },
+        {
+          "id": "double_star_rate_classification",
+          "type": "classify",
+          "metric": {
+            "id": "double_star_rate",
+            "label": "主管双星率",
+            "unit": "pct",
+            "formatter": "pct"
+          },
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "high",
+              "metric": {
+                "id": "double_star_rate",
+                "label": "主管双星率",
+                "unit": "pct",
+                "formatter": "pct"
+              },
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "double_star_rate",
+                    "operator": "gt",
+                    "threshold": 55
+                  }
+                ]
+              },
+              "threshold": 50,
+              "organizations": [
+                "浙江",
+                "江苏",
+                "福建",
+                "潍坊",
+                "深圳",
+                "海南"
+              ],
+              "count": 6,
+              "formatter": "pct",
+              "presentation": {
+                "style": "threshold_list",
+                "subject": "主管双星率",
+                "comparison": "高于 "
+              },
+              "operator": "gt"
+            },
+            {
+              "id": "low",
+              "metric": {
+                "id": "double_star_rate",
+                "label": "主管双星率",
+                "unit": "pct",
+                "formatter": "pct"
+              },
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "double_star_rate",
+                    "operator": "lt",
+                    "threshold": 25
+                  }
+                ]
+              },
+              "threshold": 25,
+              "organizations": [
+                "陕西",
+                "山西",
+                "贵州",
+                "甘肃",
+                "宁夏",
+                "青岛"
+              ],
+              "count": 6,
+              "formatter": "pct",
+              "presentation": {
+                "style": "threshold_list",
+                "subject": "主管双星率",
+                "comparison": "低于 "
+              },
+              "operator": "lt"
+            }
+          ],
+          "presentation": {
+            "separator": "；",
+            "terminator": "。"
+          }
+        }
+      ],
+      "signals": {}
+    },
+    "standard-team": {
+      "scene": {
+        "id": "standard-team",
+        "version": "1.0.0",
+        "title": "标准组",
+        "description": "按标准组同比和占比分类机构。",
+        "match": {
+          "keywords": [
+            "标准组",
+            "标准组同比",
+            "标准组占比"
+          ],
+          "questions": [
+            "哪些机构标准组同比下滑超过阈值？",
+            "哪些机构标准组占比较低？"
+          ]
+        }
+      },
+      "params": {
+        "standard_team_yoy_threshold": -20,
+        "standard_team_share_threshold": 30
+      },
+      "steps": [
+        {
+          "id": "standard_team_classification",
+          "type": "classify",
+          "metric": null,
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "yoy_low",
+              "metric": {
+                "id": "standard_yoy",
+                "label": "标准组同比",
+                "unit": "pct",
+                "formatter": "yoy_pct_phrase"
+              },
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "standard_yoy",
+                    "operator": "lt",
+                    "threshold": -20
+                  }
+                ]
+              },
+              "threshold": -20,
+              "organizations": [
+                "广东",
+                "上海",
+                "安徽",
+                "黑龙江",
+                "北京",
+                "山西",
+                "深圳",
+                "海南",
+                "内蒙古",
+                "贵州",
+                "宁波"
+              ],
+              "count": 11,
+              "formatter": "abs_pct",
+              "presentation": {
+                "style": "threshold_list",
+                "subject": "标准组同比",
+                "comparison": "负增超过 "
+              },
+              "operator": "lt"
+            },
+            {
+              "id": "share_low",
+              "metric": {
+                "id": "standard_share",
+                "label": "标准组占比",
+                "unit": "pct",
+                "formatter": "pct"
+              },
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "standard_share",
+                    "operator": "lt",
+                    "threshold": 30
+                  }
+                ]
+              },
+              "threshold": 30,
+              "organizations": [
+                "山东",
+                "广东",
+                "上海",
+                "安徽",
+                "黑龙江",
+                "北京",
+                "陕西",
+                "山西",
+                "深圳",
+                "海南",
+                "新疆",
+                "贵州",
+                "甘肃",
+                "宁波",
+                "宁夏",
+                "青岛"
+              ],
+              "count": 16,
+              "formatter": "pct",
+              "presentation": {
+                "style": "threshold_list",
+                "subject": "标准组占比",
+                "comparison": "低于 "
+              },
+              "operator": "lt"
+            }
+          ],
+          "presentation": {
+            "separator": "；",
+            "terminator": "。"
+          }
+        }
+      ],
+      "signals": {}
+    },
+    "recruitment": {
+      "scene": {
+        "id": "recruitment",
+        "version": "1.0.0",
+        "title": "新增",
+        "description": "汇总新增及学历指标，并分类新增达成率和本科占比目标。",
+        "match": {
+          "keywords": [
+            "新增",
+            "新增达成率",
+            "本科占比",
+            "首阳"
+          ],
+          "questions": [
+            "本月新增和学历指标达成情况如何？",
+            "哪些机构新增达标或本科占比未达标？"
+          ]
+        }
+      },
+      "params": {
+        "data_month_name": "5月",
+        "cutoff_date": "5月31日",
+        "recruitment_middle_low_threshold": 80,
+        "recruitment_target_threshold": 100,
+        "recruitment_low_threshold": 40,
+        "bachelor_target_threshold": 0,
+        "bachelor_excess_threshold": 10
+      },
+      "steps": [
+        {
+          "id": "overall_summary",
+          "type": "summarize",
+          "metrics": [
+            {
+              "id": "training_count",
+              "label": "新增送训",
+              "value": 1510,
+              "unit": "person",
+              "formatter": "person",
+              "prefix": "送训",
+              "separator_after": null
+            },
+            {
+              "id": "added_count",
+              "label": "新增人数",
+              "value": 739,
+              "unit": "person",
+              "formatter": "person",
+              "prefix": "新增",
+              "separator_after": null
+            },
+            {
+              "id": "added_rate",
+              "label": "新增达成率",
+              "value": 62.6,
+              "unit": "pct",
+              "formatter": "pct",
+              "prefix": "目标达成率 ",
+              "separator_after": null
+            },
+            {
+              "id": "added_yoy",
+              "label": "新增同比",
+              "value": -7.4,
+              "unit": "pct",
+              "formatter": "yoy_pct_phrase",
+              "prefix": "",
+              "separator_after": null
+            },
+            {
+              "id": "first_sun_count",
+              "label": "起聘首阳人数",
+              "value": 425,
+              "unit": "person",
+              "formatter": "person",
+              "prefix": "起聘首阳人数",
+              "separator_after": null
+            },
+            {
+              "id": "first_sun_rate",
+              "label": "起聘首阳率",
+              "value": 45.6,
+              "unit": "pct",
+              "formatter": "pct",
+              "prefix": "首阳率 ",
+              "separator_after": "；"
+            },
+            {
+              "id": "college_share",
+              "label": "大专加学历人力占比",
+              "value": 47.5,
+              "unit": "pct",
+              "formatter": "pct",
+              "prefix": "大专+学历人力占比 ",
+              "separator_after": null
+            },
+            {
+              "id": "college_yoy",
+              "label": "大专加学历人力同比",
+              "value": 16.3,
+              "unit": "pt",
+              "formatter": "yoy_pt_phrase",
+              "prefix": "",
+              "separator_after": null
+            },
+            {
+              "id": "bachelor_share",
+              "label": "本科加学历人力占比",
+              "value": 25.4,
+              "unit": "pct",
+              "formatter": "pct",
+              "prefix": "本科+学历人力占比 ",
+              "separator_after": null
+            },
+            {
+              "id": "bachelor_gap",
+              "label": "本科加学历人力目标差额",
+              "value": 5.4,
+              "unit": "pt",
+              "formatter": "gap_pt_phrase",
+              "prefix": "",
+              "separator_after": null
+            }
+          ],
+          "presentation": {
+            "prefix": "截至5月31日，全系统",
+            "separator": "，",
+            "terminator": "；"
+          }
+        },
+        {
+          "id": "recruitment_rate_classification",
+          "type": "classify",
+          "metric": {
+            "id": "added_rate",
+            "label": "新增达成率",
+            "unit": "pct",
+            "formatter": "pct"
+          },
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "middle",
+              "metric": {
+                "id": "added_rate",
+                "label": "新增达成率",
+                "unit": "pct",
+                "formatter": "pct"
+              },
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "added_rate",
+                    "operator": "gt",
+                    "threshold": 80
+                  },
+                  {
+                    "metric": "added_rate",
+                    "operator": "lt",
+                    "threshold": 100
+                  }
+                ]
+              },
+              "threshold": 80,
+              "organizations": [
+                "河北",
+                "河南",
+                "山西",
+                "青岛"
+              ],
+              "count": 4,
+              "formatter": "pct",
+              "presentation": {
+                "style": "threshold_list",
+                "subject": "新增达成率",
+                "comparison": "超过 "
+              }
+            },
+            {
+              "id": "target_met",
+              "metric": {
+                "id": "added_rate",
+                "label": "新增达成率",
+                "unit": "pct",
+                "formatter": "pct"
+              },
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "added_rate",
+                    "operator": "gte",
+                    "threshold": 100
+                  }
+                ]
+              },
+              "threshold": 100,
+              "organizations": [
+                "宁波",
+                "深圳"
+              ],
+              "count": 2,
+              "formatter": "pct",
+              "presentation": {
+                "style": "count_list",
+                "subject": "达成5月新增目标"
+              },
+              "operator": "gte"
+            }
+          ],
+          "presentation": {
+            "separator": "；",
+            "terminator": "；"
+          }
+        },
+        {
+          "id": "recruitment_rate_low",
+          "type": "classify",
+          "metric": {
+            "id": "added_rate",
+            "label": "新增达成率",
+            "unit": "pct",
+            "formatter": "pct"
+          },
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "low",
+              "metric": {
+                "id": "added_rate",
+                "label": "新增达成率",
+                "unit": "pct",
+                "formatter": "pct"
+              },
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "added_rate",
+                    "operator": "lt",
+                    "threshold": 40
+                  }
+                ]
+              },
+              "threshold": 40,
+              "organizations": [
+                "广东",
+                "吉林",
+                "天津",
+                "黑龙江",
+                "北京",
+                "新疆",
+                "宁夏",
+                "贵州",
+                "海南"
+              ],
+              "count": 9,
+              "formatter": "pct",
+              "presentation": {
+                "style": "threshold_list",
+                "subject": "新增达成率",
+                "comparison": "低于 "
+              },
+              "operator": "lt"
+            }
+          ],
+          "presentation": {
+            "separator": "；",
+            "terminator": "；"
+          }
+        },
+        {
+          "id": "bachelor_classification",
+          "type": "classify",
+          "metric": {
+            "id": "bachelor_gap",
+            "label": "本科加学历人力目标差额",
+            "unit": "pt",
+            "formatter": "gap_pt_phrase"
+          },
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "target_met",
+              "metric": {
+                "id": "bachelor_gap",
+                "label": "本科加学历人力目标差额",
+                "unit": "pt",
+                "formatter": "gap_pt_phrase"
+              },
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "bachelor_gap",
+                    "operator": "gte",
+                    "threshold": 0
+                  }
+                ]
+              },
+              "threshold": 0,
+              "organizations": [
+                "河北",
+                "江苏",
+                "福建",
+                "山东",
+                "湖北",
+                "上海",
+                "四川",
+                "山西",
+                "潍坊",
+                "云南",
+                "湖南",
+                "陕西",
+                "辽宁",
+                "安徽",
+                "吉林",
+                "黑龙江",
+                "北京",
+                "深圳",
+                "甘肃",
+                "内蒙古",
+                "新疆"
+              ],
+              "count": 21,
+              "formatter": "pt",
+              "presentation": {
+                "style": "count_text",
+                "subject": "达成本科占比目标，其中"
+              },
+              "operator": "gte"
+            },
+            {
+              "id": "excess",
+              "metric": {
+                "id": "bachelor_gap",
+                "label": "本科加学历人力目标差额",
+                "unit": "pt",
+                "formatter": "gap_pt_phrase"
+              },
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "bachelor_gap",
+                    "operator": "gt",
+                    "threshold": 10
+                  }
+                ]
+              },
+              "threshold": 10,
+              "organizations": [
+                "江苏",
+                "福建",
+                "上海",
+                "四川",
+                "陕西",
+                "深圳",
+                "甘肃",
+                "内蒙古"
+              ],
+              "count": 8,
+              "formatter": "pt",
+              "presentation": {
+                "style": "threshold_list",
+                "subject": "",
+                "comparison": "超额"
+              },
+              "operator": "gt"
+            }
+          ],
+          "presentation": {
+            "separator": "",
+            "terminator": "；"
+          }
+        },
+        {
+          "id": "bachelor_target_not_met",
+          "type": "classify",
+          "metric": {
+            "id": "bachelor_gap",
+            "label": "本科加学历人力目标差额",
+            "unit": "pt",
+            "formatter": "gap_pt_phrase"
+          },
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "not_met",
+              "metric": {
+                "id": "bachelor_gap",
+                "label": "本科加学历人力目标差额",
+                "unit": "pt",
+                "formatter": "gap_pt_phrase"
+              },
+              "conditions": {
+                "match": "any",
+                "rules": [
+                  {
+                    "metric": "bachelor_gap",
+                    "operator": "lt",
+                    "threshold": 0
+                  },
+                  {
+                    "metric": "bachelor_gap",
+                    "operator": "is_missing",
+                    "threshold": null
+                  }
+                ]
+              },
+              "threshold": null,
+              "organizations": [
+                "河南",
+                "浙江",
+                "重庆",
+                "广东",
+                "天津",
+                "宁波",
+                "青岛",
+                "宁夏",
+                "贵州",
+                "海南"
+              ],
+              "count": 10,
+              "formatter": "pt",
+              "presentation": {
+                "style": "count_list",
+                "subject": "未达成新增本科占比目标"
+              }
+            }
+          ],
+          "presentation": {
+            "separator": "；",
+            "terminator": "。"
+          }
+        }
+      ],
+      "signals": {
+        "target_met": {
+          "organizations": [
+            "宁波",
+            "深圳"
+          ],
+          "count": 2,
+          "step": "recruitment_rate_classification",
+          "band": "target_met"
+        }
+      }
+    },
+    "co-recruitment": {
+      "scene": {
+        "id": "co-recruitment",
+        "version": "1.0.0",
+        "title": "同引",
+        "description": "汇总月度送训、季度同引和学历指标，并分类目标及挂零机构。",
+        "match": {
+          "keywords": [
+            "同引",
+            "同引达成率",
+            "同引主管"
+          ],
+          "questions": [
+            "二季度同引达成情况如何？",
+            "哪些机构同引达成目标或出现挂零？"
+          ]
+        }
+      },
+      "params": {
+        "data_month_name": "5月",
+        "quarter_name": "二季度",
+        "cutoff_date": "5月31日",
+        "co_recruitment_target_threshold": 100,
+        "co_recruitment_middle_threshold": 50,
+        "zero_threshold": 0
+      },
+      "steps": [
+        {
+          "id": "overall_summary",
+          "type": "summarize",
+          "metrics": [
+            {
+              "id": "month_training_count",
+              "label": "月度同引送训",
+              "value": 111,
+              "unit": "person",
+              "formatter": "person",
+              "prefix": "5月送训",
+              "separator_after": null
+            },
+            {
+              "id": "month_training_yoy",
+              "label": "月度同引送训同比",
+              "value": -14,
+              "unit": "pct",
+              "formatter": "yoy_pct_phrase",
+              "prefix": "",
+              "separator_after": "；"
+            },
+            {
+              "id": "quarter_achieved",
+              "label": "季度同引上岗",
+              "value": 105,
+              "unit": "person",
+              "formatter": "person",
+              "prefix": "二季度上岗",
+              "separator_after": null
+            },
+            {
+              "id": "quarter_rate",
+              "label": "季度同引达成率",
+              "value": 38.2,
+              "unit": "pct",
+              "formatter": "pct",
+              "prefix": "达成率 ",
+              "separator_after": null
+            },
+            {
+              "id": "quarter_yoy",
+              "label": "季度同引同比",
+              "value": 47.9,
+              "unit": "pct",
+              "formatter": "yoy_pct_phrase",
+              "prefix": "",
+              "separator_after": "；"
+            },
+            {
+              "id": "quarter_college_share",
+              "label": "季度同引大专加学历占比",
+              "value": 41,
+              "unit": "pct",
+              "formatter": "pct",
+              "prefix": "二季度同引主管大专+学历人力占比",
+              "separator_after": null
+            },
+            {
+              "id": "quarter_college_yoy",
+              "label": "季度同引大专加学历同比",
+              "value": 0.1,
+              "unit": "pt",
+              "formatter": "yoy_pt_phrase",
+              "prefix": "",
+              "separator_after": null
+            },
+            {
+              "id": "quarter_bachelor_share",
+              "label": "季度同引本科加学历占比",
+              "value": 16.2,
+              "unit": "pct",
+              "formatter": "pct",
+              "prefix": "本科+学历人力占比",
+              "separator_after": null
+            },
+            {
+              "id": "quarter_bachelor_yoy",
+              "label": "季度同引本科加学历同比",
+              "value": 0.7,
+              "unit": "pt",
+              "formatter": "yoy_pt_phrase",
+              "prefix": "",
+              "separator_after": null
+            }
+          ],
+          "presentation": {
+            "prefix": "截至5月31日，全系统",
+            "separator": "，",
+            "terminator": "；"
+          }
+        },
+        {
+          "id": "quarter_rate_classification",
+          "type": "classify",
+          "metric": {
+            "id": "quarter_rate",
+            "label": "季度同引达成率",
+            "unit": "pct",
+            "formatter": "pct"
+          },
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "target_met",
+              "metric": {
+                "id": "quarter_rate",
+                "label": "季度同引达成率",
+                "unit": "pct",
+                "formatter": "pct"
+              },
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "quarter_rate",
+                    "operator": "gte",
+                    "threshold": 100
+                  }
+                ]
+              },
+              "threshold": 100,
+              "organizations": [
+                "河南",
+                "青岛"
+              ],
+              "count": 2,
+              "formatter": "pct",
+              "presentation": {
+                "style": "count_list",
+                "subject": "达成二季度同引目标"
+              },
+              "operator": "gte"
+            },
+            {
+              "id": "middle",
+              "metric": {
+                "id": "quarter_rate",
+                "label": "季度同引达成率",
+                "unit": "pct",
+                "formatter": "pct"
+              },
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "quarter_rate",
+                    "operator": "gte",
+                    "threshold": 50
+                  },
+                  {
+                    "metric": "quarter_rate",
+                    "operator": "lt",
+                    "threshold": 100
+                  }
+                ]
+              },
+              "threshold": 50,
+              "organizations": [
+                "江苏",
+                "陕西",
+                "甘肃"
+              ],
+              "count": 3,
+              "formatter": "pct",
+              "presentation": {
+                "style": "threshold_list",
+                "subject": "达成率",
+                "comparison": "超过 "
+              }
+            }
+          ],
+          "presentation": {
+            "separator": "；",
+            "terminator": "；"
+          }
+        },
+        {
+          "id": "zero_classification",
+          "type": "classify",
+          "metric": null,
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "both_zero",
+              "metric": {
+                "id": "month_training_count",
+                "label": "月度同引送训",
+                "unit": "person",
+                "formatter": "person"
+              },
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "month_training_count",
+                    "operator": "eq",
+                    "threshold": 0
+                  },
+                  {
+                    "metric": "quarter_achieved",
+                    "operator": "eq",
+                    "threshold": 0
+                  }
+                ]
+              },
+              "threshold": null,
+              "organizations": [
+                "重庆",
+                "福建",
+                "天津",
+                "贵州",
+                "宁波",
+                "海南",
+                "深圳"
+              ],
+              "count": 7,
+              "formatter": "person",
+              "presentation": {
+                "style": "count_list",
+                "subject": "二季度同引挂0且5月送训挂0"
+              }
+            }
+          ],
+          "presentation": {
+            "separator": "；",
+            "terminator": "。"
+          }
+        }
+      ],
+      "signals": {
+        "target_met": {
+          "organizations": [
+            "河南",
+            "青岛"
+          ],
+          "count": 2,
+          "step": "quarter_rate_classification",
+          "band": "target_met"
+        }
+      }
+    }
+  },
+  "fragments": {
+    "standard-premium": "# 标保\n\n- 截至5月31日，全系统5月标保共达成12444万，达成率 61.8%，同比负增11.6%，全年达成100538万，全年进度 53.8%，全年标保同比正增20.6%。\n- 9家机构5月标保达成率高于 70%：河南、天津、潍坊、云南、新疆、海南、内蒙古、宁波、甘肃；其中天津、新疆达成5月标保目标；8家机构5月标保达成率低于 50%：上海、安徽、山西、北京、贵州、青岛、宁夏、深圳；其中深圳达成率不足 5%；\n- 7家机构全年标保进度达成高于 60%：天津、潍坊、云南、新疆、宁波、甘肃、贵州；其中宁波达成进度超 80%；6家机构全年标保进度达成低于 45%：安徽、北京、海南、青岛、宁夏、深圳。",
+    "value": "# 价值\n\n- 截至5月31日，全系统5月价值达成7045万，价值达成率 74.1%，同比正增9.8%，全年进度 54.2%，全年价值达成同比正增7.2%；\n- 5家机构5月价值达成率高于 85%：河南、天津、云南、吉林、新疆；8家机构5月价值达成率低于 55%：上海、山西、北京、宁波、贵州、青岛、宁夏、深圳。",
+    "active-manpower": "# 活动人力\n\n- 截至5月31日，全系统5月活动人力共5531人，达成率 77.9%，同比负增9.4%；\n- 6家机构活动人力达成率高于 90%：重庆、陕西、吉林、潍坊、宁波、新疆；其中宁波达成5月活动人力目标；6家机构活动人力达成率低于 60%：上海、安徽、北京、内蒙古、贵州、深圳。",
+    "sunshine-manpower": "# 阳光人力\n\n- 截至5月31日，阳光人力共达成4772人，达成率 82.2%，同比负增2.1%，阳光占比活动 85.2%；\n- 8家机构阳光人力达成率高于 90%：重庆、河南、陕西、吉林、潍坊、湖南、宁波、新疆；7家机构阳光人力达成率低于 70%：上海、黑龙江、安徽、北京、内蒙古、贵州、深圳。",
+    "supervisor-activity": "# 主管活动\n\n- 截至5月31日，全系统在职主管共3484人，主管活动2485人，活动率 71.3%，活动率同比负增1.1pt；\n- 5家机构主管活动率高于 80%：重庆、浙江、江苏、潍坊、深圳；6家机构主管活动率低于 60%：广东、上海、陕西、山西、宁夏、青岛。",
+    "supervisor-double-star": "# 主管双星\n\n- 截至5月31日，主管双星共达成1300人，双星达成率 37.3%，达成率同比负增4.3pt。\n- 6家机构主管双星率高于 50%：浙江、江苏、福建、潍坊、深圳、海南；6家机构主管双星率低于 25%：陕西、山西、贵州、甘肃、宁夏、青岛。",
+    "standard-team": "# 标准组\n\n- 11家机构标准组同比负增超过 20%：广东、上海、安徽、黑龙江、北京、山西、深圳、海南、内蒙古、贵州、宁波；16家机构标准组占比低于 30%：山东、广东、上海、安徽、黑龙江、北京、陕西、山西、深圳、海南、新疆、贵州、甘肃、宁波、宁夏、青岛。",
+    "recruitment": "# 新增\n\n- 截至5月31日，全系统送训1510人，新增739人，目标达成率 62.6%，同比负增7.4%，起聘首阳人数425人，首阳率 45.6%；大专+学历人力占比 47.5%，同比正增16.3pt，本科+学历人力占比 25.4%，超额5.4pt；\n- 4家机构新增达成率超过 80%：河北、河南、山西、青岛；2家机构达成5月新增目标：宁波、深圳；\n- 9家机构新增达成率低于 40%：广东、吉林、天津、黑龙江、北京、新疆、宁夏、贵州、海南；\n- 21家机构达成本科占比目标，其中8家机构超额10pt：江苏、福建、上海、四川、陕西、深圳、甘肃、内蒙古；\n- 10家机构未达成新增本科占比目标：河南、浙江、重庆、广东、天津、宁波、青岛、宁夏、贵州、海南。",
+    "co-recruitment": "# 同引\n\n- 截至5月31日，全系统5月送训111人，同比负增14%；二季度上岗105人，达成率 38.2%，同比正增47.9%；二季度同引主管大专+学历人力占比41%，同比正增0.1pt，本科+学历人力占比16.2%，同比正增0.7pt；\n- 2家机构达成二季度同引目标：河南、青岛；3家机构达成率超过 50%：江苏、陕西、甘肃；\n- 7家机构二季度同引挂0且5月送训挂0：重庆、福建、天津、贵州、宁波、海南、深圳。"
+  },
+  "scene_order": [
+    "standard-premium",
+    "value",
+    "active-manpower",
+    "sunshine-manpower",
+    "supervisor-activity",
+    "supervisor-double-star",
+    "standard-team",
+    "recruitment",
+    "co-recruitment"
+  ]
+}

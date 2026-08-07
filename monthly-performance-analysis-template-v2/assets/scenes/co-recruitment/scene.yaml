@@ -1,0 +1,134 @@
+scene:
+  id: co-recruitment
+  version: 1.0.0
+  title: 同引
+  description: 汇总月度送训、季度同引和学历指标，并分类目标及挂零机构。
+  match:
+    keywords: [同引, 同引达成率, 同引主管]
+    questions:
+      - 二季度同引达成情况如何？
+      - 哪些机构同引达成目标或出现挂零？
+
+metric_catalog: ../../metrics/co-recruitment.yaml
+
+inputs:
+  parameters:
+    data_month_name:
+      type: string
+      required: true
+      description: 报告月份，例如5月。
+    quarter_name:
+      type: string
+      required: true
+      description: 报告季度，例如二季度。
+    cutoff_date:
+      type: string
+      required: true
+      description: 报告数据截止日期，例如5月31日。
+    co_recruitment_target_threshold:
+      type: number
+      default: 100
+      description: 季度同引目标达成阈值。
+    co_recruitment_middle_threshold:
+      type: number
+      default: 50
+      description: 季度同引中档区间下限。
+    zero_threshold:
+      type: number
+      default: 0
+      description: 挂零判断阈值。
+
+analysis_instructions:
+  - 汇总全系统{月度送训}、{月度同比}、{季度上岗}、{季度达成率}、{季度同比}及两项{学历占比}。
+  - 按{季度达成率}列出目标机构和中档机构。
+  - 同时筛选{季度上岗}和{月度送训}均为零的机构。
+
+steps:
+  - id: overall_summary
+    type: summarize
+    metrics:
+      - metric: month_training_count
+        prefix: ${data_month_name}送训
+      - metric: month_training_yoy
+        prefix: ""
+        separator_after: "；"
+      - metric: quarter_achieved
+        prefix: ${quarter_name}上岗
+      - metric: quarter_rate
+        prefix: "达成率 "
+      - metric: quarter_yoy
+        prefix: ""
+        separator_after: "；"
+      - metric: quarter_college_share
+        prefix: ${quarter_name}同引主管大专+学历人力占比
+      - metric: quarter_college_yoy
+        prefix: ""
+      - metric: quarter_bachelor_share
+        prefix: 本科+学历人力占比
+      - metric: quarter_bachelor_yoy
+        prefix: ""
+    presentation:
+      prefix: 截至${cutoff_date}，全系统
+      separator: "，"
+      terminator: "；"
+  - id: quarter_rate_classification
+    type: classify
+    metric: quarter_rate
+    display_order: source
+    bands:
+      - id: target_met
+        operator: gte
+        threshold_param: co_recruitment_target_threshold
+        presentation:
+          style: count_list
+          subject: 达成${quarter_name}同引目标
+      - id: middle
+        conditions:
+          match: all
+          rules:
+            - metric: quarter_rate
+              operator: gte
+              threshold_param: co_recruitment_middle_threshold
+            - metric: quarter_rate
+              operator: lt
+              threshold_param: co_recruitment_target_threshold
+        display_metric: quarter_rate
+        display_threshold_param: co_recruitment_middle_threshold
+        presentation:
+          style: threshold_list
+          subject: 达成率
+          comparison: "超过 "
+    presentation:
+      separator: "；"
+      terminator: "；"
+  - id: zero_classification
+    type: classify
+    display_order: source
+    bands:
+      - id: both_zero
+        conditions:
+          match: all
+          rules:
+            - metric: month_training_count
+              operator: eq
+              threshold_param: zero_threshold
+            - metric: quarter_achieved
+              operator: eq
+              threshold_param: zero_threshold
+        display_metric: month_training_count
+        presentation:
+          style: count_list
+          subject: ${quarter_name}同引挂0且${data_month_name}送训挂0
+    presentation:
+      separator: "；"
+      terminator: "。"
+
+signals:
+  target_met:
+    from:
+      step: quarter_rate_classification
+      band: target_met
+
+render:
+  template: scene.md.j2
+  type: markdown_fragment

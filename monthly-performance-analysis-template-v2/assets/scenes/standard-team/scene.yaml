@@ -1,0 +1,56 @@
+scene:
+  id: standard-team
+  version: 1.0.0
+  title: 标准组
+  description: 按标准组同比和占比分类机构。
+  match:
+    keywords: [标准组, 标准组同比, 标准组占比]
+    questions:
+      - 哪些机构标准组同比下滑超过阈值？
+      - 哪些机构标准组占比较低？
+
+metric_catalog: ../../metrics/standard-team.yaml
+
+inputs:
+  parameters:
+    standard_team_yoy_threshold:
+      type: number
+      default: -20
+      description: 标准组同比负增阈值。
+    standard_team_share_threshold:
+      type: number
+      default: 30
+      description: 标准组占比较低阈值。
+
+analysis_instructions:
+  - 按{标准组同比}列出同比负增超过{同比阈值}的机构。
+  - 按{标准组占比}列出低于{占比阈值}的机构。
+
+steps:
+  - id: standard_team_classification
+    type: classify
+    display_order: source
+    bands:
+      - id: yoy_low
+        metric: standard_yoy
+        operator: lt
+        threshold_param: standard_team_yoy_threshold
+        presentation:
+          style: threshold_list
+          subject: 标准组同比
+          comparison: "负增超过 "
+      - id: share_low
+        metric: standard_share
+        operator: lt
+        threshold_param: standard_team_share_threshold
+        presentation:
+          style: threshold_list
+          subject: 标准组占比
+          comparison: "低于 "
+    presentation:
+      separator: "；"
+      terminator: "。"
+
+render:
+  template: scene.md.j2
+  type: markdown_fragment

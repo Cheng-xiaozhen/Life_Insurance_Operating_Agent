@@ -1,0 +1,74 @@
+scene:
+  id: supervisor-activity
+  version: 1.0.0
+  title: 主管活动
+  description: 汇总主管活动人数和活动率并分类机构。
+  match:
+    keywords: [主管活动, 主管活动率]
+    questions:
+      - 主管活动情况如何？
+      - 哪些机构主管活动率较高或较低？
+
+metric_catalog: ../../metrics/supervisor-activity.yaml
+
+inputs:
+  parameters:
+    cutoff_date:
+      type: string
+      required: true
+      description: 报告数据截止日期，例如5月31日。
+    supervisor_activity_high_threshold:
+      type: number
+      default: 80
+      description: 主管活动率较高阈值。
+    supervisor_activity_low_threshold:
+      type: number
+      default: 60
+      description: 主管活动率较低阈值。
+
+analysis_instructions:
+  - 汇总全系统{在职主管}、{主管活动人数}、{活动率}和{活动率同比}。
+  - 按{活动率}列出高于{较高阈值}和低于{较低阈值}的机构。
+
+steps:
+  - id: overall_summary
+    type: summarize
+    metrics:
+      - metric: in_service
+        prefix: 在职主管共
+      - metric: active_count
+        prefix: 主管活动
+      - metric: activity_rate
+        prefix: "活动率 "
+      - metric: activity_yoy
+        prefix: 活动率
+    presentation:
+      prefix: 截至${cutoff_date}，全系统
+      separator: "，"
+      terminator: "；"
+  - id: activity_rate_classification
+    type: classify
+    metric: activity_rate
+    display_order: source
+    bands:
+      - id: high
+        operator: gt
+        threshold_param: supervisor_activity_high_threshold
+        presentation:
+          style: threshold_list
+          subject: 主管活动率
+          comparison: "高于 "
+      - id: low
+        operator: lt
+        threshold_param: supervisor_activity_low_threshold
+        presentation:
+          style: threshold_list
+          subject: 主管活动率
+          comparison: "低于 "
+    presentation:
+      separator: "；"
+      terminator: "。"
+
+render:
+  template: scene.md.j2
+  type: markdown_fragment

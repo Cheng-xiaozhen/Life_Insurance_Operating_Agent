@@ -1,0 +1,48 @@
+# {{ meta.report_month_name }}工作总结
+
+{% if derived.standard_premium.month_target_met.organizations %}
+## 贺报
+
+热烈祝贺
+
+{{ derived.standard_premium.month_target_met.organizations | cn_join }}
+
+达成{{ meta.data_month_name }}标保目标
+{% endif %}
+
+## 1. 标保、价值
+
+- 截止{{ meta.cutoff_date }}，全系统{{ meta.data_month_name }}标保共达成{{ summary.standard_premium.month_amount | amount_wan }}，达成率{{ summary.standard_premium.month_rate | pct }}，{{ summary.standard_premium.month_yoy | yoy_pct_phrase }}，全年达成{{ summary.standard_premium.year_amount | amount_wan }}，全年进度{{ summary.standard_premium.year_progress | pct }}，全年标保{{ summary.standard_premium.year_yoy | yoy_pct_phrase }}；{{ meta.data_month_name }}价值达成{{ summary.value.month_amount | amount_wan }}，价值达成率{{ summary.value.month_rate | pct }}，{{ summary.value.month_yoy | yoy_pct_phrase }}，全年进度{{ summary.value.year_progress | pct }}，全年价值达成{{ summary.value.year_yoy | yoy_pct_phrase }}。
+- {{ derived.standard_premium.month_rate_high.organizations | length }}家机构{{ meta.data_month_name }}标保达成率高于{{ derived.standard_premium.month_rate_high.threshold | pct }}：{{ derived.standard_premium.month_rate_high.organizations | cn_join }}；其中{{ derived.standard_premium.month_target_met.organizations | cn_join }}达成{{ meta.data_month_name }}标保目标。
+- {{ derived.standard_premium.month_rate_low.organizations | length }}家机构{{ meta.data_month_name }}标保达成率低于{{ derived.standard_premium.month_rate_low.threshold | pct }}：{{ derived.standard_premium.month_rate_low.organizations | cn_join }}；其中{{ derived.standard_premium.month_rate_very_low.organizations | cn_join }}达成率不足{{ derived.standard_premium.month_rate_very_low.threshold | pct }}。
+- {{ derived.value.month_rate_high.organizations | length }}家机构{{ meta.data_month_name }}价值达成率高于{{ derived.value.month_rate_high.threshold | pct }}：{{ derived.value.month_rate_high.organizations | cn_join }}；{{ derived.value.month_rate_low.organizations | length }}家机构{{ meta.data_month_name }}价值达成率低于{{ derived.value.month_rate_low.threshold | pct }}：{{ derived.value.month_rate_low.organizations | cn_join }}。
+- {{ derived.standard_premium.year_progress_high.organizations | length }}家机构全年标保进度高于{{ derived.standard_premium.year_progress_high.threshold | pct }}：{{ derived.standard_premium.year_progress_high.organizations | cn_join }}；其中{{ derived.standard_premium.year_progress_very_high.organizations | cn_join }}达成进度超过{{ derived.standard_premium.year_progress_very_high.threshold | pct }}。
+- {{ derived.standard_premium.year_progress_low.organizations | length }}家机构全年标保进度低于{{ derived.standard_premium.year_progress_low.threshold | pct }}：{{ derived.standard_premium.year_progress_low.organizations | cn_join }}。
+
+## 2.1 活动人力、阳光人力
+
+- 截止{{ meta.cutoff_date }}，全系统{{ meta.data_month_name }}活动人力共{{ summary.active_manpower.headcount }}人，达成率{{ summary.active_manpower.rate | pct }}，{{ summary.active_manpower.yoy | yoy_pct_phrase }}；阳光人力共达成{{ summary.sunshine_manpower.headcount }}人，达成率{{ summary.sunshine_manpower.rate | pct }}，{{ summary.sunshine_manpower.yoy | yoy_pct_phrase }}，阳光占比活动{{ summary.sunshine_manpower.share_of_active | pct }}。
+- {{ derived.active_manpower.rate_high.organizations | length }}家机构活动人力达成率高于{{ derived.active_manpower.rate_high.threshold | pct }}：{{ derived.active_manpower.rate_high.organizations | cn_join }}；其中{{ derived.active_manpower.target_met.organizations | cn_join }}达成{{ meta.data_month_name }}活动人力目标。
+- {{ derived.active_manpower.rate_low.organizations | length }}家机构活动人力达成率低于{{ derived.active_manpower.rate_low.threshold | pct }}：{{ derived.active_manpower.rate_low.organizations | cn_join }}。
+- {{ derived.sunshine_manpower.rate_high.organizations | length }}家机构阳光人力达成率不低于{{ derived.sunshine_manpower.rate_high.threshold | pct }}：{{ derived.sunshine_manpower.rate_high.organizations | cn_join }}。
+- {{ derived.sunshine_manpower.rate_low.organizations | length }}家机构阳光人力达成率低于{{ derived.sunshine_manpower.rate_low.threshold | pct }}：{{ derived.sunshine_manpower.rate_low.organizations | cn_join }}。
+
+## 2.2 主管活动、主管双星、标准组
+
+- 截止{{ meta.cutoff_date }}，全系统在职主管共{{ summary.supervisor.in_service }}人，主管活动{{ summary.supervisor.active }}人，活动率{{ summary.supervisor.active_rate | pct }}，活动率{{ summary.supervisor.active_rate_yoy | yoy_pt_phrase }}；主管双星共达成{{ summary.supervisor.double_star }}人，双星达成率{{ summary.supervisor.double_star_rate | pct }}，达成率{{ summary.supervisor.double_star_rate_yoy | yoy_pt_phrase }}。
+- {{ derived.supervisor.active_rate_high.organizations | length }}家机构主管活动率高于{{ derived.supervisor.active_rate_high.threshold | pct }}：{{ derived.supervisor.active_rate_high.organizations | cn_join }}；{{ derived.supervisor.active_rate_low.organizations | length }}家机构主管活动率低于{{ derived.supervisor.active_rate_low.threshold | pct }}：{{ derived.supervisor.active_rate_low.organizations | cn_join }}。
+- {{ derived.supervisor.double_star_rate_high.organizations | length }}家机构主管双星率高于{{ derived.supervisor.double_star_rate_high.threshold | pct }}：{{ derived.supervisor.double_star_rate_high.organizations | cn_join }}；{{ derived.supervisor.double_star_rate_low.organizations | length }}家机构主管双星率低于{{ derived.supervisor.double_star_rate_low.threshold | pct }}：{{ derived.supervisor.double_star_rate_low.organizations | cn_join }}。
+- {{ derived.standard_team.yoy_low.organizations | length }}家机构标准组同比负增超过{{ derived.standard_team.yoy_low.threshold_abs | pct }}：{{ derived.standard_team.yoy_low.organizations | cn_join }}。
+- {{ derived.standard_team.share_low.organizations | length }}家机构标准组占比低于{{ derived.standard_team.share_low.threshold | pct }}：{{ derived.standard_team.share_low.organizations | cn_join }}。
+
+## 2.3 新增
+
+- 截止{{ meta.cutoff_date }}，全系统送训{{ summary.recruitment.trained }}人，新增{{ summary.recruitment.added }}人，目标达成率{{ summary.recruitment.rate | pct }}，{{ summary.recruitment.yoy | yoy_pct_phrase }}，起聘首阳人数{{ summary.recruitment.first_month_sunshine }}人，首阳率{{ summary.recruitment.first_month_sunshine_rate | pct }}；大专+学历人力占比{{ summary.recruitment.college_share | pct }}，{{ summary.recruitment.college_share_yoy | yoy_pt_phrase }}，本科+学历人力占比{{ summary.recruitment.bachelor_share | pct }}，{{ summary.recruitment.bachelor_gap | gap_pt_phrase }}。
+- {{ derived.recruitment.target_met.organizations | length }}家机构达成{{ meta.data_month_name }}新增目标：{{ derived.recruitment.target_met.organizations | cn_join }}；{{ derived.recruitment.rate_middle.organizations | length }}家机构新增达成率超过{{ derived.recruitment.rate_middle.lower_threshold | pct }}但未达{{ derived.recruitment.rate_middle.upper_threshold | pct }}：{{ derived.recruitment.rate_middle.organizations | cn_join }}；{{ derived.recruitment.rate_low.organizations | length }}家机构新增达成率低于{{ derived.recruitment.rate_low.threshold | pct }}：{{ derived.recruitment.rate_low.organizations | cn_join }}。
+- {{ derived.recruitment.bachelor_target_met.organizations | length }}家机构达成本科+占比目标，其中{{ derived.recruitment.bachelor_gap_high.organizations | length }}家机构超额{{ derived.recruitment.bachelor_gap_high.threshold | pt }}：{{ derived.recruitment.bachelor_gap_high.organizations | cn_join }}；{{ derived.recruitment.bachelor_target_not_met.organizations | length }}家机构未达成新增本科+占比目标：{{ derived.recruitment.bachelor_target_not_met.organizations | cn_join }}。
+
+## 2.4 同引
+
+- 截止{{ meta.cutoff_date }}，全系统{{ meta.data_month_name }}送训{{ summary.co_recruitment.month_trained }}人，{{ summary.co_recruitment.month_trained_yoy | yoy_pct_phrase }}；{{ meta.quarter_name }}上岗{{ summary.co_recruitment.quarter_onboarded }}人，达成率{{ summary.co_recruitment.quarter_rate | pct }}，{{ summary.co_recruitment.quarter_yoy | yoy_pct_phrase }}；{{ meta.quarter_name }}同引主管大专+学历人力占比{{ summary.co_recruitment.college_share | pct }}，{{ summary.co_recruitment.college_share_yoy | yoy_pt_phrase }}，本科+学历人力占比{{ summary.co_recruitment.bachelor_share | pct }}，{{ summary.co_recruitment.bachelor_share_yoy | yoy_pt_phrase }}。
+- {{ derived.co_recruitment.target_met.organizations | length }}家机构达成{{ meta.quarter_name }}同引目标：{{ derived.co_recruitment.target_met.organizations | cn_join }}；{{ derived.co_recruitment.rate_middle.organizations | length }}家机构同引达成率不低于{{ derived.co_recruitment.rate_middle.lower_threshold | pct }}但未达{{ derived.co_recruitment.rate_middle.upper_threshold | pct }}：{{ derived.co_recruitment.rate_middle.organizations | cn_join }}；{{ derived.co_recruitment.month_trained_zero_and_quarter_onboarded_zero.organizations | length }}家机构{{ meta.quarter_name }}同引挂0且{{ meta.data_month_name }}送训挂0：{{ derived.co_recruitment.month_trained_zero_and_quarter_onboarded_zero.organizations | cn_join }}。
+

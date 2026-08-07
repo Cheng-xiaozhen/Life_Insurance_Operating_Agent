@@ -1,0 +1,97 @@
+catalog:
+  id: co-recruitment
+  version: 1.0.0
+  title: 同引候选指标
+  dataset: co_recruitment
+
+dimensions:
+  row_label:
+    column: 分组
+    type: string
+  organization:
+    column: 机构
+    type: string
+
+row_sets:
+  total:
+    field: row_label
+    operator: eq
+    value: 全系统
+  details:
+    organization_field: organization
+
+metrics:
+  month_training_count:
+    label: 月度同引送训
+    column: ${data_month_name}送训_送训
+    type: number
+    unit: person
+    formatter: person
+    operations: [summarize, classify]
+  month_training_yoy:
+    label: 月度同引送训同比
+    column: ${data_month_name}送训_同比
+    type: number
+    unit: pct
+    formatter: yoy_pct_phrase
+    threshold_formatter: pct
+    operations: [summarize, classify]
+  quarter_target:
+    label: 季度同引目标
+    column: ${quarter_name}同引_目标
+    type: number
+    unit: person
+    formatter: person
+    operations: [summarize]
+  quarter_achieved:
+    label: 季度同引上岗
+    column: ${quarter_name}同引_达成
+    type: number
+    unit: person
+    formatter: person
+    operations: [summarize, classify]
+  quarter_rate:
+    label: 季度同引达成率
+    column: ${quarter_name}同引_达成率
+    type: number
+    unit: pct
+    formatter: pct
+    operations: [summarize, classify]
+  quarter_yoy:
+    label: 季度同引同比
+    column: ${quarter_name}同引_同比
+    type: number
+    unit: pct
+    formatter: yoy_pct_phrase
+    threshold_formatter: pct
+    operations: [summarize, classify]
+  quarter_college_share:
+    label: 季度同引大专加学历占比
+    column: ${quarter_name}大专+学历_占比
+    type: number
+    unit: pct
+    formatter: pct
+    operations: [summarize, classify]
+  quarter_college_yoy:
+    label: 季度同引大专加学历同比
+    column: ${quarter_name}大专+学历_同比
+    type: number
+    unit: pt
+    formatter: yoy_pt_phrase
+    threshold_formatter: pt
+    operations: [summarize, classify]
+  quarter_bachelor_share:
+    label: 季度同引本科加学历占比
+    column: ${quarter_name}本科+学历_占比
+    type: number
+    unit: pct
+    formatter: pct
+    operations: [summarize, classify]
+  quarter_bachelor_yoy:
+    label: 季度同引本科加学历同比
+    column: ${quarter_name}本科+学历_同比
+    type: number
+    unit: pt
+    formatter: yoy_pt_phrase
+    threshold_formatter: pt
+    operations: [summarize, classify]

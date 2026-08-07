@@ -1,0 +1,67 @@
+catalog:
+  id: standard-premium
+  version: 1.0.0
+  title: 标保候选指标
+  dataset: standard_premium
+
+dimensions:
+  row_label:
+    column: 片区
+    type: string
+  organization:
+    column: 机构
+    type: string
+
+row_sets:
+  total:
+    field: row_label
+    operator: eq
+    value: 全系统
+  details:
+    organization_field: organization
+
+metrics:
+  month_amount:
+    label: 月度标保达成
+    column: ${data_month_name}达成
+    type: number
+    unit: wan
+    formatter: amount_wan
+    operations: [summarize] # 允许被哪些步骤使用，还没有成为真正的运行时约束，可以删除，或者保留作为约束
+  month_rate:
+    label: 月度标保达成率
+    column: ${data_month_name}达成率
+    type: number
+    unit: pct
+    formatter: pct
+    operations: [summarize, classify]
+  month_yoy:
+    label: 月度标保同比
+    column: ${data_month_name}同比
+    type: number
+    unit: pct
+    formatter: yoy_pct_phrase
+    threshold_formatter: pct
+    operations: [summarize, classify]
+  year_amount:
+    label: 全年标保达成
+    column: 全年标保达成
+    type: number
+    unit: wan
+    formatter: amount_wan
+    operations: [summarize]
+  year_progress:
+    label: 全年标保进度
+    column: 全年进度
+    type: number
+    unit: pct
+    formatter: pct
+    operations: [summarize, classify]
+  year_yoy:
+    label: 全年标保同比
+    column: 全年同比
+    type: number
+    unit: pct
+    formatter: yoy_pct_phrase
+    threshold_formatter: pct
+    operations: [summarize, classify]

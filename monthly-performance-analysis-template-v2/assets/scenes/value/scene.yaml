@@ -1,0 +1,80 @@
+scene:
+  id: value
+  version: 1.0.0
+  title: 价值
+  description: 按五月报告步骤汇总价值并分类机构达成率。
+  match:
+    keywords: [价值, 价值达成率, 全年价值进度]
+    questions:
+      - 本月价值达成情况如何？
+      - 哪些机构价值达成率较高或较低？
+
+metric_catalog: ../../metrics/value.yaml
+
+inputs:
+  parameters:
+    data_month_name:
+      type: string
+      required: true
+      description: CSV动态列月份，例如5月。
+    cutoff_date:
+      type: string
+      required: true
+      description: 报告数据截止日期，例如5月31日。
+    value_high_threshold:
+      type: number
+      default: 85
+      description: 价值月度达成率较高阈值。
+    value_low_threshold:
+      type: number
+      default: 55
+      description: 价值月度达成率较低阈值。
+
+analysis_instructions:
+  - 汇总全系统价值的{总量}、{达成率}、{同比增速}、{年度进度}和{全年同比}。
+  - 按{达成率}列出高于{价值较高阈值}和低于{价值较低阈值}的机构。
+
+steps:
+  - id: overall_summary
+    type: summarize
+    metrics:
+      - metric: month_amount
+        prefix: ${data_month_name}价值达成
+      - metric: month_rate
+        prefix: "价值达成率 "
+      - metric: month_yoy
+        prefix: ""
+      - metric: year_progress
+        prefix: "全年进度 "
+      - metric: year_yoy
+        prefix: 全年价值达成
+    presentation:
+      prefix: 截至${cutoff_date}，全系统
+      separator: "，"
+      terminator: "；"
+  - id: month_rate_classification
+    type: classify
+    metric: month_rate
+    display_order: source
+    bands:
+      - id: high
+        operator: gt
+        threshold_param: value_high_threshold
+        presentation:
+          style: threshold_list
+          subject: ${data_month_name}价值达成率
+          comparison: "高于 "
+      - id: low
+        operator: lt
+        threshold_param: value_low_threshold
+        presentation:
+          style: threshold_list
+          subject: ${data_month_name}价值达成率
+          comparison: "低于 "
+    presentation:
+      separator: "；"
+      terminator: "。"
+
+render:
+  template: scene.md.j2
+  type: markdown_fragment

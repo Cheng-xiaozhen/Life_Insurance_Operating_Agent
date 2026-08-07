@@ -1,0 +1,78 @@
+scene:
+  id: sunshine-manpower
+  version: 1.0.0
+  title: 阳光人力
+  description: 汇总阳光人力及其活动占比并分类机构。
+  match:
+    keywords: [阳光人力, 阳光占比活动]
+    questions:
+      - 阳光人力达成情况如何？
+      - 哪些机构阳光人力达成率偏低？
+
+metric_catalog: ../../metrics/sunshine-manpower.yaml
+
+inputs:
+  parameters:
+    data_month_name:
+      type: string
+      required: true
+      description: 报告月份，例如5月。
+    cutoff_date:
+      type: string
+      required: true
+      description: 报告数据截止日期，例如5月31日。
+    sunshine_high_threshold:
+      type: number
+      default: 90
+      description: 阳光人力达成率高位阈值。按参考名单使用不低于。
+    sunshine_low_threshold:
+      type: number
+      default: 70
+      description: 阳光人力达成率低位阈值。
+
+analysis_instructions:
+  - 汇总全系统{阳光人力}、{达成率}、{同比增速}和{阳光占比活动}。
+  - 按{达成率}列出达到{较高阈值}和低于{较低阈值}的机构。
+
+steps:
+  - id: overall_summary
+    type: summarize
+    metrics:
+      - metric: sunshine_count
+        prefix: 阳光人力共达成
+      - metric: sunshine_rate
+        prefix: "达成率 "
+      - metric: sunshine_yoy
+        prefix: ""
+      - metric: sunshine_share
+        prefix: "阳光占比活动 "
+    presentation:
+      prefix: 截至${cutoff_date}，
+      separator: "，"
+      terminator: "；"
+  - id: sunshine_rate_classification
+    type: classify
+    metric: sunshine_rate
+    display_order: source
+    bands:
+      - id: high
+        operator: gte
+        threshold_param: sunshine_high_threshold
+        presentation:
+          style: threshold_list
+          subject: 阳光人力达成率
+          comparison: "高于 "
+      - id: low
+        operator: lt
+        threshold_param: sunshine_low_threshold
+        presentation:
+          style: threshold_list
+          subject: 阳光人力达成率
+          comparison: "低于 "
+    presentation:
+      separator: "；"
+      terminator: "。"
+
+render:
+  template: scene.md.j2
+  type: markdown_fragment

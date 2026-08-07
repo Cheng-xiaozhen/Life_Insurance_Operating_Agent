@@ -1,0 +1,12 @@
+# {{ scene.title }}
+
+{% for step in steps -%}
+{% if step.type == "summarize" -%}
+- {{ step.presentation.prefix }}{% for item in step.metrics %}{{ item.prefix }}{{ item.value | format_metric(item.formatter) }}{% if not loop.last %}{{ item.separator_after if item.separator_after is not none else step.presentation.separator }}{% endif %}{% endfor %}{{ step.presentation.terminator }}
+{% elif step.type == "classify" -%}
+{% set active_bands = step.bands | selectattr("organizations") | list -%}
+{% if active_bands -%}
+- {% for band in active_bands %}{% if not loop.first %}{{ step.presentation.separator }}{% endif %}{% if band.presentation.style == "threshold_list" %}{{ band.count }}家机构{{ band.presentation.subject }}{{ band.presentation.comparison }}{{ band.threshold | format_metric(band.formatter) }}：{{ band.organizations | cn_join }}{% elif band.presentation.style == "organization_text" %}{{ band.presentation.prefix }}{{ band.organizations | cn_join }}{{ band.presentation.suffix }}{% elif band.presentation.style == "organization_threshold" %}{{ band.presentation.prefix }}{{ band.organizations | cn_join }}{{ band.presentation.text }}{{ band.threshold | format_metric(band.formatter) }}{% elif band.presentation.style == "count_list" %}{{ band.count }}家机构{{ band.presentation.subject }}：{{ band.organizations | cn_join }}{% elif band.presentation.style == "count_text" %}{{ band.count }}家机构{{ band.presentation.subject }}{% endif %}{% endfor %}{{ step.presentation.terminator }}
+{% endif -%}
+{% endif -%}
+{% endfor %}

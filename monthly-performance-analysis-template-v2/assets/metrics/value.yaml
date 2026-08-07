@@ -1,0 +1,60 @@
+catalog:
+  id: value
+  version: 1.0.0
+  title: 价值候选指标
+  dataset: value
+
+dimensions:
+  row_label:
+    column: 片区
+    type: string
+  organization:
+    column: 机构
+    type: string
+
+row_sets:
+  total:
+    field: row_label
+    operator: eq
+    value: 全系统
+  details:
+    organization_field: organization
+
+metrics:
+  month_amount:
+    label: 月度价值达成
+    column: ${data_month_name}达成
+    type: number
+    unit: wan
+    formatter: amount_wan
+    operations: [summarize]
+  month_rate:
+    label: 月度价值达成率
+    column: ${data_month_name}达成率
+    type: number
+    unit: pct
+    formatter: pct
+    operations: [summarize, classify]
+  month_yoy:
+    label: 月度价值同比
+    column: ${data_month_name}序时同比
+    type: number
+    unit: pct
+    formatter: yoy_pct_phrase
+    threshold_formatter: pct
+    operations: [summarize, classify]
+  year_progress:
+    label: 全年价值进度
+    column: 全年进度
+    type: number
+    unit: pct
+    formatter: pct
+    operations: [summarize, classify]
+  year_yoy:
+    label: 全年价值同比
+    column: 全年同比
+    type: number
+    unit: pct
+    formatter: yoy_pct_phrase
+    threshold_formatter: pct
+    operations: [summarize, classify]

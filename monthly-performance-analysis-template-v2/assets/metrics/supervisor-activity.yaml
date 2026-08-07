@@ -1,0 +1,52 @@
+catalog:
+  id: supervisor-activity
+  version: 1.0.0
+  title: 主管活动候选指标
+  dataset: supervisor_activity
+
+dimensions:
+  row_label:
+    column: 分组
+    type: string
+  organization:
+    column: 机构
+    type: string
+
+row_sets:
+  total:
+    field: row_label
+    operator: eq
+    value: 全系统
+  details:
+    organization_field: organization
+
+metrics:
+  in_service:
+    label: 在职主管
+    column: 在职主管
+    type: number
+    unit: person
+    formatter: person
+    operations: [summarize]
+  active_count:
+    label: 主管活动人数
+    column: 活动人数
+    type: number
+    unit: person
+    formatter: person
+    operations: [summarize]
+  activity_rate:
+    label: 主管活动率
+    column: 活动率
+    type: number
+    unit: pct
+    formatter: pct
+    operations: [summarize, classify]
+  activity_yoy:
+    label: 主管活动率同比
+    column: 活动率同比
+    type: number
+    unit: pt
+    formatter: yoy_pt_phrase
+    threshold_formatter: pt
+    operations: [summarize, classify]

@@ -1,0 +1,174 @@
+scene:
+  id: recruitment
+  version: 1.0.0
+  title: 新增
+  description: 汇总新增及学历指标，并分类新增达成率和本科占比目标。
+  match:
+    keywords: [新增, 新增达成率, 本科占比, 首阳]
+    questions:
+      - 本月新增和学历指标达成情况如何？
+      - 哪些机构新增达标或本科占比未达标？
+
+metric_catalog: ../../metrics/recruitment.yaml
+
+inputs:
+  parameters:
+    data_month_name:
+      type: string
+      required: true
+      description: 报告月份，例如5月。
+    cutoff_date:
+      type: string
+      required: true
+      description: 报告数据截止日期，例如5月31日。
+    recruitment_middle_low_threshold:
+      type: number
+      default: 80
+      description: 新增中档区间下限。
+    recruitment_target_threshold:
+      type: number
+      default: 100
+      description: 新增目标达成阈值。
+    recruitment_low_threshold:
+      type: number
+      default: 40
+      description: 新增达成率低位阈值。
+    bachelor_target_threshold:
+      type: number
+      default: 0
+      description: 本科加学历占比目标差额阈值。
+    bachelor_excess_threshold:
+      type: number
+      default: 10
+      description: 本科加学历占比超额阈值。
+
+analysis_instructions:
+  - 汇总全系统{送训}、{新增}、{目标达成率}、{同比增速}、{首阳}、{首阳率}、{大专加学历占比}、{本科加学历占比}及其变化。
+  - 按{新增达成率}列出目标机构、中档机构和低于{低位阈值}的机构。
+  - 按{本科加学历目标差额}列出达标、超额和未达标机构，缺失差额按未达标处理。
+
+steps:
+  - id: overall_summary
+    type: summarize
+    metrics:
+      - metric: training_count
+        prefix: 送训
+      - metric: added_count
+        prefix: 新增
+      - metric: added_rate
+        prefix: "目标达成率 "
+      - metric: added_yoy
+        prefix: ""
+      - metric: first_sun_count
+        prefix: 起聘首阳人数
+      - metric: first_sun_rate
+        prefix: "首阳率 "
+        separator_after: "；"
+      - metric: college_share
+        prefix: "大专+学历人力占比 "
+      - metric: college_yoy
+        prefix: ""
+      - metric: bachelor_share
+        prefix: "本科+学历人力占比 "
+      - metric: bachelor_gap
+        prefix: ""
+    presentation:
+      prefix: 截至${cutoff_date}，全系统
+      separator: "，"
+      terminator: "；"
+  - id: recruitment_rate_classification
+    type: classify
+    metric: added_rate
+    display_order: source
+    bands:
+      - id: middle
+        conditions:
+          match: all
+          rules:
+            - metric: added_rate
+              operator: gt
+              threshold_param: recruitment_middle_low_threshold
+            - metric: added_rate
+              operator: lt
+              threshold_param: recruitment_target_threshold
+        display_metric: added_rate
+        display_threshold_param: recruitment_middle_low_threshold
+        presentation:
+          style: threshold_list
+          subject: 新增达成率
+          comparison: "超过 "
+      - id: target_met
+        operator: gte
+        threshold_param: recruitment_target_threshold
+        presentation:
+          style: count_list
+          subject: 达成${data_month_name}新增目标
+    presentation:
+      separator: "；"
+      terminator: "；"
+  - id: recruitment_rate_low
+    type: classify
+    metric: added_rate
+    display_order: source
+    bands:
+      - id: low
+        operator: lt
+        threshold_param: recruitment_low_threshold
+        presentation:
+          style: threshold_list
+          subject: 新增达成率
+          comparison: "低于 "
+    presentation:
+      separator: "；"
+      terminator: "；"
+  - id: bachelor_classification
+    type: classify
+    metric: bachelor_gap
+    display_order: source
+    bands:
+      - id: target_met
+        operator: gte
+        threshold_param: bachelor_target_threshold
+        presentation:
+          style: count_text
+          subject: 达成本科占比目标，其中
+      - id: excess
+        operator: gt
+        threshold_param: bachelor_excess_threshold
+        presentation:
+          style: threshold_list
+          subject: ""
+          comparison: 超额
+    presentation:
+      separator: ""
+      terminator: "；"
+  - id: bachelor_target_not_met
+    type: classify
+    metric: bachelor_gap
+    display_order: source
+    bands:
+      - id: not_met
+        conditions:
+          match: any
+          rules:
+            - metric: bachelor_gap
+              operator: lt
+              threshold_param: bachelor_target_threshold
+            - metric: bachelor_gap
+              operator: is_missing
+        presentation:
+          style: count_list
+          subject: 未达成新增本科占比目标
+    presentation:
+      separator: "；"
+      terminator: "。"
+
+signals:
+  target_met:
+    from:
+      step: recruitment_rate_classification
+      band: target_met
+
+render:
+  template: scene.md.j2
+  type: markdown_fragment

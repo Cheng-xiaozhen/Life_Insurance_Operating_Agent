@@ -1,0 +1,4 @@
+interface:
+  display_name: "Monthly Performance Analysis"
+  short_description: "Compose auditable insurance performance reports"
+  default_prompt: "Use $monthly-performance-analysis-template-v2 to plan and generate an auditable monthly performance report from the supplied datasets."

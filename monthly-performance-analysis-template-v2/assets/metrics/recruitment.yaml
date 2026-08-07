@@ -1,0 +1,96 @@
+catalog:
+  id: recruitment
+  version: 1.0.0
+  title: 新增候选指标
+  dataset: recruitment
+
+dimensions:
+  row_label:
+    column: 分组
+    type: string
+  organization:
+    column: 机构
+    type: string
+
+row_sets:
+  total:
+    field: row_label
+    operator: eq
+    value: 全系统
+  details:
+    organization_field: organization
+
+metrics:
+  training_count:
+    label: 新增送训
+    column: 新增_送训
+    type: number
+    unit: person
+    formatter: person
+    operations: [summarize]
+  added_count:
+    label: 新增人数
+    column: 新增_新增
+    type: number
+    unit: person
+    formatter: person
+    operations: [summarize]
+  added_rate:
+    label: 新增达成率
+    column: 新增_达成率
+    type: number
+    unit: pct
+    formatter: pct
+    operations: [summarize, classify]
+  added_yoy:
+    label: 新增同比
+    column: 新增_序时同比
+    type: number
+    unit: pct
+    formatter: yoy_pct_phrase
+    threshold_formatter: pct
+    operations: [summarize, classify]
+  first_sun_count:
+    label: 起聘首阳人数
+    column: 首阳（起聘）_首阳
+    type: number
+    unit: person
+    formatter: person
+    operations: [summarize]
+  first_sun_rate:
+    label: 起聘首阳率
+    column: 首阳（起聘）_首阳率
+    type: number
+    unit: pct
+    formatter: pct
+    operations: [summarize, classify]
+  college_share:
+    label: 大专加学历人力占比
+    column: 大专+_占比
+    type: number
+    unit: pct
+    formatter: pct
+    operations: [summarize, classify]
+  college_yoy:
+    label: 大专加学历人力同比
+    column: 大专+_序时同比
+    type: number
+    unit: pt
+    formatter: yoy_pt_phrase
+    threshold_formatter: pt
+    operations: [summarize, classify]
+  bachelor_share:
+    label: 本科加学历人力占比
+    column: 本科+_占比
+    type: number
+    unit: pct
+    formatter: pct
+    operations: [summarize, classify]
+  bachelor_gap:
+    label: 本科加学历人力目标差额
+    column: 本科+_差额
+    type: number
+    unit: pt
+    formatter: gap_pt_phrase
+    threshold_formatter: pt
+    operations: [summarize, classify]

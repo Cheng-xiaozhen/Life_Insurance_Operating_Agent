@@ -1,0 +1,286 @@
+{
+  "report": {
+    "id": "monthly-performance",
+    "version": "1.0.0",
+    "title": "五月工作总结"
+  },
+  "params": {
+    "report_month_name": "五月",
+    "data_month_name": "5月",
+    "cutoff_date": "5月31日"
+  },
+  "scenes": {
+    "standard-premium": {
+      "scene": {
+        "id": "standard-premium",
+        "version": "2.0.0",
+        "title": "标保",
+        "description": "按手工分析步骤汇总标保指标并对机构进行阈值分类。",
+        "match": {
+          "keywords": [
+            "标保",
+            "标准保费",
+            "标保达成率",
+            "全年标保进度"
+          ],
+          "questions": [
+            "本月标保达成情况如何？",
+            "哪些机构标保达标或进度偏低？"
+          ]
+        }
+      },
+      "params": {
+        "data_month_name": "5月",
+        "cutoff_date": "5月31日",
+        "monthly_high_threshold": 70,
+        "monthly_target_threshold": 100,
+        "monthly_low_threshold": 50,
+        "monthly_very_low_threshold": 5,
+        "yearly_high_threshold": 60,
+        "yearly_very_high_threshold": 80,
+        "yearly_low_threshold": 45
+      },
+      "steps": [
+        {
+          "id": "overall_summary",
+          "type": "summarize",
+          "metrics": [
+            {
+              "id": "month_amount",
+              "label": "月度标保达成",
+              "value": 12444,
+              "unit": "wan",
+              "formatter": "amount_wan",
+              "prefix": "5月标保共达成"
+            },
+            {
+              "id": "month_rate",
+              "label": "月度标保达成率",
+              "value": 61.8,
+              "unit": "pct",
+              "formatter": "pct",
+              "prefix": "达成率 "
+            },
+            {
+              "id": "month_yoy",
+              "label": "月度标保同比",
+              "value": -11.6,
+              "unit": "pct",
+              "formatter": "yoy_pct_phrase",
+              "prefix": ""
+            },
+            {
+              "id": "year_amount",
+              "label": "全年标保达成",
+              "value": 100538,
+              "unit": "wan",
+              "formatter": "amount_wan",
+              "prefix": "全年达成"
+            },
+            {
+              "id": "year_progress",
+              "label": "全年标保进度",
+              "value": 53.8,
+              "unit": "pct",
+              "formatter": "pct",
+              "prefix": "全年进度 "
+            },
+            {
+              "id": "year_yoy",
+              "label": "全年标保同比",
+              "value": 20.6,
+              "unit": "pct",
+              "formatter": "yoy_pct_phrase",
+              "prefix": "全年标保"
+            }
+          ],
+          "presentation": {
+            "prefix": "截至5月31日，全系统",
+            "separator": "，",
+            "terminator": "。"
+          }
+        },
+        {
+          "id": "monthly_rate_classification",
+          "type": "classify",
+          "metric": {
+            "id": "month_rate",
+            "label": "月度标保达成率",
+            "unit": "pct",
+            "formatter": "pct"
+          },
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "high",
+              "operator": "gt",
+              "threshold": 70,
+              "organizations": [
+                "河南",
+                "天津",
+                "潍坊",
+                "云南",
+                "新疆",
+                "海南",
+                "内蒙古",
+                "宁波",
+                "甘肃"
+              ],
+              "count": 9,
+              "formatter": "pct",
+              "presentation": {
+                "style": "threshold_list",
+                "subject": "5月标保达成率",
+                "comparison": "高于 "
+              }
+            },
+            {
+              "id": "target_met",
+              "operator": "gte",
+              "threshold": 100,
+              "organizations": [
+                "天津",
+                "新疆"
+              ],
+              "count": 2,
+              "formatter": "pct",
+              "presentation": {
+                "style": "organization_text",
+                "prefix": "其中",
+                "suffix": "达成5月标保目标"
+              }
+            },
+            {
+              "id": "low",
+              "operator": "lt",
+              "threshold": 50,
+              "organizations": [
+                "上海",
+                "安徽",
+                "山西",
+                "北京",
+                "贵州",
+                "青岛",
+                "宁夏",
+                "深圳"
+              ],
+              "count": 8,
+              "formatter": "pct",
+              "presentation": {
+                "style": "threshold_list",
+                "subject": "5月标保达成率",
+                "comparison": "低于 "
+              }
+            },
+            {
+              "id": "very_low",
+              "operator": "lt",
+              "threshold": 5,
+              "organizations": [
+                "深圳"
+              ],
+              "count": 1,
+              "formatter": "pct",
+              "presentation": {
+                "style": "organization_threshold",
+                "prefix": "其中",
+                "text": "达成率不足 "
+              }
+            }
+          ],
+          "presentation": {
+            "separator": "；",
+            "terminator": "；"
+          }
+        },
+        {
+          "id": "yearly_progress_classification",
+          "type": "classify",
+          "metric": {
+            "id": "year_progress",
+            "label": "全年标保进度",
+            "unit": "pct",
+            "formatter": "pct"
+          },
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "high",
+              "operator": "gt",
+              "threshold": 60,
+              "organizations": [
+                "天津",
+                "潍坊",
+                "云南",
+                "新疆",
+                "宁波",
+                "甘肃",
+                "贵州"
+              ],
+              "count": 7,
+              "formatter": "pct",
+              "presentation": {
+                "style": "threshold_list",
+                "subject": "全年标保进度达成",
+                "comparison": "高于 "
+              }
+            },
+            {
+              "id": "very_high",
+              "operator": "gt",
+              "threshold": 80,
+              "organizations": [
+                "宁波"
+              ],
+              "count": 1,
+              "formatter": "pct",
+              "presentation": {
+                "style": "organization_threshold",
+                "prefix": "其中",
+                "text": "达成进度超 "
+              }
+            },
+            {
+              "id": "low",
+              "operator": "lt",
+              "threshold": 45,
+              "organizations": [
+                "安徽",
+                "北京",
+                "海南",
+                "青岛",
+                "宁夏",
+                "深圳"
+              ],
+              "count": 6,
+              "formatter": "pct",
+              "presentation": {
+                "style": "threshold_list",
+                "subject": "全年标保进度达成",
+                "comparison": "低于 "
+              }
+            }
+          ],
+          "presentation": {
+            "separator": "；",
+            "terminator": "。"
+          }
+        }
+      ],
+      "signals": {
+        "target_met": {
+          "organizations": [
+            "天津",
+            "新疆"
+          ],
+          "count": 2,
+          "step": "monthly_rate_classification",
+          "band": "target_met"
+        }
+      }
+    }
+  },
+  "fragments": {
+    "standard-premium": "# 标保\n\n- 截至5月31日，全系统5月标保共达成12444万，达成率 61.8%，同比负增11.6%，全年达成100538万，全年进度 53.8%，全年标保同比正增20.6%。\n- 9家机构5月标保达成率高于 70%：河南、天津、潍坊、云南、新疆、海南、内蒙古、宁波、甘肃；其中天津、新疆达成5月标保目标；8家机构5月标保达成率低于 50%：上海、安徽、山西、北京、贵州、青岛、宁夏、深圳；其中深圳达成率不足 5%；\n- 7家机构全年标保进度达成高于 60%：天津、潍坊、云南、新疆、宁波、甘肃、贵州；其中宁波达成进度超 80%；6家机构全年标保进度达成低于 45%：安徽、北京、海南、青岛、宁夏、深圳。"
+  }
+}

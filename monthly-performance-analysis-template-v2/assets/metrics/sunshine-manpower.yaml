@@ -1,0 +1,52 @@
+catalog:
+  id: sunshine-manpower
+  version: 1.0.0
+  title: 阳光人力候选指标
+  dataset: sunshine_manpower
+
+dimensions:
+  row_label:
+    column: 片区
+    type: string
+  organization:
+    column: 机构
+    type: string
+
+row_sets:
+  total:
+    field: row_label
+    operator: eq
+    value: 全系统
+  details:
+    organization_field: organization
+
+metrics:
+  sunshine_count:
+    label: 阳光人力达成
+    column: 阳光人力达成
+    type: number
+    unit: person
+    formatter: person
+    operations: [summarize]
+  sunshine_yoy:
+    label: 阳光人力同比
+    column: 同比
+    type: number
+    unit: pct
+    formatter: yoy_pct_phrase
+    threshold_formatter: pct
+    operations: [summarize, classify]
+  sunshine_rate:
+    label: 阳光人力达成率
+    column: 阳光人力达成率
+    type: number
+    unit: pct
+    formatter: pct
+    operations: [summarize, classify]
+  sunshine_share:
+    label: 阳光占比活动
+    column: 阳光占比活动
+    type: number
+    unit: pct
+    formatter: pct
+    operations: [summarize, classify]

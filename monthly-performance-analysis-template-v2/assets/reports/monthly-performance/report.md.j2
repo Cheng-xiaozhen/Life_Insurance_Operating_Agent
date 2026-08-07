@@ -1,0 +1,12 @@
+# {{ report.title }}
+
+{% set target_met = scenes["standard-premium"].signals.target_met.organizations -%}
+{% if target_met %}
+## 贺报
+
+热烈祝贺 {{ target_met | cn_join }}达成{{ params.data_month_name }}标保目标
+
+{% endif -%}
+{% for scene_id in scene_order %}
+{{ fragments[scene_id] }}
+{% endfor %}

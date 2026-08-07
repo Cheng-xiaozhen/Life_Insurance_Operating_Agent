@@ -1,0 +1,93 @@
+scene:
+  id: active-manpower
+  version: 1.0.0
+  title: 活动人力
+  description: 汇总活动人力并按达成率分类机构。
+  match:
+    keywords: [活动人力, 活动人力达成率]
+    questions:
+      - 本月活动人力达成情况如何？
+      - 哪些机构活动人力达标或偏低？
+
+metric_catalog: ../../metrics/active-manpower.yaml
+
+inputs:
+  parameters:
+    data_month_name:
+      type: string
+      required: true
+      description: 报告月份，例如5月。
+    cutoff_date:
+      type: string
+      required: true
+      description: 报告数据截止日期，例如5月31日。
+    activity_high_threshold:
+      type: number
+      default: 90
+      description: 活动人力达成率较高阈值。
+    activity_target_threshold:
+      type: number
+      default: 100
+      description: 活动人力目标达成阈值。
+    activity_low_threshold:
+      type: number
+      default: 60
+      description: 活动人力达成率较低阈值。
+
+analysis_instructions:
+  - 汇总全系统{活动人力}、{达成率}和{同比增速}。
+  - 按{达成率}列出高于{较高阈值}、达成目标和低于{较低阈值}的机构。
+
+steps:
+  - id: overall_summary
+    type: summarize
+    metrics:
+      - metric: activity_count
+        prefix: ${data_month_name}活动人力共
+      - metric: activity_rate
+        prefix: "达成率 "
+      - metric: activity_yoy
+        prefix: ""
+    presentation:
+      prefix: 截至${cutoff_date}，全系统
+      separator: "，"
+      terminator: "；"
+  - id: activity_rate_classification
+    type: classify
+    metric: activity_rate
+    display_order: source
+    bands:
+      - id: high
+        operator: gt
+        threshold_param: activity_high_threshold
+        presentation:
+          style: threshold_list
+          subject: 活动人力达成率
+          comparison: "高于 "
+      - id: target_met
+        operator: gte
+        threshold_param: activity_target_threshold
+        presentation:
+          style: organization_text
+          prefix: 其中
+          suffix: 达成${data_month_name}活动人力目标
+      - id: low
+        operator: lt
+        threshold_param: activity_low_threshold
+        presentation:
+          style: threshold_list
+          subject: 活动人力达成率
+          comparison: "低于 "
+    presentation:
+      separator: "；"
+      terminator: "。"
+
+signals:
+  target_met:
+    from:
+      step: activity_rate_classification
+      band: target_met
+
+render:
+  template: scene.md.j2
+  type: markdown_fragment

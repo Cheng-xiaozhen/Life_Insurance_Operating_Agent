@@ -1,0 +1,52 @@
+catalog:
+  id: standard-team
+  version: 1.0.0
+  title: 标准组候选指标
+  dataset: standard_team
+
+dimensions:
+  row_label:
+    column: 分组
+    type: string
+  organization:
+    column: 机构
+    type: string
+
+row_sets:
+  total:
+    field: row_label
+    operator: eq
+    value: 全系统
+  details:
+    organization_field: organization
+
+metrics:
+  in_service:
+    label: 在职主管
+    column: 在职主管
+    type: number
+    unit: person
+    formatter: person
+    operations: [summarize]
+  standard_count:
+    label: 标准组达成
+    column: 达成
+    type: number
+    unit: person
+    formatter: person
+    operations: [summarize]
+  standard_yoy:
+    label: 标准组同比
+    column: 同比
+    type: number
+    unit: pct
+    formatter: yoy_pct_phrase
+    threshold_formatter: abs_pct
+    operations: [summarize, classify]
+  standard_share:
+    label: 标准组占比
+    column: 占比
+    type: number
+    unit: pct
+    formatter: pct
+    operations: [summarize, classify]

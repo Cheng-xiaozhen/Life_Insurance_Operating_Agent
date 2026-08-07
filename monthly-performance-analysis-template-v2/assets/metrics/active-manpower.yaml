@@ -1,0 +1,45 @@
+catalog:
+  id: active-manpower
+  version: 1.0.0
+  title: 活动人力候选指标
+  dataset: active_manpower
+
+dimensions:
+  row_label:
+    column: 片区
+    type: string
+  organization:
+    column: 机构
+    type: string
+
+row_sets:
+  total:
+    field: row_label
+    operator: eq
+    value: 全系统
+  details:
+    organization_field: organization
+
+metrics:
+  activity_count:
+    label: 活动人力
+    column: 活动人力
+    type: number
+    unit: person
+    formatter: person
+    operations: [summarize]
+  activity_yoy:
+    label: 活动人力同比
+    column: 同比
+    type: number
+    unit: pct
+    formatter: yoy_pct_phrase
+    threshold_formatter: pct
+    operations: [summarize, classify]
+  activity_rate:
+    label: 活动人力达成率
+    column: 活动人力达成率
+    type: number
+    unit: pct
+    formatter: pct
+    operations: [summarize, classify]
