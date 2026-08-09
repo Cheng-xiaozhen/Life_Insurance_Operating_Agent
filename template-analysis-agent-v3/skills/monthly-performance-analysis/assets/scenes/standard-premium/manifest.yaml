@@ -1,0 +1,10 @@
+id: standard-premium
+version: 3.0.0
+title: 标保
+description: 汇总月度标保和年度进度，并按阈值识别机构表现。
+keywords: [标保, 标准保费, 标保达成率, 全年标保进度]
+questions:
+  - 本月标保达成情况如何？
+  - 哪些机构标保达标或进度偏低？
+required_parameters: [data_month_name, cutoff_date]
+

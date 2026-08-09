@@ -1,0 +1,22 @@
+profile:
+  id: recruitment
+  version: 1.0.0
+  encoding: utf-8-sig
+dimensions:
+  row_label: {column: 分组, type: string}
+  organization: {column: 机构, type: string}
+row_sets:
+  total: {field: row_label, operator: eq, value: 全系统}
+  details: {organization_field: organization}
+metrics:
+  training_count: {column: 新增_送训, type: number}
+  added_count: {column: 新增_新增, type: number}
+  added_rate: {column: 新增_达成率, type: number}
+  added_yoy: {column: 新增_序时同比, type: number}
+  first_sun_count: {column: 首阳（起聘）_首阳, type: number}
+  first_sun_rate: {column: 首阳（起聘）_首阳率, type: number}
+  college_share: {column: 大专+_占比, type: number}
+  college_yoy: {column: 大专+_序时同比, type: number}
+  bachelor_share: {column: 本科+_占比, type: number}
+  bachelor_gap: {column: 本科+_差额, type: number}
+

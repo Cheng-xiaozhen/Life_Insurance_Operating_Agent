@@ -1,0 +1,19 @@
+id: monthly-performance.recruitment
+version: 1.0.0
+binding_id: recruitment
+description: 查询机构及全系统新增、首阳和学历结构指标。
+parameters: {}
+output_schema: canonical.monthly-performance.recruitment.v1
+grain: organization
+handler: csv
+handler_ref: template_analysis_agent.query.CsvDataAdapter
+profile_id: recruitment
+source:
+  kind: local_binding
+  owner: monthly-performance-analysis
+  contains_sensitive_data: false
+permissions:
+  classification: internal
+  required_scopes: [monthly-performance:read]
+required: true
+timeout_ms: 30000

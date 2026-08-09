@@ -1,0 +1,10 @@
+id: co-recruitment
+version: 3.0.0
+title: 同引
+description: 汇总月度送训、季度同引和学历指标，并识别目标及挂零机构。
+keywords: [同引, 同引达成率, 同引主管, 送训挂零]
+questions:
+  - 二季度同引达成情况如何？
+  - 哪些机构同引达成目标或出现挂零？
+required_parameters: [data_month_name, quarter_name, cutoff_date]
+

@@ -1,0 +1,16 @@
+profile:
+  id: supervisor-activity
+  version: 1.0.0
+  encoding: utf-8-sig
+dimensions:
+  row_label: {column: 分组, type: string}
+  organization: {column: 机构, type: string}
+row_sets:
+  total: {field: row_label, operator: eq, value: 全系统}
+  details: {organization_field: organization}
+metrics:
+  in_service: {column: 在职主管, type: number}
+  active_count: {column: 活动人数, type: number}
+  activity_rate: {column: 活动率, type: number}
+  activity_yoy: {column: 活动率同比, type: number}
+

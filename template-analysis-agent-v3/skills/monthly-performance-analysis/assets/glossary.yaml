@@ -1,0 +1,43 @@
+metrics:
+  standard_premium:
+    preferred_term: 标保
+  value:
+    preferred_term: 价值
+  active_manpower:
+    preferred_term: 活动人力
+  sunshine_manpower:
+    preferred_term: 阳光人力
+  supervisor_activity:
+    preferred_term: 主管活动
+  supervisor_double_star:
+    preferred_term: 主管双星
+  standard_team:
+    preferred_term: 标准组
+  recruitment:
+    preferred_term: 新增
+  co_recruitment:
+    preferred_term: 同引
+
+relations:
+  eq:
+    allowed: [等于, 达到]
+  gt:
+    allowed: [高于, 超过]
+  gte:
+    allowed: [不低于, 达到或超过]
+  lt:
+    allowed: [低于, 不足]
+  lte:
+    allowed: [不高于, 未超过]
+  increase:
+    allowed: [增长, 提升, 正增长]
+  decrease:
+    allowed: [下降, 负增长]
+  flat:
+    allowed: [持平]
+
+signals:
+  target_met:
+    allowed: [达成目标, 达标]
+  severe_low:
+    allowed: [严重偏低]

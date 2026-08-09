@@ -1,0 +1,19 @@
+id: monthly-performance.supervisor-double-star
+version: 1.0.0
+binding_id: supervisor_double_star
+description: 查询机构及全系统主管双星人数和双星率。
+parameters: {}
+output_schema: canonical.monthly-performance.supervisor-double-star.v1
+grain: organization
+handler: csv
+handler_ref: template_analysis_agent.query.CsvDataAdapter
+profile_id: supervisor-double-star
+source:
+  kind: local_binding
+  owner: monthly-performance-analysis
+  contains_sensitive_data: false
+permissions:
+  classification: internal
+  required_scopes: [monthly-performance:read]
+required: true
+timeout_ms: 30000

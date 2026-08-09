@@ -1,0 +1,10 @@
+id: supervisor-activity
+version: 3.0.0
+title: 主管活动
+description: 汇总主管活动人数和活动率，并识别高低机构。
+keywords: [主管活动, 主管活动率]
+questions:
+  - 主管活动情况如何？
+  - 哪些机构主管活动率较高或较低？
+required_parameters: [cutoff_date]
+

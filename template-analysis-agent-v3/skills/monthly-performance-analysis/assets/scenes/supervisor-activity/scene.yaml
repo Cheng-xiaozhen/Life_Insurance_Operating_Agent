@@ -1,0 +1,34 @@
+scene_id: supervisor-activity
+query_ref: monthly-performance.supervisor-activity
+parameters:
+  cutoff_date:
+    type: string
+    required: true
+    description: 数据截止日期，例如5月31日。
+  supervisor_activity_high_threshold:
+    type: number
+    default: 80
+    description: 主管活动率较高阈值。
+  supervisor_activity_low_threshold:
+    type: number
+    default: 60
+    description: 主管活动率较低阈值。
+analysis_intent:
+  - 汇总在职主管、主管活动人数、活动率及同比。
+  - 识别活动率较高和较低的机构。
+steps:
+  - id: overall_summary
+    type: summarize
+    metrics: [in_service, active_count, activity_rate, activity_yoy]
+  - id: activity_rate_classification
+    type: classify
+    metric: activity_rate
+    display_order: source
+    bands:
+      - {id: high, operator: gt, threshold_param: supervisor_activity_high_threshold}
+      - {id: low, operator: lt, threshold_param: supervisor_activity_low_threshold}
+signals: {}
+expression:
+  style_profile: monthly-operation-report
+  example_tags: [summary, threshold-classification]
+

@@ -1,0 +1,27 @@
+id: monthly-performance.co-recruitment
+version: 1.0.0
+binding_id: co_recruitment
+description: 查询月度送训、季度同引及学历结构指标。
+parameters:
+  data_month_name:
+    type: string
+    required: true
+    description: CSV动态月份列名称，例如5月。
+  quarter_name:
+    type: string
+    required: true
+    description: CSV动态季度列名称，例如二季度。
+output_schema: canonical.monthly-performance.co-recruitment.v1
+grain: organization
+handler: csv
+handler_ref: template_analysis_agent.query.CsvDataAdapter
+profile_id: co-recruitment
+source:
+  kind: local_binding
+  owner: monthly-performance-analysis
+  contains_sensitive_data: false
+permissions:
+  classification: internal
+  required_scopes: [monthly-performance:read]
+required: true
+timeout_ms: 30000

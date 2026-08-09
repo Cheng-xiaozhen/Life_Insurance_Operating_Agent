@@ -1,0 +1,30 @@
+catalog:
+  id: standard-team
+  version: 1.0.0
+metrics:
+  in_service:
+    label: 在职主管
+    unit: person
+    formatter: person
+    semantic: value
+    operations: [summarize]
+  standard_count:
+    label: 标准组达成
+    unit: person
+    formatter: person
+    semantic: value
+    operations: [summarize]
+  standard_yoy:
+    label: 标准组同比
+    unit: pct
+    formatter: pct
+    threshold_formatter: abs_pct
+    semantic: yoy
+    operations: [summarize, classify]
+  standard_share:
+    label: 标准组占比
+    unit: pct
+    formatter: pct
+    semantic: value
+    operations: [summarize, classify]
+

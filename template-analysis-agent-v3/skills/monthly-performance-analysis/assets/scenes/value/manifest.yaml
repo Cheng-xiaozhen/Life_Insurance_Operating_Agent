@@ -1,0 +1,10 @@
+id: value
+version: 3.0.0
+title: 价值
+description: 汇总月度价值和年度价值进度，并按达成率识别机构。
+keywords: [价值, 价值达成率, 全年价值进度]
+questions:
+  - 本月价值达成情况如何？
+  - 哪些机构价值达成率较高或较低？
+required_parameters: [data_month_name, cutoff_date]
+

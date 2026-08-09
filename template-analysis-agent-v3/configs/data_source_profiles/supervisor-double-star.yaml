@@ -1,0 +1,16 @@
+profile:
+  id: supervisor-double-star
+  version: 1.0.0
+  encoding: utf-8-sig
+dimensions:
+  row_label: {column: 分组, type: string}
+  organization: {column: 机构, type: string}
+row_sets:
+  total: {field: row_label, operator: eq, value: 全系统}
+  details: {organization_field: organization}
+metrics:
+  in_service: {column: 在职主管, type: number}
+  double_star_count: {column: 双星人数, type: number}
+  double_star_rate: {column: 双星率, type: number}
+  double_star_yoy: {column: 双星率同比, type: number}
+

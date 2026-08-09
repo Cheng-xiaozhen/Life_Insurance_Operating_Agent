@@ -1,0 +1,19 @@
+id: monthly-performance.sunshine-manpower
+version: 1.0.0
+binding_id: sunshine_manpower
+description: 查询机构及全系统阳光人力与活动占比。
+parameters: {}
+output_schema: canonical.monthly-performance.sunshine-manpower.v1
+grain: organization
+handler: csv
+handler_ref: template_analysis_agent.query.CsvDataAdapter
+profile_id: sunshine-manpower
+source:
+  kind: local_binding
+  owner: monthly-performance-analysis
+  contains_sensitive_data: false
+permissions:
+  classification: internal
+  required_scopes: [monthly-performance:read]
+required: true
+timeout_ms: 30000

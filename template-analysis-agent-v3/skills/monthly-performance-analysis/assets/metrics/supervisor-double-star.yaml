@@ -1,0 +1,29 @@
+catalog:
+  id: supervisor-double-star
+  version: 1.0.0
+metrics:
+  in_service:
+    label: 在职主管
+    unit: person
+    formatter: person
+    semantic: value
+    operations: [summarize]
+  double_star_count:
+    label: 主管双星人数
+    unit: person
+    formatter: person
+    semantic: value
+    operations: [summarize]
+  double_star_rate:
+    label: 主管双星率
+    unit: pct
+    formatter: pct
+    semantic: value
+    operations: [summarize, classify]
+  double_star_yoy:
+    label: 主管双星率同比
+    unit: pt
+    formatter: pt
+    semantic: yoy
+    operations: [summarize, classify]
+

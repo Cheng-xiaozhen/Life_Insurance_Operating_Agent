@@ -1,0 +1,25 @@
+scene_id: standard-team
+query_ref: monthly-performance.standard-team
+parameters:
+  standard_team_yoy_threshold:
+    type: number
+    default: -20
+    description: 标准组同比负增阈值。
+  standard_team_share_threshold:
+    type: number
+    default: 30
+    description: 标准组占比较低阈值。
+analysis_intent:
+  - 识别标准组同比负增超过阈值以及标准组占比较低的机构。
+steps:
+  - id: standard_team_classification
+    type: classify
+    display_order: source
+    bands:
+      - {id: yoy_low, metric: standard_yoy, operator: lt, threshold_param: standard_team_yoy_threshold}
+      - {id: share_low, metric: standard_share, operator: lt, threshold_param: standard_team_share_threshold}
+signals: {}
+expression:
+  style_profile: monthly-operation-report
+  example_tags: [threshold-classification]
+

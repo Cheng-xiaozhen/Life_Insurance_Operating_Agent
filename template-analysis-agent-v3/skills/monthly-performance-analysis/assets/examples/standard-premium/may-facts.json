@@ -1,0 +1,118 @@
+{
+  "scene_id": "standard-premium",
+  "scene_title": "标保",
+  "status": "ready",
+  "parameters": {
+    "data_month_name": "5月",
+    "cutoff_date": "5月31日"
+  },
+  "facts": [
+    {
+      "fact_id": "standard-premium.overall_summary.month_amount",
+      "fact_type": "summary",
+      "label": "月度标保达成",
+      "raw_value": 12444,
+      "display_value": "12444万"
+    },
+    {
+      "fact_id": "standard-premium.overall_summary.month_rate",
+      "fact_type": "summary",
+      "label": "月度标保达成率",
+      "raw_value": 61.8,
+      "display_value": "61.8%"
+    },
+    {
+      "fact_id": "standard-premium.overall_summary.month_yoy",
+      "fact_type": "summary",
+      "label": "月度标保同比",
+      "raw_value": -11.6,
+      "display_value": "-11.6%",
+      "direction": "decrease"
+    },
+    {
+      "fact_id": "standard-premium.overall_summary.year_amount",
+      "fact_type": "summary",
+      "label": "全年标保达成",
+      "raw_value": 100538,
+      "display_value": "100538万"
+    },
+    {
+      "fact_id": "standard-premium.overall_summary.year_progress",
+      "fact_type": "summary",
+      "label": "全年标保进度",
+      "raw_value": 53.8,
+      "display_value": "53.8%"
+    },
+    {
+      "fact_id": "standard-premium.overall_summary.year_yoy",
+      "fact_type": "summary",
+      "label": "全年标保同比",
+      "raw_value": 20.6,
+      "display_value": "20.6%",
+      "direction": "increase"
+    },
+    {
+      "fact_id": "standard-premium.monthly_rate_classification.high",
+      "fact_type": "classification",
+      "label": "月度标保达成率",
+      "threshold": 70,
+      "threshold_display": "70%",
+      "organizations": ["河南", "天津", "潍坊", "云南", "新疆", "海南", "内蒙古", "宁波", "甘肃"],
+      "count": 9
+    },
+    {
+      "fact_id": "standard-premium.monthly_rate_classification.target_met",
+      "fact_type": "classification",
+      "label": "月度标保达成率",
+      "threshold": 100,
+      "threshold_display": "100%",
+      "organizations": ["天津", "新疆"],
+      "count": 2
+    },
+    {
+      "fact_id": "standard-premium.monthly_rate_classification.low",
+      "fact_type": "classification",
+      "label": "月度标保达成率",
+      "threshold": 50,
+      "threshold_display": "50%",
+      "organizations": ["上海", "安徽", "山西", "北京", "贵州", "青岛", "宁夏", "深圳"],
+      "count": 8
+    },
+    {
+      "fact_id": "standard-premium.monthly_rate_classification.very_low",
+      "fact_type": "classification",
+      "label": "月度标保达成率",
+      "threshold": 5,
+      "threshold_display": "5%",
+      "organizations": ["深圳"],
+      "count": 1
+    },
+    {
+      "fact_id": "standard-premium.yearly_progress_classification.high",
+      "fact_type": "classification",
+      "label": "全年标保进度",
+      "threshold": 60,
+      "threshold_display": "60%",
+      "organizations": ["天津", "潍坊", "云南", "新疆", "宁波", "甘肃", "贵州"],
+      "count": 7
+    },
+    {
+      "fact_id": "standard-premium.yearly_progress_classification.very_high",
+      "fact_type": "classification",
+      "label": "全年标保进度",
+      "threshold": 80,
+      "threshold_display": "80%",
+      "organizations": ["宁波"],
+      "count": 1
+    },
+    {
+      "fact_id": "standard-premium.yearly_progress_classification.low",
+      "fact_type": "classification",
+      "label": "全年标保进度",
+      "threshold": 45,
+      "threshold_display": "45%",
+      "organizations": ["安徽", "北京", "海南", "青岛", "宁夏", "深圳"],
+      "count": 6
+    }
+  ]
+}

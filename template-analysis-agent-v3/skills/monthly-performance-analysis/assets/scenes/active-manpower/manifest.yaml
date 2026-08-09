@@ -1,0 +1,10 @@
+id: active-manpower
+version: 3.0.0
+title: 活动人力
+description: 汇总活动人力并按达成率分类机构。
+keywords: [活动人力, 活动人力达成率]
+questions:
+  - 本月活动人力达成情况如何？
+  - 哪些机构活动人力达标或偏低？
+required_parameters: [data_month_name, cutoff_date]
+

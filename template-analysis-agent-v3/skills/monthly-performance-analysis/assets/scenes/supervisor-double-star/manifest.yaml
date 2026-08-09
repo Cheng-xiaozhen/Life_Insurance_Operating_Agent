@@ -1,0 +1,10 @@
+id: supervisor-double-star
+version: 3.0.0
+title: 主管双星
+description: 汇总主管双星人数和双星率，并识别高低机构。
+keywords: [主管双星, 双星率]
+questions:
+  - 主管双星达成情况如何？
+  - 哪些机构主管双星率较高或较低？
+required_parameters: [cutoff_date]
+

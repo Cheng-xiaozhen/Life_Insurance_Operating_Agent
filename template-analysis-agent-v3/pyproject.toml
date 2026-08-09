@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "template-analysis-agent"
+version = "0.1.0"
+description = "Template-driven, deterministic business analysis with constrained LLM expression."
+requires-python = ">=3.11"
+dependencies = [
+  "PyYAML>=6.0,<7",
+  "pydantic>=2.10,<3",
+  "langchain>=1,<2",
+  "langchain-deepseek>=1,<2",
+]
+
+[project.scripts]
+template-analysis = "template_analysis_agent.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+

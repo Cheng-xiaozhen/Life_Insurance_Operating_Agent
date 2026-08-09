@@ -1,0 +1,34 @@
+catalog:
+  id: value
+  version: 1.0.0
+metrics:
+  month_amount:
+    label: 月度价值达成
+    unit: wan
+    formatter: amount_wan
+    semantic: value
+    operations: [summarize]
+  month_rate:
+    label: 月度价值达成率
+    unit: pct
+    formatter: pct
+    semantic: value
+    operations: [summarize, classify]
+  month_yoy:
+    label: 月度价值同比
+    unit: pct
+    formatter: pct
+    semantic: yoy
+    operations: [summarize, classify]
+  year_progress:
+    label: 全年价值进度
+    unit: pct
+    formatter: pct
+    semantic: value
+    operations: [summarize, classify]
+  year_yoy:
+    label: 全年价值同比
+    unit: pct
+    formatter: pct
+    semantic: yoy
+    operations: [summarize, classify]

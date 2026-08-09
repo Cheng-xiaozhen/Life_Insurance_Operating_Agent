@@ -1,0 +1,29 @@
+catalog:
+  id: supervisor-activity
+  version: 1.0.0
+metrics:
+  in_service:
+    label: 在职主管
+    unit: person
+    formatter: person
+    semantic: value
+    operations: [summarize]
+  active_count:
+    label: 主管活动人数
+    unit: person
+    formatter: person
+    semantic: value
+    operations: [summarize]
+  activity_rate:
+    label: 主管活动率
+    unit: pct
+    formatter: pct
+    semantic: value
+    operations: [summarize, classify]
+  activity_yoy:
+    label: 主管活动率同比
+    unit: pt
+    formatter: pt
+    semantic: yoy
+    operations: [summarize, classify]
+

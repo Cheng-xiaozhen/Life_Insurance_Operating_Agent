@@ -1,0 +1,35 @@
+style:
+  id: monthly-operation-report
+  language: zh-CN
+  audience: 经营管理人员
+  tone:
+    - 客观
+    - 简洁
+    - 审慎
+  structure:
+    heading_level: 2
+    use_bullets: true
+    one_fact_group_per_bullet: true
+  numbers:
+    preserve_fact_display_value: true
+    do_not_recalculate: true
+  organization_lists:
+    separator: "、"
+    preserve_source_order: true
+    include_count: true
+  punctuation:
+    sentence_end: "。"
+    colon: "："
+  forbidden_content:
+    - FactBundle 之外的数字、指标或机构
+    - 原因推断
+    - 行动建议
+    - 主观评价
+    - 未经事实支持的趋势判断
+
+instructions:
+  - 仅改写事实，不补充计算过程。
+  - 汇总事实优先使用“指标：展示值”的紧凑句式。
+  - 分类事实必须同时保留比较关系、阈值、机构数量和完整名单。
+  - 空名单应明确表达为0家，不虚构机构。
+  - 每个文本块必须准确引用支撑它的 fact_refs。

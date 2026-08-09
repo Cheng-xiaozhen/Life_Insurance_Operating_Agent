@@ -1,0 +1,22 @@
+profile:
+  id: co-recruitment
+  version: 1.0.0
+  encoding: utf-8-sig
+dimensions:
+  row_label: {column: 分组, type: string}
+  organization: {column: 机构, type: string}
+row_sets:
+  total: {field: row_label, operator: eq, value: 全系统}
+  details: {organization_field: organization}
+metrics:
+  month_training_count: {column: "${data_month_name}送训_送训", type: number}
+  month_training_yoy: {column: "${data_month_name}送训_同比", type: number}
+  quarter_target: {column: "${quarter_name}同引_目标", type: number}
+  quarter_achieved: {column: "${quarter_name}同引_达成", type: number}
+  quarter_rate: {column: "${quarter_name}同引_达成率", type: number}
+  quarter_yoy: {column: "${quarter_name}同引_同比", type: number}
+  quarter_college_share: {column: "${quarter_name}大专+学历_占比", type: number}
+  quarter_college_yoy: {column: "${quarter_name}大专+学历_同比", type: number}
+  quarter_bachelor_share: {column: "${quarter_name}本科+学历_占比", type: number}
+  quarter_bachelor_yoy: {column: "${quarter_name}本科+学历_同比", type: number}
+

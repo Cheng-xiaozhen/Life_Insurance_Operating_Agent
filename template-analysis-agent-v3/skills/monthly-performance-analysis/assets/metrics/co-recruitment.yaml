@@ -1,0 +1,65 @@
+catalog:
+  id: co-recruitment
+  version: 1.0.0
+metrics:
+  month_training_count:
+    label: 月度同引送训
+    unit: person
+    formatter: person
+    semantic: value
+    operations: [summarize, classify]
+  month_training_yoy:
+    label: 月度同引送训同比
+    unit: pct
+    formatter: pct
+    semantic: yoy
+    operations: [summarize, classify]
+  quarter_target:
+    label: 季度同引目标
+    unit: person
+    formatter: person
+    semantic: value
+    operations: [summarize]
+  quarter_achieved:
+    label: 季度同引上岗
+    unit: person
+    formatter: person
+    semantic: value
+    operations: [summarize, classify]
+  quarter_rate:
+    label: 季度同引达成率
+    unit: pct
+    formatter: pct
+    semantic: value
+    operations: [summarize, classify]
+  quarter_yoy:
+    label: 季度同引同比
+    unit: pct
+    formatter: pct
+    semantic: yoy
+    operations: [summarize, classify]
+  quarter_college_share:
+    label: 季度同引大专加学历占比
+    unit: pct
+    formatter: pct
+    semantic: value
+    operations: [summarize, classify]
+  quarter_college_yoy:
+    label: 季度同引大专加学历同比
+    unit: pt
+    formatter: pt
+    semantic: yoy
+    operations: [summarize, classify]
+  quarter_bachelor_share:
+    label: 季度同引本科加学历占比
+    unit: pct
+    formatter: pct
+    semantic: value
+    operations: [summarize, classify]
+  quarter_bachelor_yoy:
+    label: 季度同引本科加学历同比
+    unit: pt
+    formatter: pt
+    semantic: yoy
+    operations: [summarize, classify]
+

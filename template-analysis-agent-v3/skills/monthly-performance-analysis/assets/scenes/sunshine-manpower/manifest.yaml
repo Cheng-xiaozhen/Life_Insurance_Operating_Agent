@@ -1,0 +1,10 @@
+id: sunshine-manpower
+version: 3.0.0
+title: 阳光人力
+description: 汇总阳光人力及活动占比，并按达成率识别机构。
+keywords: [阳光人力, 阳光人力达成率, 阳光占比活动]
+questions:
+  - 阳光人力达成情况如何？
+  - 哪些机构阳光人力达成率偏低？
+required_parameters: [data_month_name, cutoff_date]
+

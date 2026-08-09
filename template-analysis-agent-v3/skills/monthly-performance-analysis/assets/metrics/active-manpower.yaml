@@ -1,0 +1,24 @@
+catalog:
+  id: active-manpower
+  version: 1.0.0
+metrics:
+  activity_count:
+    label: 活动人力
+    unit: person
+    formatter: person
+    semantic: value
+    operations: [summarize]
+  activity_yoy:
+    label: 活动人力同比
+    unit: pct
+    formatter: pct
+    threshold_formatter: pct
+    semantic: yoy
+    operations: [summarize, classify]
+  activity_rate:
+    label: 活动人力达成率
+    unit: pct
+    formatter: pct
+    semantic: value
+    operations: [summarize, classify]
+

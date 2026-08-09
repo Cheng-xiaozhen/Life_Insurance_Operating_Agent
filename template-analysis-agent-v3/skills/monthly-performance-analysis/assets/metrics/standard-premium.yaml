@@ -1,0 +1,41 @@
+catalog:
+  id: standard-premium
+  version: 1.0.0
+metrics:
+  month_amount:
+    label: 月度标保达成
+    unit: wan
+    formatter: amount_wan
+    semantic: value
+    operations: [summarize]
+  month_rate:
+    label: 月度标保达成率
+    unit: pct
+    formatter: pct
+    semantic: value
+    operations: [summarize, classify]
+  month_yoy:
+    label: 月度标保同比
+    unit: pct
+    formatter: pct
+    semantic: yoy
+    operations: [summarize, classify]
+  year_amount:
+    label: 全年标保达成
+    unit: wan
+    formatter: amount_wan
+    semantic: value
+    operations: [summarize]
+  year_progress:
+    label: 全年标保进度
+    unit: pct
+    formatter: pct
+    semantic: value
+    operations: [summarize, classify]
+  year_yoy:
+    label: 全年标保同比
+    unit: pct
+    formatter: pct
+    semantic: yoy
+    operations: [summarize, classify]
+

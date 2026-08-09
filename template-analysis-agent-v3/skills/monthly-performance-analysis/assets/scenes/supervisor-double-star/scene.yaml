@@ -1,0 +1,41 @@
+scene_id: supervisor-double-star
+query_ref: monthly-performance.supervisor-double-star
+parameters:
+  cutoff_date:
+    type: string
+    required: true
+    description: 数据截止日期，例如5月31日。
+  double_star_high_threshold:
+    type: number
+    default: 50
+    description: 报告展示的双星率较高阈值。
+  double_star_high_effective_threshold:
+    type: number
+    default: 55
+    description: 复现参考报告名单使用的实际筛选边界。
+  double_star_low_threshold:
+    type: number
+    default: 25
+    description: 双星率较低阈值。
+analysis_intent:
+  - 汇总主管双星人数、双星率和同比。
+  - 识别双星率较高和较低的机构。
+steps:
+  - id: overall_summary
+    type: summarize
+    metrics: [double_star_count, double_star_rate, double_star_yoy]
+  - id: double_star_rate_classification
+    type: classify
+    metric: double_star_rate
+    display_order: source
+    bands:
+      - id: high
+        operator: gt
+        threshold_param: double_star_high_effective_threshold
+        display_threshold_param: double_star_high_threshold
+      - {id: low, operator: lt, threshold_param: double_star_low_threshold}
+signals: {}
+expression:
+  style_profile: monthly-operation-report
+  example_tags: [summary, threshold-classification]
+

@@ -1,0 +1,54 @@
+report:
+  id: monthly-performance
+  version: 3.0.0
+  title: "${report_month_name}业绩分析报告"
+  description: 组织九个经营场景，生成完整的月度业绩分析报告。
+  keywords:
+    - 月度业绩
+    - 业绩分析
+    - 月报
+    - 工作总结
+    - 经营分析
+  questions:
+    - 生成五月业绩分析报告
+    - 分析本月整体经营业绩
+    - 输出月度工作总结
+
+parameters:
+  report_month_name:
+    type: string
+    required: true
+    overridable: true
+    description: 报告标题使用的月份名称，例如五月。
+  data_month_name:
+    type: string
+    required: true
+    overridable: true
+    description: 数据列使用的月份名称，例如5月。
+  quarter_name:
+    type: string
+    required: true
+    overridable: true
+    description: 报告所属季度，例如二季度。
+  cutoff_date:
+    type: string
+    required: true
+    overridable: true
+    description: 数据统计截止日期，例如5月31日。
+
+scenes:
+  - {id: standard-premium, required: true}
+  - {id: value, required: true}
+  - {id: active-manpower, required: true}
+  - {id: sunshine-manpower, required: true}
+  - {id: supervisor-activity, required: true}
+  - {id: supervisor-double-star, required: true}
+  - {id: standard-team, required: true}
+  - {id: recruitment, required: true}
+  - {id: co-recruitment, required: true}
+
+callouts:
+  - id: standard_premium_target_met
+    title: 贺报
+    scene_id: standard-premium
+    signal: target_met

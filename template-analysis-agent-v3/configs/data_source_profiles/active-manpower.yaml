@@ -1,0 +1,15 @@
+profile:
+  id: active-manpower
+  version: 1.0.0
+  encoding: utf-8-sig
+dimensions:
+  row_label: {column: 片区, type: string}
+  organization: {column: 机构, type: string}
+row_sets:
+  total: {field: row_label, operator: eq, value: 全系统}
+  details: {organization_field: organization}
+metrics:
+  activity_count: {column: 活动人力, type: number}
+  activity_yoy: {column: 同比, type: number}
+  activity_rate: {column: 活动人力达成率, type: number}
+

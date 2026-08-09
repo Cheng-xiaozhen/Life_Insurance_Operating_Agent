@@ -1,0 +1,93 @@
+scene_id: recruitment
+query_ref: monthly-performance.recruitment
+parameters:
+  data_month_name:
+    type: string
+    required: true
+    description: 报告月份，例如5月。
+  cutoff_date:
+    type: string
+    required: true
+    description: 数据截止日期，例如5月31日。
+  recruitment_middle_low_threshold:
+    type: number
+    default: 80
+    description: 新增中档区间下限。
+  recruitment_target_threshold:
+    type: number
+    default: 100
+    description: 新增目标阈值。
+  recruitment_low_threshold:
+    type: number
+    default: 40
+    description: 新增达成率低位阈值。
+  bachelor_target_threshold:
+    type: number
+    default: 0
+    description: 本科占比目标差额阈值。
+  bachelor_excess_threshold:
+    type: number
+    default: 10
+    description: 本科占比超额阈值。
+analysis_intent:
+  - 汇总送训、新增、首阳和学历结构指标。
+  - 识别新增达标、中档、低位以及本科占比达标、超额和未达标机构。
+steps:
+  - id: overall_summary
+    type: summarize
+    metrics:
+      - training_count
+      - added_count
+      - added_rate
+      - added_yoy
+      - first_sun_count
+      - first_sun_rate
+      - college_share
+      - college_yoy
+      - bachelor_share
+      - bachelor_gap
+  - id: recruitment_rate_classification
+    type: classify
+    metric: added_rate
+    display_order: source
+    bands:
+      - id: middle
+        conditions:
+          match: all
+          rules:
+            - {metric: added_rate, operator: gt, threshold_param: recruitment_middle_low_threshold}
+            - {metric: added_rate, operator: lt, threshold_param: recruitment_target_threshold}
+        display_metric: added_rate
+        display_threshold_param: recruitment_middle_low_threshold
+      - {id: target_met, operator: gte, threshold_param: recruitment_target_threshold}
+  - id: recruitment_rate_low
+    type: classify
+    metric: added_rate
+    display_order: source
+    bands:
+      - {id: low, operator: lt, threshold_param: recruitment_low_threshold}
+  - id: bachelor_classification
+    type: classify
+    metric: bachelor_gap
+    display_order: source
+    bands:
+      - {id: target_met, operator: gte, threshold_param: bachelor_target_threshold}
+      - {id: excess, operator: gt, threshold_param: bachelor_excess_threshold}
+  - id: bachelor_target_not_met
+    type: classify
+    metric: bachelor_gap
+    display_order: source
+    bands:
+      - id: not_met
+        conditions:
+          match: any
+          rules:
+            - {metric: bachelor_gap, operator: lt, threshold_param: bachelor_target_threshold}
+            - {metric: bachelor_gap, operator: is_missing}
+signals:
+  target_met:
+    from: {step: recruitment_rate_classification, band: target_met}
+expression:
+  style_profile: monthly-operation-report
+  example_tags: [summary, compound-condition, missing-value]
+

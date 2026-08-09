@@ -1,0 +1,72 @@
+scene_id: standard-premium
+query_ref: monthly-performance.standard-premium
+parameters:
+  data_month_name:
+    type: string
+    required: true
+    description: 报告月份，例如5月。
+  cutoff_date:
+    type: string
+    required: true
+    description: 数据截止日期，例如5月31日。
+  monthly_high_threshold:
+    type: number
+    default: 70
+    description: 月度标保达成率较高阈值。
+  monthly_target_threshold:
+    type: number
+    default: 100
+    description: 月度标保目标阈值。
+  monthly_low_threshold:
+    type: number
+    default: 50
+    description: 月度标保达成率较低阈值。
+  monthly_very_low_threshold:
+    type: number
+    default: 5
+    description: 月度标保达成率严重偏低阈值。
+  yearly_high_threshold:
+    type: number
+    default: 60
+    description: 全年标保进度较高阈值。
+  yearly_very_high_threshold:
+    type: number
+    default: 80
+    description: 全年标保进度突出阈值。
+  yearly_low_threshold:
+    type: number
+    default: 45
+    description: 全年标保进度较低阈值。
+analysis_intent:
+  - 汇总全系统月度标保总量、达成率、同比和年度进度。
+  - 识别月度达标、较高、较低和严重偏低机构。
+  - 识别年度进度较高、突出和较低机构。
+steps:
+  - id: overall_summary
+    type: summarize
+    metrics: [month_amount, month_rate, month_yoy, year_amount, year_progress, year_yoy]
+  - id: monthly_rate_classification
+    type: classify
+    metric: month_rate
+    display_order: source
+    bands:
+      - {id: high, operator: gt, threshold_param: monthly_high_threshold}
+      - {id: target_met, operator: gte, threshold_param: monthly_target_threshold}
+      - {id: low, operator: lt, threshold_param: monthly_low_threshold}
+      - {id: very_low, operator: lt, threshold_param: monthly_very_low_threshold}
+  - id: yearly_progress_classification
+    type: classify
+    metric: year_progress
+    display_order: source
+    bands:
+      - {id: high, operator: gt, threshold_param: yearly_high_threshold}
+      - {id: very_high, operator: gt, threshold_param: yearly_very_high_threshold}
+      - {id: low, operator: lt, threshold_param: yearly_low_threshold}
+signals:
+  target_met:
+    from: {step: monthly_rate_classification, band: target_met}
+  severe_low:
+    from: {step: monthly_rate_classification, band: very_low}
+expression:
+  style_profile: monthly-operation-report
+  example_tags: [summary, threshold-classification]

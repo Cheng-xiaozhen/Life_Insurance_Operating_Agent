@@ -1,0 +1,16 @@
+profile:
+  id: standard-team
+  version: 1.0.0
+  encoding: utf-8-sig
+dimensions:
+  row_label: {column: 分组, type: string}
+  organization: {column: 机构, type: string}
+row_sets:
+  total: {field: row_label, operator: eq, value: 全系统}
+  details: {organization_field: organization}
+metrics:
+  in_service: {column: 在职主管, type: number}
+  standard_count: {column: 达成, type: number}
+  standard_yoy: {column: 同比, type: number}
+  standard_share: {column: 占比, type: number}
+

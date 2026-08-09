@@ -1,0 +1,29 @@
+catalog:
+  id: sunshine-manpower
+  version: 1.0.0
+metrics:
+  sunshine_count:
+    label: 阳光人力达成
+    unit: person
+    formatter: person
+    semantic: value
+    operations: [summarize]
+  sunshine_yoy:
+    label: 阳光人力同比
+    unit: pct
+    formatter: pct
+    semantic: yoy
+    operations: [summarize, classify]
+  sunshine_rate:
+    label: 阳光人力达成率
+    unit: pct
+    formatter: pct
+    semantic: value
+    operations: [summarize, classify]
+  sunshine_share:
+    label: 阳光占比活动
+    unit: pct
+    formatter: pct
+    semantic: value
+    operations: [summarize, classify]
+

@@ -1,0 +1,10 @@
+id: recruitment
+version: 3.0.0
+title: 新增
+description: 汇总新增、首阳及学历指标，并识别目标与未达标机构。
+keywords: [新增, 新增达成率, 本科占比, 首阳]
+questions:
+  - 本月新增和学历指标达成情况如何？
+  - 哪些机构新增达标或本科占比未达标？
+required_parameters: [data_month_name, cutoff_date]
+

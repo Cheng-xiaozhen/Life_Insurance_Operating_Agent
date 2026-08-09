@@ -1,0 +1,23 @@
+id: monthly-performance.standard-premium
+version: 1.0.0
+binding_id: standard_premium
+description: 查询机构及全系统月度标保和年度标保进度。
+parameters:
+  data_month_name:
+    type: string
+    required: true
+    description: CSV动态月份列名称，例如5月。
+output_schema: canonical.monthly-performance.standard-premium.v1
+grain: organization
+handler: csv
+handler_ref: template_analysis_agent.query.CsvDataAdapter
+profile_id: standard-premium
+source:
+  kind: local_binding
+  owner: monthly-performance-analysis
+  contains_sensitive_data: false
+permissions:
+  classification: internal
+  required_scopes: [monthly-performance:read]
+required: true
+timeout_ms: 30000

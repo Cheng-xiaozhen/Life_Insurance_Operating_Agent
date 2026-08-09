@@ -1,0 +1,10 @@
+id: standard-team
+version: 3.0.0
+title: 标准组
+description: 按标准组同比和标准组占比识别偏低机构。
+keywords: [标准组, 标准组同比, 标准组占比]
+questions:
+  - 哪些机构标准组同比下滑超过阈值？
+  - 哪些机构标准组占比较低？
+required_parameters: []
+

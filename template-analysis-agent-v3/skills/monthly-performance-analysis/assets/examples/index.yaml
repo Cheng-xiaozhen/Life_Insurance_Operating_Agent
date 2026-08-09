@@ -1,0 +1,9 @@
+examples:
+  - id: may-standard-premium-v2
+    scene_id: standard-premium
+    tags:
+      - summary
+      - threshold-classification
+      - standard-premium
+    facts: standard-premium/may-facts.json
+    markdown: standard-premium/may-report.md

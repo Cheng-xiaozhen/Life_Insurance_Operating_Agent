@@ -1,0 +1,77 @@
+scene_id: co-recruitment
+query_ref: monthly-performance.co-recruitment
+parameters:
+  data_month_name:
+    type: string
+    required: true
+    description: 报告月份，例如5月。
+  quarter_name:
+    type: string
+    required: true
+    description: 报告季度，例如二季度。
+  cutoff_date:
+    type: string
+    required: true
+    description: 数据截止日期，例如5月31日。
+  co_recruitment_target_threshold:
+    type: number
+    default: 100
+    description: 季度同引目标达成阈值。
+  co_recruitment_middle_threshold:
+    type: number
+    default: 50
+    description: 季度同引中档区间下限。
+  zero_threshold:
+    type: number
+    default: 0
+    description: 挂零判断阈值。
+analysis_intent:
+  - 汇总月度送训、季度同引和学历结构指标。
+  - 识别季度达标、中档以及月度送训和季度上岗同时挂零的机构。
+steps:
+  - id: overall_summary
+    type: summarize
+    metrics:
+      - month_training_count
+      - month_training_yoy
+      - quarter_achieved
+      - quarter_rate
+      - quarter_yoy
+      - quarter_college_share
+      - quarter_college_yoy
+      - quarter_bachelor_share
+      - quarter_bachelor_yoy
+  - id: quarter_rate_classification
+    type: classify
+    metric: quarter_rate
+    display_order: source
+    bands:
+      - id: target_met
+        operator: gte
+        threshold_param: co_recruitment_target_threshold
+      - id: middle
+        conditions:
+          match: all
+          rules:
+            - {metric: quarter_rate, operator: gte, threshold_param: co_recruitment_middle_threshold}
+            - {metric: quarter_rate, operator: lt, threshold_param: co_recruitment_target_threshold}
+        display_metric: quarter_rate
+        display_threshold_param: co_recruitment_middle_threshold
+  - id: zero_classification
+    type: classify
+    display_order: source
+    bands:
+      - id: both_zero
+        conditions:
+          match: all
+          rules:
+            - {metric: month_training_count, operator: eq, threshold_param: zero_threshold}
+            - {metric: quarter_achieved, operator: eq, threshold_param: zero_threshold}
+        display_metric: month_training_count
+signals:
+  target_met:
+    from: {step: quarter_rate_classification, band: target_met}
+expression:
+  style_profile: monthly-operation-report
+  example_tags: [summary, compound-condition]
+
