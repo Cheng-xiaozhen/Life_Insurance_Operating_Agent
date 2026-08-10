@@ -1,0 +1,539 @@
+[
+  {
+    "draft": {
+      "scene_id": "standard-premium",
+      "blocks": [
+        {
+          "fact_refs": [
+            "standard-premium.overall_summary.month_amount"
+          ],
+          "markdown": "- 月度标保达成：12444万。"
+        },
+        {
+          "fact_refs": [
+            "standard-premium.overall_summary.month_rate"
+          ],
+          "markdown": "- 月度标保达成率：61.8%。"
+        },
+        {
+          "fact_refs": [
+            "standard-premium.overall_summary.month_yoy"
+          ],
+          "markdown": "- 月度标保同比：-11.6%。"
+        },
+        {
+          "fact_refs": [
+            "standard-premium.overall_summary.year_amount"
+          ],
+          "markdown": "- 全年标保达成：100538万。"
+        },
+        {
+          "fact_refs": [
+            "standard-premium.overall_summary.year_progress"
+          ],
+          "markdown": "- 全年标保进度：53.8%。"
+        },
+        {
+          "fact_refs": [
+            "standard-premium.overall_summary.year_yoy"
+          ],
+          "markdown": "- 全年标保同比：20.6%。"
+        },
+        {
+          "fact_refs": [
+            "standard-premium.monthly_rate_classification.high"
+          ],
+          "markdown": "- 月度标保达成率高于70%的机构共9家：河南、天津、潍坊、云南、新疆、海南、内蒙古、宁波、甘肃。"
+        },
+        {
+          "fact_refs": [
+            "standard-premium.monthly_rate_classification.target_met"
+          ],
+          "markdown": "- 月度标保达成率不低于100%的机构共2家：天津、新疆。"
+        },
+        {
+          "fact_refs": [
+            "standard-premium.monthly_rate_classification.low"
+          ],
+          "markdown": "- 月度标保达成率低于50%的机构共8家：上海、安徽、山西、北京、贵州、青岛、宁夏、深圳。"
+        },
+        {
+          "fact_refs": [
+            "standard-premium.monthly_rate_classification.very_low"
+          ],
+          "markdown": "- 月度标保达成率低于5%的机构共1家：深圳。"
+        },
+        {
+          "fact_refs": [
+            "standard-premium.yearly_progress_classification.high"
+          ],
+          "markdown": "- 全年标保进度高于60%的机构共7家：天津、潍坊、云南、新疆、宁波、甘肃、贵州。"
+        },
+        {
+          "fact_refs": [
+            "standard-premium.yearly_progress_classification.very_high"
+          ],
+          "markdown": "- 全年标保进度高于80%的机构共1家：宁波。"
+        },
+        {
+          "fact_refs": [
+            "standard-premium.yearly_progress_classification.low"
+          ],
+          "markdown": "- 全年标保进度低于45%的机构共6家：安徽、北京、海南、青岛、宁夏、深圳。"
+        }
+      ]
+    },
+    "raw_response": null,
+    "usage": {},
+    "provider": "deterministic",
+    "model": null
+  },
+  {
+    "draft": {
+      "scene_id": "value",
+      "blocks": [
+        {
+          "fact_refs": [
+            "value.overall_summary.month_amount"
+          ],
+          "markdown": "- 月度价值达成：7045万。"
+        },
+        {
+          "fact_refs": [
+            "value.overall_summary.month_rate"
+          ],
+          "markdown": "- 月度价值达成率：74.1%。"
+        },
+        {
+          "fact_refs": [
+            "value.overall_summary.month_yoy"
+          ],
+          "markdown": "- 月度价值同比：9.8%。"
+        },
+        {
+          "fact_refs": [
+            "value.overall_summary.year_progress"
+          ],
+          "markdown": "- 全年价值进度：54.2%。"
+        },
+        {
+          "fact_refs": [
+            "value.overall_summary.year_yoy"
+          ],
+          "markdown": "- 全年价值同比：7.2%。"
+        },
+        {
+          "fact_refs": [
+            "value.month_rate_classification.high"
+          ],
+          "markdown": "- 月度价值达成率高于85%的机构共5家：河南、天津、云南、吉林、新疆。"
+        },
+        {
+          "fact_refs": [
+            "value.month_rate_classification.low"
+          ],
+          "markdown": "- 月度价值达成率低于55%的机构共8家：上海、山西、北京、宁波、贵州、青岛、宁夏、深圳。"
+        }
+      ]
+    },
+    "raw_response": null,
+    "usage": {},
+    "provider": "deterministic",
+    "model": null
+  },
+  {
+    "draft": {
+      "scene_id": "active-manpower",
+      "blocks": [
+        {
+          "fact_refs": [
+            "active-manpower.overall_summary.activity_count"
+          ],
+          "markdown": "- 活动人力：5531人。"
+        },
+        {
+          "fact_refs": [
+            "active-manpower.overall_summary.activity_rate"
+          ],
+          "markdown": "- 活动人力达成率：77.9%。"
+        },
+        {
+          "fact_refs": [
+            "active-manpower.overall_summary.activity_yoy"
+          ],
+          "markdown": "- 活动人力同比：-9.4%。"
+        },
+        {
+          "fact_refs": [
+            "active-manpower.activity_rate_classification.high"
+          ],
+          "markdown": "- 活动人力达成率高于90%的机构共6家：重庆、陕西、吉林、潍坊、宁波、新疆。"
+        },
+        {
+          "fact_refs": [
+            "active-manpower.activity_rate_classification.target_met"
+          ],
+          "markdown": "- 活动人力达成率不低于100%的机构共1家：宁波。"
+        },
+        {
+          "fact_refs": [
+            "active-manpower.activity_rate_classification.low"
+          ],
+          "markdown": "- 活动人力达成率低于60%的机构共6家：上海、安徽、北京、内蒙古、贵州、深圳。"
+        }
+      ]
+    },
+    "raw_response": null,
+    "usage": {},
+    "provider": "deterministic",
+    "model": null
+  },
+  {
+    "draft": {
+      "scene_id": "sunshine-manpower",
+      "blocks": [
+        {
+          "fact_refs": [
+            "sunshine-manpower.overall_summary.sunshine_count"
+          ],
+          "markdown": "- 阳光人力达成：4772人。"
+        },
+        {
+          "fact_refs": [
+            "sunshine-manpower.overall_summary.sunshine_rate"
+          ],
+          "markdown": "- 阳光人力达成率：82.2%。"
+        },
+        {
+          "fact_refs": [
+            "sunshine-manpower.overall_summary.sunshine_yoy"
+          ],
+          "markdown": "- 阳光人力同比：-2.1%。"
+        },
+        {
+          "fact_refs": [
+            "sunshine-manpower.overall_summary.sunshine_share"
+          ],
+          "markdown": "- 阳光占比活动：85.2%。"
+        },
+        {
+          "fact_refs": [
+            "sunshine-manpower.sunshine_rate_classification.high"
+          ],
+          "markdown": "- 阳光人力达成率不低于90%的机构共8家：重庆、河南、陕西、吉林、潍坊、湖南、宁波、新疆。"
+        },
+        {
+          "fact_refs": [
+            "sunshine-manpower.sunshine_rate_classification.low"
+          ],
+          "markdown": "- 阳光人力达成率低于70%的机构共7家：上海、黑龙江、安徽、北京、内蒙古、贵州、深圳。"
+        }
+      ]
+    },
+    "raw_response": null,
+    "usage": {},
+    "provider": "deterministic",
+    "model": null
+  },
+  {
+    "draft": {
+      "scene_id": "supervisor-activity",
+      "blocks": [
+        {
+          "fact_refs": [
+            "supervisor-activity.overall_summary.in_service"
+          ],
+          "markdown": "- 在职主管：3484人。"
+        },
+        {
+          "fact_refs": [
+            "supervisor-activity.overall_summary.active_count"
+          ],
+          "markdown": "- 主管活动人数：2485人。"
+        },
+        {
+          "fact_refs": [
+            "supervisor-activity.overall_summary.activity_rate"
+          ],
+          "markdown": "- 主管活动率：71.3%。"
+        },
+        {
+          "fact_refs": [
+            "supervisor-activity.overall_summary.activity_yoy"
+          ],
+          "markdown": "- 主管活动率同比：-1.1pt。"
+        },
+        {
+          "fact_refs": [
+            "supervisor-activity.activity_rate_classification.high"
+          ],
+          "markdown": "- 主管活动率高于80%的机构共5家：重庆、浙江、江苏、潍坊、深圳。"
+        },
+        {
+          "fact_refs": [
+            "supervisor-activity.activity_rate_classification.low"
+          ],
+          "markdown": "- 主管活动率低于60%的机构共6家：广东、上海、陕西、山西、宁夏、青岛。"
+        }
+      ]
+    },
+    "raw_response": null,
+    "usage": {},
+    "provider": "deterministic",
+    "model": null
+  },
+  {
+    "draft": {
+      "scene_id": "supervisor-double-star",
+      "blocks": [
+        {
+          "fact_refs": [
+            "supervisor-double-star.overall_summary.double_star_count"
+          ],
+          "markdown": "- 主管双星人数：1300人。"
+        },
+        {
+          "fact_refs": [
+            "supervisor-double-star.overall_summary.double_star_rate"
+          ],
+          "markdown": "- 主管双星率：37.3%。"
+        },
+        {
+          "fact_refs": [
+            "supervisor-double-star.overall_summary.double_star_yoy"
+          ],
+          "markdown": "- 主管双星率同比：-4.3pt。"
+        },
+        {
+          "fact_refs": [
+            "supervisor-double-star.double_star_rate_classification.high"
+          ],
+          "markdown": "- 主管双星率高于50%的机构共6家：浙江、江苏、福建、潍坊、深圳、海南。"
+        },
+        {
+          "fact_refs": [
+            "supervisor-double-star.double_star_rate_classification.low"
+          ],
+          "markdown": "- 主管双星率低于25%的机构共6家：陕西、山西、贵州、甘肃、宁夏、青岛。"
+        }
+      ]
+    },
+    "raw_response": null,
+    "usage": {},
+    "provider": "deterministic",
+    "model": null
+  },
+  {
+    "draft": {
+      "scene_id": "standard-team",
+      "blocks": [
+        {
+          "fact_refs": [
+            "standard-team.standard_team_classification.yoy_low"
+          ],
+          "markdown": "- 标准组同比低于20%的机构共11家：广东、上海、安徽、黑龙江、北京、山西、深圳、海南、内蒙古、贵州、宁波。"
+        },
+        {
+          "fact_refs": [
+            "standard-team.standard_team_classification.share_low"
+          ],
+          "markdown": "- 标准组占比低于30%的机构共16家：山东、广东、上海、安徽、黑龙江、北京、陕西、山西、深圳、海南、新疆、贵州、甘肃、宁波、宁夏、青岛。"
+        }
+      ]
+    },
+    "raw_response": null,
+    "usage": {},
+    "provider": "deterministic",
+    "model": null
+  },
+  {
+    "draft": {
+      "scene_id": "recruitment",
+      "blocks": [
+        {
+          "fact_refs": [
+            "recruitment.overall_summary.training_count"
+          ],
+          "markdown": "- 新增送训：1510人。"
+        },
+        {
+          "fact_refs": [
+            "recruitment.overall_summary.added_count"
+          ],
+          "markdown": "- 新增人数：739人。"
+        },
+        {
+          "fact_refs": [
+            "recruitment.overall_summary.added_rate"
+          ],
+          "markdown": "- 新增达成率：62.6%。"
+        },
+        {
+          "fact_refs": [
+            "recruitment.overall_summary.added_yoy"
+          ],
+          "markdown": "- 新增同比：-7.4%。"
+        },
+        {
+          "fact_refs": [
+            "recruitment.overall_summary.first_sun_count"
+          ],
+          "markdown": "- 起聘首阳人数：425人。"
+        },
+        {
+          "fact_refs": [
+            "recruitment.overall_summary.first_sun_rate"
+          ],
+          "markdown": "- 起聘首阳率：45.6%。"
+        },
+        {
+          "fact_refs": [
+            "recruitment.overall_summary.college_share"
+          ],
+          "markdown": "- 大专加学历人力占比：47.5%。"
+        },
+        {
+          "fact_refs": [
+            "recruitment.overall_summary.college_yoy"
+          ],
+          "markdown": "- 大专加学历人力同比：16.3pt。"
+        },
+        {
+          "fact_refs": [
+            "recruitment.overall_summary.bachelor_share"
+          ],
+          "markdown": "- 本科加学历人力占比：25.4%。"
+        },
+        {
+          "fact_refs": [
+            "recruitment.overall_summary.bachelor_gap"
+          ],
+          "markdown": "- 本科加学历人力目标差额：5.4pt。"
+        },
+        {
+          "fact_refs": [
+            "recruitment.recruitment_rate_classification.middle"
+          ],
+          "markdown": "- 新增达成率符合组合规则（参考阈值80%）的机构共4家：河北、河南、山西、青岛。"
+        },
+        {
+          "fact_refs": [
+            "recruitment.recruitment_rate_classification.target_met"
+          ],
+          "markdown": "- 新增达成率不低于100%的机构共2家：宁波、深圳。"
+        },
+        {
+          "fact_refs": [
+            "recruitment.recruitment_rate_low.low"
+          ],
+          "markdown": "- 新增达成率低于40%的机构共9家：广东、吉林、天津、黑龙江、北京、新疆、宁夏、贵州、海南。"
+        },
+        {
+          "fact_refs": [
+            "recruitment.bachelor_classification.target_met"
+          ],
+          "markdown": "- 本科加学历人力目标差额不低于0pt的机构共21家：河北、江苏、福建、山东、湖北、上海、四川、山西、潍坊、云南、湖南、陕西、辽宁、安徽、吉林、黑龙江、北京、深圳、甘肃、内蒙古、新疆。"
+        },
+        {
+          "fact_refs": [
+            "recruitment.bachelor_classification.excess"
+          ],
+          "markdown": "- 本科加学历人力目标差额高于10pt的机构共8家：江苏、福建、上海、四川、陕西、深圳、甘肃、内蒙古。"
+        },
+        {
+          "fact_refs": [
+            "recruitment.bachelor_target_not_met.not_met"
+          ],
+          "markdown": "- 本科加学历人力目标差额符合组合规则的机构共10家：河南、浙江、重庆、广东、天津、宁波、青岛、宁夏、贵州、海南。"
+        }
+      ]
+    },
+    "raw_response": null,
+    "usage": {},
+    "provider": "deterministic",
+    "model": null
+  },
+  {
+    "draft": {
+      "scene_id": "co-recruitment",
+      "blocks": [
+        {
+          "fact_refs": [
+            "co-recruitment.overall_summary.month_training_count"
+          ],
+          "markdown": "- 月度同引送训：111人。"
+        },
+        {
+          "fact_refs": [
+            "co-recruitment.overall_summary.month_training_yoy"
+          ],
+          "markdown": "- 月度同引送训同比：-14%。"
+        },
+        {
+          "fact_refs": [
+            "co-recruitment.overall_summary.quarter_achieved"
+          ],
+          "markdown": "- 季度同引上岗：105人。"
+        },
+        {
+          "fact_refs": [
+            "co-recruitment.overall_summary.quarter_rate"
+          ],
+          "markdown": "- 季度同引达成率：38.2%。"
+        },
+        {
+          "fact_refs": [
+            "co-recruitment.overall_summary.quarter_yoy"
+          ],
+          "markdown": "- 季度同引同比：47.9%。"
+        },
+        {
+          "fact_refs": [
+            "co-recruitment.overall_summary.quarter_college_share"
+          ],
+          "markdown": "- 季度同引大专加学历占比：41%。"
+        },
+        {
+          "fact_refs": [
+            "co-recruitment.overall_summary.quarter_college_yoy"
+          ],
+          "markdown": "- 季度同引大专加学历同比：0.1pt。"
+        },
+        {
+          "fact_refs": [
+            "co-recruitment.overall_summary.quarter_bachelor_share"
+          ],
+          "markdown": "- 季度同引本科加学历占比：16.2%。"
+        },
+        {
+          "fact_refs": [
+            "co-recruitment.overall_summary.quarter_bachelor_yoy"
+          ],
+          "markdown": "- 季度同引本科加学历同比：0.7pt。"
+        },
+        {
+          "fact_refs": [
+            "co-recruitment.quarter_rate_classification.target_met"
+          ],
+          "markdown": "- 季度同引达成率不低于100%的机构共2家：河南、青岛。"
+        },
+        {
+          "fact_refs": [
+            "co-recruitment.quarter_rate_classification.middle"
+          ],
+          "markdown": "- 季度同引达成率符合组合规则（参考阈值50%）的机构共3家：江苏、陕西、甘肃。"
+        },
+        {
+          "fact_refs": [
+            "co-recruitment.zero_classification.both_zero"
+          ],
+          "markdown": "- 月度同引送训符合组合规则的机构共7家：重庆、福建、天津、贵州、宁波、海南、深圳。"
+        }
+      ]
+    },
+    "raw_response": null,
+    "usage": {},
+    "provider": "deterministic",
+    "model": null
+  }
+]

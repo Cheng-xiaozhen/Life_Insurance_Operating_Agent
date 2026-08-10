@@ -1,0 +1,106 @@
+id: recruitment
+version: 4.0.0
+title: 新增人力分析
+description: 汇总新增与学历指标，按复合条件识别目标、中档、低位及本科占比表现。
+keywords: [新增人力, 新增达成, 新增, 增员, 首阳, 本科占比]
+
+parameters:
+  recruitment_target:
+    type: number
+    default: 100
+    description: 新增目标达成阈值。
+  recruitment_middle:
+    type: number
+    default: 80
+    description: 新增中档下限。
+  recruitment_low:
+    type: number
+    default: 40
+    description: 新增低位阈值。
+  bachelor_target:
+    type: number
+    default: 0
+    description: 本科占比目标差额阈值。
+  bachelor_excess:
+    type: number
+    default: 10
+    description: 本科占比超额阈值。
+
+metrics:
+  training_count: {label: 新增送训, formatter: person}
+  added_count: {label: 新增人数, formatter: person}
+  added_rate: {label: 新增达成率, formatter: pct}
+  added_yoy: {label: 新增同比, formatter: pct}
+  first_sun_count: {label: 起聘首阳人数, formatter: person}
+  first_sun_rate: {label: 起聘首阳率, formatter: pct}
+  college_share: {label: 大专及以上学历占比, formatter: pct}
+  college_yoy: {label: 大专及以上学历同比, formatter: pt}
+  bachelor_share: {label: 本科及以上学历占比, formatter: pct}
+  bachelor_gap: {label: 本科占比目标差额, formatter: pt}
+
+steps:
+  - id: summary
+    title: 全系统概况
+    op: summarize
+    metrics:
+      - training_count
+      - added_count
+      - added_rate
+      - added_yoy
+      - first_sun_count
+      - first_sun_rate
+      - college_share
+      - college_yoy
+      - bachelor_share
+      - bachelor_gap
+
+  - id: recruitment_bands
+    title: 新增达成分层
+    op: classify
+    exclusive: true
+    order: metric_desc
+    bands:
+      - id: target
+        label: 新增目标达成机构
+        metric: added_rate
+        operator: gte
+        threshold_param: recruitment_target
+      - id: middle
+        label: 新增中档机构
+        conditions:
+          match: all
+          rules:
+            - {metric: added_rate, operator: gt, threshold_param: recruitment_middle}
+            - {metric: added_rate, operator: lt, threshold_param: recruitment_target}
+      - id: low
+        label: 新增低位机构
+        metric: added_rate
+        operator: lt
+        threshold_param: recruitment_low
+
+  - id: bachelor_bands
+    title: 本科占比目标分层
+    op: classify
+    exclusive: true
+    order: source
+    bands:
+      - id: excess
+        label: 本科占比超额机构
+        metric: bachelor_gap
+        operator: gt
+        threshold_param: bachelor_excess
+      - id: target
+        label: 本科占比达标机构
+        conditions:
+          match: all
+          rules:
+            - {metric: bachelor_gap, operator: gte, threshold_param: bachelor_target}
+            - {metric: bachelor_gap, operator: lte, threshold_param: bachelor_excess}
+      - id: not_met
+        label: 本科占比未达标机构
+        display_metric: bachelor_gap
+        conditions:
+          match: any
+          rules:
+            - {metric: bachelor_gap, operator: lt, threshold_param: bachelor_target}
+            - {metric: bachelor_gap, operator: is_missing}

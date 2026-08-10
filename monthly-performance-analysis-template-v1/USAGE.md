@@ -57,14 +57,14 @@ Windows PowerShell：
 
 ```powershell
 .\.venv\Scripts\python.exe `
-  .\monthly-performance-analysis-template\scripts\render_report.py `
+  .\monthly-performance-analysis-template-v1\scripts\render_report.py `
   --data-dir .\docs `
   --report-month-name 五月 `
   --data-month-name 5月 `
   --cutoff-date 5月31日 `
   --quarter-name 二季度 `
-  --output .\monthly-performance-analysis-template\output\五月业绩分析报告.md `
-  --context-output .\monthly-performance-analysis-template\output\五月业绩分析报告.context.json
+  --output .\monthly-performance-analysis-template-v1\output\五月业绩分析报告.md `
+  --context-output .\monthly-performance-analysis-template-v1\output\五月业绩分析报告.context.json
 ```
 
 macOS 或 Linux：

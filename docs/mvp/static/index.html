@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>寿险经营分析助手 Agent - MVP</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f0f4f8; height: 100vh; display: flex; flex-direction: column; }
+
+/* Header */
+.header { background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%); color: white; padding: 12px 24px; display: flex; align-items: center; gap: 12px; box-shadow: 0 2px 12px rgba(0,0,0,.15); z-index: 10; }
+.header h1 { font-size: 18px; font-weight: 600; }
+.header .badge { background: rgba(255,255,255,.2); padding: 2px 10px; border-radius: 12px; font-size: 12px; }
+.header .status { margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 13px; }
+.header .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #10b981; }
+.header .status-dot.off { background: #ef4444; }
+
+/* Main Layout */
+.main { display: flex; flex: 1; overflow: hidden; }
+.sidebar { width: 280px; background: white; border-right: 1px solid #e5e7eb; overflow-y: auto; padding: 16px; flex-shrink: 0; }
+.chat-area { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+/* Sidebar */
+.sidebar h3 { font-size: 14px; color: #6b7280; margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.question-chip { display: block; width: 100%; padding: 10px 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; color: #374151; font-size: 13px; text-align: left; cursor: pointer; margin-bottom: 8px; transition: all .15s; }
+.question-chip:hover { background: #eff6ff; border-color: #93c5fd; }
+.scenario-list { margin-top: 20px; }
+.scenario-item { padding: 8px 10px; margin-bottom: 4px; border-radius: 6px; font-size: 12px; color: #4b5563; display: flex; align-items: center; gap: 6px; }
+.scenario-item .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.scenario-item .dot.premium { background: #3b82f6; }
+.scenario-item .dot.manpower { background: #8b5cf6; }
+.scenario-item .dot.comprehensive { background: #f59e0b; }
+
+/* Chat */
+.messages { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+.message { display: flex; gap: 10px; max-width: 85%; }
+.message.user { align-self: flex-end; flex-direction: row-reverse; }
+.message.agent { align-self: flex-start; }
+.message .avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.message.user .avatar { background: #2563eb; color: white; }
+.message.agent .avatar { background: #f0f4ff; color: #2563eb; border: 2px solid #bfdbfe; }
+.message .bubble { padding: 12px 16px; border-radius: 14px; font-size: 14px; line-height: 1.7; overflow: hidden; }
+.message.user .bubble { background: #2563eb; color: white; border-bottom-right-radius: 4px; }
+.message.agent .bubble { background: white; color: #1f2937; border: 1px solid #e5e7eb; border-bottom-left-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
+.message.agent .bubble h2 { font-size: 16px; margin: 12px 0 8px; }
+.message.agent .bubble h3 { font-size: 14px; margin: 10px 0 6px; color: #374151; }
+.message.agent .bubble p { margin-bottom: 6px; }
+.message.agent .bubble ul, .message.agent .bubble ol { padding-left: 20px; margin: 6px 0; }
+.message.agent .bubble li { margin-bottom: 4px; }
+.message.agent .bubble strong { color: #1e3a5f; }
+.message.agent .bubble hr { margin: 12px 0; border: none; border-top: 1px solid #e5e7eb; }
+
+/* LLM badge */
+.llm-badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 10px; font-size: 11px; background: #d1fae5; color: #065f46; margin-bottom: 8px; }
+.llm-badge .pulse { width: 6px; height: 6px; border-radius: 50%; background: #10b981; animation: pulse 1.5s infinite; }
+
+/* Reasoning Chain - Enhanced */
+.reasoning-chain { margin-bottom: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; }
+.reasoning-header { padding: 10px 16px; font-size: 13px; color: #374151; cursor: pointer; display: flex; align-items: center; gap: 8px; user-select: none; font-weight: 500; transition: background .15s; }
+.reasoning-header:hover { background: #f1f5f9; }
+.reasoning-header .arrow { transition: transform .25s; font-size: 11px; color: #9ca3af; }
+.reasoning-header .arrow.open { transform: rotate(90deg); }
+.reasoning-header .summary { font-size: 11px; color: #9ca3af; margin-left: auto; }
+.reasoning-steps { display: none; padding: 0 16px 12px; }
+.reasoning-steps.show { display: block; }
+.reasoning-step { display: flex; gap: 10px; padding: 7px 0; font-size: 12.5px; border-bottom: 1px solid #f1f5f9; align-items: flex-start; }
+.reasoning-step:last-child { border-bottom: none; }
+.reasoning-step .step-status { width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; font-size: 10px; }
+.reasoning-step .step-status.running { background: #fef3c7; color: #b45309; animation: spin 1s linear infinite; }
+.reasoning-step .step-status.done { background: #d1fae5; color: #065f46; }
+.reasoning-step .step-body { flex: 1; }
+.reasoning-step .step-action { font-weight: 600; color: #374151; }
+.reasoning-step .step-detail { color: #6b7280; margin-top: 2px; white-space: pre-line; line-height: 1.6; }
+
+/* Scenario Tag */
+.scenario-tag { display: inline-flex; align-items: center; gap: 4px; padding: 3px 12px; border-radius: 14px; font-size: 12px; margin-bottom: 8px; font-weight: 500; }
+.scenario-tag.premium { background: #dbeafe; color: #1d4ed8; }
+.scenario-tag.manpower { background: #ede9fe; color: #6d28d9; }
+.scenario-tag.comprehensive { background: #fef3c7; color: #b45309; }
+.confidence-bar { display: inline-flex; align-items: center; gap: 4px; margin-left: 6px; font-size: 11px; color: #9ca3af; }
+.confidence-dot { width: 6px; height: 6px; border-radius: 50%; }
+.confidence-dot.high { background: #10b981; }
+.confidence-dot.medium { background: #f59e0b; }
+.confidence-dot.low { background: #ef4444; }
+
+/* Alternative scenarios */
+.alt-scenarios { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+.alt-chip { padding: 2px 8px; border-radius: 10px; font-size: 11px; background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; cursor: pointer; transition: all .15s; }
+.alt-chip:hover { background: #e0e7ff; border-color: #93c5fd; color: #2563eb; }
+
+/* Chart */
+.chart-container { margin: 12px 0; background: #f9fafb; border-radius: 10px; padding: 14px; border: 1px solid #e5e7eb; }
+.chart-container h4 { font-size: 13px; color: #374151; margin-bottom: 10px; }
+.chart-box { width: 100%; height: 380px; }
+
+/* Content area */
+.content-area { min-height: 20px; }
+.content-area .streaming-cursor { display: inline-block; width: 2px; height: 16px; background: #2563eb; margin-left: 2px; animation: blink 0.8s infinite; vertical-align: text-bottom; }
+@keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+
+/* Input */
+.input-area { padding: 16px 20px; background: white; border-top: 1px solid #e5e7eb; }
+.input-row { display: flex; gap: 10px; align-items: center; }
+.input-row textarea { flex: 1; resize: none; border: 1px solid #d1d5db; border-radius: 12px; padding: 12px 16px; font-size: 14px; font-family: inherit; outline: none; min-height: 46px; max-height: 120px; line-height: 1.5; }
+.input-row textarea:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
+.input-row button { background: #2563eb; color: white; border: none; padding: 12px 20px; border-radius: 10px; font-size: 14px; cursor: pointer; font-weight: 500; transition: background .15s; white-space: nowrap; }
+.input-row button:hover { background: #1d4ed8; }
+.input-row button:disabled { background: #93c5fd; cursor: not-allowed; }
+.input-hint { font-size: 12px; color: #9ca3af; margin-top: 6px; }
+
+/* Typing indicator */
+.typing { display: flex; gap: 4px; padding: 8px 0; }
+.typing span { width: 7px; height: 7px; border-radius: 50%; background: #93c5fd; animation: bounce 1.4s infinite; }
+.typing span:nth-child(2) { animation-delay: .2s; }
+.typing span:nth-child(3) { animation-delay: .4s; }
+@keyframes bounce { 0%, 60%, 100% { transform: translateY(0); opacity: .4; } 30% { transform: translateY(-6px); opacity: 1; } }
+
+/* Empty state */
+.empty-state { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #9ca3af; }
+.empty-state .icon { font-size: 56px; margin-bottom: 16px; }
+.empty-state h3 { font-size: 18px; color: #6b7280; margin-bottom: 8px; }
+.empty-state p { font-size: 14px; }
+
+/* Animations */
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+.fade-in { animation: fadeIn 0.3s ease-out; }
+
+/* Elapsed time */
+.elapsed-time { font-size: 11px; color: #9ca3af; margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <span style="font-size: 22px;">📊</span>
+  <h1>寿险经营分析助手 Agent</h1>
+  <span class="badge">MVP v0.2</span>
+  <div class="status" id="status">
+    <span class="status-dot" id="statusDot"></span>
+    <span id="statusText">连接中...</span>
+  </div>
+</div>
+
+<div class="main">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h3>💡 试试这些问题</h3>
+    <div id="suggestedQuestions"></div>
+    <div class="scenario-list" id="scenarioList">
+      <h3>📋 分析场景</h3>
+    </div>
+  </div>
+
+  <!-- Chat Area -->
+  <div class="chat-area">
+    <div class="messages" id="messages">
+      <div class="empty-state" id="emptyState">
+        <div class="icon">🤖</div>
+        <h3>寿险经营分析助手</h3>
+        <p>输入您的问题，智能匹配分析场景，获取数据驱动的经营洞察</p>
+      </div>
+    </div>
+
+    <div class="input-area">
+      <div class="input-row">
+        <textarea id="queryInput" rows="1" placeholder="输入您的经营分析问题，例如：本月标保达成情况怎么样？"
+                  onkeydown="handleKeyDown(event)"></textarea>
+        <button id="sendBtn" onclick="sendMessage()">发送</button>
+      </div>
+      <div class="input-hint">支持：标保达成 | 价值分析 | 人力分析 | 主管活动 | 新增增员 | 同引分析 | 综合评级</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── State ──
+let isProcessing = false;
+
+// ── Init ──
+document.addEventListener('DOMContentLoaded', () => {
+  checkHealth();
+  loadScenarios();
+  loadSuggestions();
+});
+
+async function checkHealth() {
+  try {
+    const resp = await fetch('/api/health');
+    const data = await resp.json();
+    document.getElementById('statusDot').classList.toggle('off', !data.llm_configured);
+    document.getElementById('statusText').textContent = data.llm_configured ? 'LLM 就绪' : '规则引擎模式';
+  } catch (e) {
+    document.getElementById('statusDot').classList.add('off');
+    document.getElementById('statusText').textContent = '后端未连接';
+  }
+}
+
+async function loadScenarios() {
+  try {
+    const resp = await fetch('/api/scenarios');
+    const data = await resp.json();
+    const catIcons = { premium: '📊', manpower: '👥', comprehensive: '🏆' };
+    const catNames = { premium: '保费分析', manpower: '人力分析', comprehensive: '综合评价' };
+    let html = '';
+    data.categories.forEach(cat => {
+      html += `<div style="font-size:11px;color:#9ca3af;padding:8px 10px 2px;font-weight:600;">${catIcons[cat.id] || ''} ${cat.name}</div>`;
+      cat.scenarios.forEach(sid => {
+        const s = data.scenarios.find(sc => sc.id === sid);
+        if (s) html += `<div class="scenario-item"><span class="dot ${cat.id}"></span>${s.name}</div>`;
+      });
+    });
+    document.getElementById('scenarioList').insertAdjacentHTML('beforeend', html);
+  } catch (e) { /* ignore */ }
+}
+
+function loadSuggestions() {
+  const questions = [
+    { q: '本月标保达成情况怎么样？', icon: '📊' },
+    { q: '各机构价值达成率排名', icon: '💰' },
+    { q: '活动人力和阳光人力的达成情况', icon: '👥' },
+    { q: '主管活动率和标准组同比变化', icon: '📋' },
+    { q: '五月新增人力达成率和学历结构', icon: '🆕' },
+    { q: '同引季度达成情况，哪些机构挂零？', icon: '🔄' },
+    { q: '五月各机构综合评级红黄蓝', icon: '🏆' },
+    { q: '深圳各项指标为什么这么差？', icon: '🔍' },
+  ];
+  const div = document.getElementById('suggestedQuestions');
+  questions.forEach(item => {
+    const btn = document.createElement('button');
+    btn.className = 'question-chip';
+    btn.textContent = `${item.icon} ${item.q}`;
+    btn.onclick = () => {
+      document.getElementById('queryInput').value = item.q;
+      sendMessage();
+    };
+    div.appendChild(btn);
+  });
+}
+
+// ── Streaming Message Builder ──
+class StreamingMessage {
+  constructor(container) {
+    this.container = container;
+    this.scenarioInfo = null;
+    this.reasoningSteps = [];
+    this.contentText = '';
+    this.chartData = null;
+    this.usedLLM = false;
+    this.elapsedMs = 0;
+    this.isComplete = false;
+
+    // Create DOM structure
+    this.el = document.createElement('div');
+    this.el.className = 'message agent fade-in';
+
+    this.bubbleEl = document.createElement('div');
+    this.bubbleEl.className = 'bubble';
+
+    // LLM badge (hidden until confirmed)
+    this.llmBadge = document.createElement('span');
+
+    // Scenario tag area
+    this.scenarioArea = document.createElement('div');
+
+    // Reasoning chain
+    this.reasoningEl = document.createElement('div');
+    this.reasoningEl.className = 'reasoning-chain';
+    this.reasoningEl.innerHTML = `
+      <div class="reasoning-header" onclick="toggleReasoning(this)">
+        <span class="arrow open">▶</span>
+        <span>推理过程</span>
+        <span class="summary" id="reasoningSummary"></span>
+      </div>
+      <div class="reasoning-steps show"></div>
+    `;
+    this.reasoningStepsEl = this.reasoningEl.querySelector('.reasoning-steps');
+    this.reasoningSummaryEl = this.reasoningEl.querySelector('.summary');
+
+    // Content area
+    this.contentEl = document.createElement('div');
+    this.contentEl.className = 'content-area';
+    this.contentEl.innerHTML = '<span class="streaming-cursor"></span>';
+    this.cursorEl = this.contentEl.querySelector('.streaming-cursor');
+
+    // Chart area (hidden initially)
+    this.chartArea = document.createElement('div');
+
+    // Elapsed time
+    this.elapsedEl = document.createElement('div');
+    this.elapsedEl.className = 'elapsed-time';
+
+    // Assemble
+    this.bubbleEl.appendChild(this.llmBadge);
+    this.bubbleEl.appendChild(this.scenarioArea);
+    this.bubbleEl.appendChild(this.reasoningEl);
+    this.bubbleEl.appendChild(this.contentEl);
+    this.bubbleEl.appendChild(this.chartArea);
+    this.bubbleEl.appendChild(this.elapsedEl);
+
+    this.el.innerHTML = `
+      <div class="avatar">🤖</div>
+    `;
+    this.el.appendChild(this.bubbleEl);
+
+    document.getElementById('emptyState')?.remove();
+    this.container.appendChild(this.el);
+  }
+
+  addReasoning(step) {
+    // Update or add step
+    const existing = this.reasoningSteps.find(s => s.step === step.step);
+    if (existing) {
+      existing.action = step.action;
+      existing.status = step.status;
+      existing.detail = step.detail;
+    } else {
+      this.reasoningSteps.push(step);
+    }
+    this._renderReasoning();
+  }
+
+  _renderReasoning() {
+    const statusIcon = { running: '⏳', done: '✅' };
+    let html = '';
+    let doneCount = 0;
+    this.reasoningSteps.forEach(s => {
+      const cls = s.status === 'running' ? 'running' : 'done';
+      const icon = statusIcon[s.status] || '✅';
+      if (s.status === 'done') doneCount++;
+      html += `
+        <div class="reasoning-step">
+          <span class="step-status ${cls}">${icon}</span>
+          <div class="step-body">
+            <div class="step-action">Step ${s.step}: ${s.action}</div>
+            <div class="step-detail">${s.detail}</div>
+          </div>
+        </div>`;
+    });
+    this.reasoningStepsEl.innerHTML = html;
+    this.reasoningSummaryEl.textContent = `${doneCount}/${this.reasoningSteps.length} 步`;
+
+    // Auto-scroll
+    this.container.scrollTop = this.container.scrollHeight;
+  }
+  setScenario(info) {
+    this.scenarioInfo = info;
+    const cat = info.matched_scenario.category;
+    const catClass = cat === '保费分析' ? 'premium' : cat === '人力分析' ? 'manpower' : 'comprehensive';
+    const conf = info.confidence || 0;
+    const confClass = conf >= 0.8 ? 'high' : conf >= 0.5 ? 'medium' : 'low';
+    let html = `<span class="scenario-tag ${catClass}">📌 ${info.matched_scenario.name}<span class="confidence-bar"><span class="confidence-dot ${confClass}"></span>${Math.round(conf * 100)}%</span></span>`;
+
+    if (info.alternatives && info.alternatives.length > 0) {
+      html += '<div class="alt-scenarios">';
+      info.alternatives.forEach(alt => {
+        html += `<span class="alt-chip" title="置信度 ${alt.score} 分">${alt.name}</span>`;
+      });
+      html += '</div>';
+    }
+    this.scenarioArea.innerHTML = html;
+  }
+
+  appendContent(text) {
+    this.contentText += text;
+    // Render markdown progressively for full paragraphs
+    this._renderContent();
+    this.container.scrollTop = this.container.scrollHeight;
+  }
+
+  _renderContent() {
+    // Show rendered markdown, keep cursor at end
+    let rendered = marked.parse(this.contentText);
+    // Remove cursor from rendered content if present
+    this.contentEl.innerHTML = rendered + '<span class="streaming-cursor"></span>';
+    this.cursorEl = this.contentEl.querySelector('.streaming-cursor');
+  }
+
+  setChart(chartData) {
+    this.chartData = chartData;
+    const chartId = 'chart_' + Date.now();
+    this.chartArea.innerHTML = `<div class="chart-container fade-in"><h4>📈 ${chartData.title || '数据可视化'}</h4><div class="chart-box" id="${chartId}"></div></div>`;
+    setTimeout(() => renderChart(chartId, chartData), 150);
+  }
+
+  complete(info = {}) {
+    this.isComplete = true;
+    this.usedLLM = info.used_llm || false;
+    this.elapsedMs = info.elapsed_ms || 0;
+
+    // Remove cursor
+    if (this.cursorEl) this.cursorEl.remove();
+
+    // Final markdown render
+    this.contentEl.innerHTML = marked.parse(this.contentText);
+
+    // Update llm badge
+    if (this.usedLLM) {
+      this.llmBadge.className = 'llm-badge';
+      this.llmBadge.innerHTML = '🤖 LLM 智能分析';
+    } else {
+      this.llmBadge.className = 'llm-badge';
+      this.llmBadge.style.background = '#fef3c7';
+      this.llmBadge.style.color = '#b45309';
+      this.llmBadge.innerHTML = '📋 规则引擎分析';
+    }
+
+    // Elapsed time
+    const sec = (this.elapsedMs / 1000).toFixed(1);
+    this.elapsedEl.textContent = `⏱ 耗时 ${sec}s`;
+
+    // Collapse reasoning when done
+    const header = this.reasoningEl.querySelector('.reasoning-header');
+    const steps = this.reasoningEl.querySelector('.reasoning-steps');
+    const arrow = this.reasoningEl.querySelector('.arrow');
+    if (steps.classList.contains('show')) {
+      steps.classList.remove('show');
+      arrow.classList.remove('open');
+    }
+
+    this.container.scrollTop = this.container.scrollHeight;
+  }
+}
+
+// ── Reasoning toggle ──
+function toggleReasoning(header) {
+  const steps = header.nextElementSibling;
+  const arrow = header.querySelector('.arrow');
+  steps.classList.toggle('show');
+  arrow.classList.toggle('open');
+}
+
+// ── Send Message (Streaming) ──
+async function sendMessage() {
+  if (isProcessing) return;
+  const input = document.getElementById('queryInput');
+  const query = input.value.trim();
+  if (!query) return;
+
+  input.value = '';
+  input.style.height = 'auto';
+  isProcessing = true;
+  document.getElementById('sendBtn').disabled = true;
+
+  // Add user message
+  const msgContainer = document.getElementById('messages');
+  const userMsg = document.createElement('div');
+  userMsg.className = 'message user fade-in';
+  userMsg.innerHTML = `
+    <div class="avatar">👤</div>
+    <div class="bubble">${query.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</div>
+  `;
+  document.getElementById('emptyState')?.remove();
+  msgContainer.appendChild(userMsg);
+  msgContainer.scrollTop = msgContainer.scrollHeight;
+
+  // Create streaming message
+  const streamMsg = new StreamingMessage(msgContainer);
+
+  try {
+    const resp = await fetch('/api/chat/stream', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query, use_llm: true, conversation_history: [] })
+    });
+
+    if (!resp.ok) {
+      streamMsg.appendContent('抱歉，请求失败，请检查后端服务。');
+      streamMsg.complete({ used_llm: false, elapsed_ms: 0 });
+      return;
+    }
+
+    const reader = resp.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      buffer += decoder.decode(value, { stream: true });
+
+      // Parse SSE events
+      const lines = buffer.split('\n');
+      buffer = lines.pop() || ''; // Keep incomplete line in buffer
+
+      let currentEvent = '';
+      for (const line of lines) {
+        if (line.startsWith('event: ')) {
+          currentEvent = line.slice(7).trim();
+        } else if (line.startsWith('data: ') && currentEvent) {
+          const dataStr = line.slice(6);
+          try {
+            const data = JSON.parse(dataStr);
+            handleSSEEvent(streamMsg, currentEvent, data);
+          } catch (e) {
+            // Raw text data
+            handleSSEEvent(streamMsg, currentEvent, dataStr);
+          }
+          currentEvent = '';
+        }
+      }
+    }
+  } catch (e) {
+    console.error('Stream error:', e);
+    streamMsg.appendContent('\n\n抱歉，连接中断，请重试。');
+    streamMsg.complete({ used_llm: false, elapsed_ms: 0 });
+  }
+
+  isProcessing = false;
+  document.getElementById('sendBtn').disabled = false;
+  input.focus();
+}
+
+function handleSSEEvent(streamMsg, event, data) {
+  switch (event) {
+    case 'reasoning':
+      streamMsg.addReasoning(data);
+      break;
+    case 'scenario':
+      streamMsg.setScenario(data);
+      break;
+    case 'content':
+      streamMsg.appendContent(data.text || data);
+      break;
+    case 'chart':
+      streamMsg.setChart(data);
+      break;
+    case 'done':
+      streamMsg.complete(data);
+      break;
+    case 'error':
+      streamMsg.appendContent(`\n\n❌ ${data.message || '发生错误'}`);
+      streamMsg.complete({ used_llm: false, elapsed_ms: 0 });
+      break;
+  }
+}
+
+// ── Chart Rendering ──
+function renderChart(chartId, chartData) {
+  const dom = document.getElementById(chartId);
+  if (!dom) return;
+  const chart = echarts.init(dom);
+
+  if (chartData.type === 'scatter' || chartData.type === 'quadrant') {
+    const data = chartData.datasets[0]?.data || [];
+    // 支持 LLM 传来的动态象限分割线，兜底写死默认值
+    const showQuadrant = chartData.type === 'quadrant' || (chartData.quadrantX != null && chartData.quadrantY != null);
+    const qx = chartData.quadrantX ?? 70;
+    const qy = chartData.quadrantY ?? 30;
+    const xName = chartData.xAxis || 'X';
+    const yName = chartData.yAxis || 'Y';
+    const option = {
+      title: { text: chartData.title, left: 'center', textStyle: { fontSize: 14 } },
+      tooltip: { formatter: p => `${p.value[2]}<br/>${xName}: ${p.value[0]}<br/>${yName}: ${p.value[1]}` },
+      xAxis: { name: xName, nameLocation: 'center', nameGap: 30 },
+      yAxis: { name: yName, nameLocation: 'center', nameGap: 40 },
+      series: [{
+        type: 'scatter', symbolSize: 12,
+        data: data.map(d => [d.x, d.y, d.label]),
+        itemStyle: { color: chartData.datasets[0]?.color || '#8b5cf6' },
+        label: { show: true, formatter: p => p.value[2], fontSize: 10, position: 'top' },
+        markLine: showQuadrant ? {
+          silent: true, data: [
+            { xAxis: qx, label: { formatter: `${xName} ${qx}` } },
+            { yAxis: qy, label: { formatter: `${yName} ${qy}` } }
+          ], lineStyle: { type: 'dashed', color: '#94a3b8' }
+        } : undefined
+      }],
+      grid: { left: 60, right: 40, top: 50, bottom: 40 }
+    };
+    chart.setOption(option);
+  } else if (chartData.type === 'heatmap') {
+    const allInsts = new Set();
+    chartData.datasets.forEach(ds => (ds.data || []).forEach(i => allInsts.add(i)));
+    const instArr = Array.from(allInsts);
+    const levels = chartData.labels || [];
+    const seriesData = [];
+    instArr.forEach((inst, i) => {
+      levels.forEach((level, j) => {
+        const ds = chartData.datasets.find(d => d.name === level);
+        if ((ds?.data || []).includes(inst)) seriesData.push([j, i, 1]);
+      });
+    });
+    // Assign scores for color: 0=gray, 1=blue(run1), 2=yellow(run2-3), 3=red(run4)
+    const scoreMap = {};
+    chartData.datasets.forEach((ds, di) => {
+      (ds.data || []).forEach(inst => {
+        scoreMap[`${inst}_${di}`] = di === 0 ? 3 : di === 1 ? 2 : di === 2 ? 1 : 0;
+      });
+    });
+    const mappedData = seriesData.map(([j, i]) => [j, i, scoreMap[`${instArr[i]}_${levels.length - 1 - j}`] ?? 1]);
+    const option = {
+      title: { text: chartData.title, left: 'center', textStyle: { fontSize: 14 } },
+      tooltip: { formatter: p => `${instArr[p.value[1]]}<br/>评级：${levels[levels.length - 1 - p.value[0]] || levels[p.value[0]]}` },
+      xAxis: { data: levels.slice().reverse(), axisLabel: { rotate: 15, fontSize: 11 } },
+      yAxis: { data: instArr, axisLabel: { fontSize: 11 } },
+      visualMap: { show: false, min: 0, max: 3, inRange: { color: ['#f1f5f9', '#3b82f6', '#f59e0b', '#ef4444'] } },
+      series: [{
+        type: 'heatmap', data: mappedData,
+        label: { show: true, formatter: p => p.value[2] ? '✓' : '' },
+        itemStyle: { borderWidth: 1, borderColor: '#fff' }
+      }],
+      grid: { left: 80, right: 30, top: 50, bottom: 60 }
+    };
+    chart.setOption(option);
+  } else if (chartData.type === 'bar') {
+    const option = {
+      title: { text: chartData.title, left: 'center', textStyle: { fontSize: 14 } },
+      tooltip: { trigger: 'axis' },
+      legend: { bottom: 0, data: (chartData.datasets || []).map(d => d.name) },
+      xAxis: { data: chartData.labels || [], axisLabel: { rotate: 45, fontSize: 10 } },
+      yAxis: {},
+      series: (chartData.datasets || []).map(ds => ({
+        name: ds.name, type: 'bar', data: ds.data || [],
+        itemStyle: { color: ds.color, borderRadius: [4, 4, 0, 0] }
+      })),
+      grid: { left: 50, right: 20, top: 50, bottom: 55 }
+    };
+    if (chartData.alertLine !== undefined) {
+      option.series.push({
+        name: '预警线', type: 'line', data: [], silent: true,
+        markLine: { silent: true, data: [{ yAxis: chartData.alertLine, label: { formatter: `预警线 ${chartData.alertLine}%` } }], lineStyle: { color: '#ef4444', type: 'dashed' } }
+      });
+    }
+    chart.setOption(option);
+  }
+
+  window.addEventListener('resize', () => chart.resize());
+}
+
+// ── Input Handling ──
+function handleKeyDown(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+}
+
+document.getElementById('queryInput').addEventListener('input', function() {
+  this.style.height = 'auto';
+  this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+});
+</script>
+</body>
+</html>

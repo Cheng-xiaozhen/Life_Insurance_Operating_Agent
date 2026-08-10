@@ -7,3 +7,5 @@ __pycache__/
 *.log
 .env
 template-analysis-agent-v3/runs/
+template-analysis-agent-v4/runs/
+template-analysis-agent-v4/outputs/

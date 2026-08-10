@@ -1,0 +1,80 @@
+{
+  "patterns": [
+    {
+      "id": "pattern-benchmark-ranking",
+      "name": "达标排名分析",
+      "description": "按指标达成率分组排名，识别优秀和预警机构",
+      "logic": "对机构按指定指标达成率降序排列，按阈值分为优秀组、达标组、预警组",
+      "params_schema": {
+        "metric": "string - 排序指标ID",
+        "group_thresholds": {
+          "excellent": "number - 优秀阈值（>=此值）",
+          "warning": "number - 预警阈值（<此值）"
+        }
+      },
+      "output_format": "排名列表 + 分组标签",
+      "reusable_for": ["保费分析", "人力分析"]
+    },
+    {
+      "id": "pattern-yoy-trend",
+      "name": "同比趋势分析",
+      "description": "对比当期与去年同期数据，分析正向/负向变化趋势",
+      "logic": "计算各机构指标的同比增长率，识别正向增长和负增长的机构及幅度",
+      "params_schema": {
+        "current_metric": "string - 当期指标ID",
+        "yoy_metric": "string - 同比增长率指标ID"
+      },
+      "output_format": "正增长/负增长机构列表 + 变化幅度",
+      "reusable_for": ["全部类别"]
+    },
+    {
+      "id": "pattern-progress-tracking",
+      "name": "进度追踪分析",
+      "description": "累计值 vs 年度目标的进度百分比分析",
+      "logic": "计算累计达成值占全年目标的比例，判断进度是否正常（如月度应达到~41.7%即5/12）",
+      "params_schema": {
+        "cumulative_metric": "string - 累计值指标ID",
+        "target_metric": "string - 年度目标指标ID"
+      },
+      "output_format": "进度百分比 + 超前/正常/滞后判断",
+      "reusable_for": ["保费分析", "人力分析"]
+    },
+    {
+      "id": "pattern-structure-distribution",
+      "name": "结构分布分析",
+      "description": "分析子项占比，评估结构合理性",
+      "logic": "计算子项在总体中的占比，与基准值/目标值对比",
+      "params_schema": {
+        "part_metric": "string - 子项指标ID",
+        "total_metric": "string - 总项指标ID",
+        "target_value": "number - 目标占比值（可选）"
+      },
+      "output_format": "占比值 + 与目标差距",
+      "reusable_for": ["人力结构", "学历结构", "产品结构"]
+    },
+    {
+      "id": "pattern-cross-evaluation",
+      "name": "交叉综合评价",
+      "description": "多维度联合打分评估，综合分类贴标签",
+      "logic": "选取多个维度指标，各机构逐项与大盘对比，统计跑赢项数，按跑赢项数分类",
+      "params_schema": {
+        "dimensions": ["string - 维度指标ID列表"],
+        "benchmark_type": "string - 对比基准（system_avg/median/target）"
+      },
+      "output_format": "跑赢项数矩阵 + 分类标签",
+      "reusable_for": ["综合评价", "机构评级"]
+    },
+    {
+      "id": "pattern-anomaly-detection",
+      "name": "异常/挂零识别",
+      "description": "识别极端异常值或挂零情况",
+      "logic": "筛选达成率为0或极低（<5%）的机构，以及全部挂零的机构列表",
+      "params_schema": {
+        "metrics": ["string - 需检测的指标ID列表"],
+        "zero_threshold": "number - 视为挂零的阈值（默认0）"
+      },
+      "output_format": "异常机构列表 + 异常指标明细",
+      "reusable_for": ["全部类别"]
+    }
+  ]
+}

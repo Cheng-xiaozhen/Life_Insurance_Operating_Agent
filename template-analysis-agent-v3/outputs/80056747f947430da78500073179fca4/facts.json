@@ -1,0 +1,2793 @@
+[
+  {
+    "scene_id": "standard-premium",
+    "scene_title": "标保",
+    "status": "ready",
+    "parameters": {
+      "data_month_name": "5月",
+      "cutoff_date": "5月31日",
+      "monthly_high_threshold": 70,
+      "monthly_target_threshold": 100,
+      "monthly_low_threshold": 50,
+      "monthly_very_low_threshold": 5,
+      "yearly_high_threshold": 60,
+      "yearly_very_high_threshold": 80,
+      "yearly_low_threshold": 45
+    },
+    "facts": [
+      {
+        "fact_id": "standard-premium.overall_summary.month_amount",
+        "scene_id": "standard-premium",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "standard-premium.month_amount",
+        "label": "月度标保达成",
+        "raw_value": 12444,
+        "display_value": "12444万",
+        "unit": "wan",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.standard-premium",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "standard-premium.overall_summary.month_rate",
+        "scene_id": "standard-premium",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "standard-premium.month_rate",
+        "label": "月度标保达成率",
+        "raw_value": 61.8,
+        "display_value": "61.8%",
+        "unit": "pct",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.standard-premium",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "standard-premium.overall_summary.month_yoy",
+        "scene_id": "standard-premium",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "standard-premium.month_yoy",
+        "label": "月度标保同比",
+        "raw_value": -11.6,
+        "display_value": "-11.6%",
+        "unit": "pct",
+        "direction": "decrease",
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.standard-premium",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "standard-premium.overall_summary.year_amount",
+        "scene_id": "standard-premium",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "standard-premium.year_amount",
+        "label": "全年标保达成",
+        "raw_value": 100538,
+        "display_value": "100538万",
+        "unit": "wan",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.standard-premium",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "standard-premium.overall_summary.year_progress",
+        "scene_id": "standard-premium",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "standard-premium.year_progress",
+        "label": "全年标保进度",
+        "raw_value": 53.8,
+        "display_value": "53.8%",
+        "unit": "pct",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.standard-premium",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "standard-premium.overall_summary.year_yoy",
+        "scene_id": "standard-premium",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "standard-premium.year_yoy",
+        "label": "全年标保同比",
+        "raw_value": 20.6,
+        "display_value": "20.6%",
+        "unit": "pct",
+        "direction": "increase",
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.standard-premium",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "standard-premium.monthly_rate_classification.high",
+        "scene_id": "standard-premium",
+        "step_id": "monthly_rate_classification",
+        "fact_type": "classification",
+        "metric_id": "standard-premium.month_rate",
+        "label": "月度标保达成率",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "all",
+          "rules": [
+            {
+              "metric_id": "standard-premium.month_rate",
+              "operator": "gt",
+              "threshold": 70
+            }
+          ]
+        },
+        "threshold": 70,
+        "threshold_display": "70%",
+        "organizations": [
+          "河南",
+          "天津",
+          "潍坊",
+          "云南",
+          "新疆",
+          "海南",
+          "内蒙古",
+          "宁波",
+          "甘肃"
+        ],
+        "count": 9,
+        "query_id": "monthly-performance.standard-premium",
+        "query_version": "1.0.0",
+        "source_rows": [
+          2,
+          13,
+          14,
+          15,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "standard-premium.monthly_rate_classification.target_met",
+        "scene_id": "standard-premium",
+        "step_id": "monthly_rate_classification",
+        "fact_type": "classification",
+        "metric_id": "standard-premium.month_rate",
+        "label": "月度标保达成率",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "all",
+          "rules": [
+            {
+              "metric_id": "standard-premium.month_rate",
+              "operator": "gte",
+              "threshold": 100
+            }
+          ]
+        },
+        "threshold": 100,
+        "threshold_display": "100%",
+        "organizations": [
+          "天津",
+          "新疆"
+        ],
+        "count": 2,
+        "query_id": "monthly-performance.standard-premium",
+        "query_version": "1.0.0",
+        "source_rows": [
+          13,
+          24
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "standard-premium.monthly_rate_classification.low",
+        "scene_id": "standard-premium",
+        "step_id": "monthly_rate_classification",
+        "fact_type": "classification",
+        "metric_id": "standard-premium.month_rate",
+        "label": "月度标保达成率",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "all",
+          "rules": [
+            {
+              "metric_id": "standard-premium.month_rate",
+              "operator": "lt",
+              "threshold": 50
+            }
+          ]
+        },
+        "threshold": 50,
+        "threshold_display": "50%",
+        "organizations": [
+          "上海",
+          "安徽",
+          "山西",
+          "北京",
+          "贵州",
+          "青岛",
+          "宁夏",
+          "深圳"
+        ],
+        "count": 8,
+        "query_id": "monthly-performance.standard-premium",
+        "query_version": "1.0.0",
+        "source_rows": [
+          12,
+          21,
+          22,
+          23,
+          29,
+          30,
+          31,
+          32
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "standard-premium.monthly_rate_classification.very_low",
+        "scene_id": "standard-premium",
+        "step_id": "monthly_rate_classification",
+        "fact_type": "classification",
+        "metric_id": "standard-premium.month_rate",
+        "label": "月度标保达成率",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "all",
+          "rules": [
+            {
+              "metric_id": "standard-premium.month_rate",
+              "operator": "lt",
+              "threshold": 5
+            }
+          ]
+        },
+        "threshold": 5,
+        "threshold_display": "5%",
+        "organizations": [
+          "深圳"
+        ],
+        "count": 1,
+        "query_id": "monthly-performance.standard-premium",
+        "query_version": "1.0.0",
+        "source_rows": [
+          32
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "standard-premium.yearly_progress_classification.high",
+        "scene_id": "standard-premium",
+        "step_id": "yearly_progress_classification",
+        "fact_type": "classification",
+        "metric_id": "standard-premium.year_progress",
+        "label": "全年标保进度",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "all",
+          "rules": [
+            {
+              "metric_id": "standard-premium.year_progress",
+              "operator": "gt",
+              "threshold": 60
+            }
+          ]
+        },
+        "threshold": 60,
+        "threshold_display": "60%",
+        "organizations": [
+          "天津",
+          "潍坊",
+          "云南",
+          "新疆",
+          "宁波",
+          "甘肃",
+          "贵州"
+        ],
+        "count": 7,
+        "query_id": "monthly-performance.standard-premium",
+        "query_version": "1.0.0",
+        "source_rows": [
+          13,
+          14,
+          15,
+          24,
+          27,
+          28,
+          29
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "standard-premium.yearly_progress_classification.very_high",
+        "scene_id": "standard-premium",
+        "step_id": "yearly_progress_classification",
+        "fact_type": "classification",
+        "metric_id": "standard-premium.year_progress",
+        "label": "全年标保进度",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "all",
+          "rules": [
+            {
+              "metric_id": "standard-premium.year_progress",
+              "operator": "gt",
+              "threshold": 80
+            }
+          ]
+        },
+        "threshold": 80,
+        "threshold_display": "80%",
+        "organizations": [
+          "宁波"
+        ],
+        "count": 1,
+        "query_id": "monthly-performance.standard-premium",
+        "query_version": "1.0.0",
+        "source_rows": [
+          27
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "standard-premium.yearly_progress_classification.low",
+        "scene_id": "standard-premium",
+        "step_id": "yearly_progress_classification",
+        "fact_type": "classification",
+        "metric_id": "standard-premium.year_progress",
+        "label": "全年标保进度",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "all",
+          "rules": [
+            {
+              "metric_id": "standard-premium.year_progress",
+              "operator": "lt",
+              "threshold": 45
+            }
+          ]
+        },
+        "threshold": 45,
+        "threshold_display": "45%",
+        "organizations": [
+          "安徽",
+          "北京",
+          "海南",
+          "青岛",
+          "宁夏",
+          "深圳"
+        ],
+        "count": 6,
+        "query_id": "monthly-performance.standard-premium",
+        "query_version": "1.0.0",
+        "source_rows": [
+          21,
+          23,
+          25,
+          30,
+          31,
+          32
+        ],
+        "required": true
+      }
+    ],
+    "signals": {
+      "target_met": "standard-premium.monthly_rate_classification.target_met",
+      "severe_low": "standard-premium.monthly_rate_classification.very_low"
+    },
+    "organization_universe": [
+      "河南",
+      "广东",
+      "重庆",
+      "湖北",
+      "山东",
+      "江苏",
+      "浙江",
+      "福建",
+      "河北",
+      "四川",
+      "上海",
+      "天津",
+      "潍坊",
+      "云南",
+      "吉林",
+      "辽宁",
+      "湖南",
+      "黑龙江",
+      "陕西",
+      "安徽",
+      "山西",
+      "北京",
+      "新疆",
+      "海南",
+      "内蒙古",
+      "宁波",
+      "甘肃",
+      "贵州",
+      "青岛",
+      "宁夏",
+      "深圳"
+    ],
+    "errors": []
+  },
+  {
+    "scene_id": "value",
+    "scene_title": "价值",
+    "status": "ready",
+    "parameters": {
+      "data_month_name": "5月",
+      "cutoff_date": "5月31日",
+      "value_high_threshold": 85,
+      "value_low_threshold": 55
+    },
+    "facts": [
+      {
+        "fact_id": "value.overall_summary.month_amount",
+        "scene_id": "value",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "value.month_amount",
+        "label": "月度价值达成",
+        "raw_value": 7045,
+        "display_value": "7045万",
+        "unit": "wan",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.value",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "value.overall_summary.month_rate",
+        "scene_id": "value",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "value.month_rate",
+        "label": "月度价值达成率",
+        "raw_value": 74.1,
+        "display_value": "74.1%",
+        "unit": "pct",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.value",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "value.overall_summary.month_yoy",
+        "scene_id": "value",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "value.month_yoy",
+        "label": "月度价值同比",
+        "raw_value": 9.8,
+        "display_value": "9.8%",
+        "unit": "pct",
+        "direction": "increase",
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.value",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "value.overall_summary.year_progress",
+        "scene_id": "value",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "value.year_progress",
+        "label": "全年价值进度",
+        "raw_value": 54.2,
+        "display_value": "54.2%",
+        "unit": "pct",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.value",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "value.overall_summary.year_yoy",
+        "scene_id": "value",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "value.year_yoy",
+        "label": "全年价值同比",
+        "raw_value": 7.2,
+        "display_value": "7.2%",
+        "unit": "pct",
+        "direction": "increase",
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.value",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "value.month_rate_classification.high",
+        "scene_id": "value",
+        "step_id": "month_rate_classification",
+        "fact_type": "classification",
+        "metric_id": "value.month_rate",
+        "label": "月度价值达成率",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "all",
+          "rules": [
+            {
+              "metric_id": "value.month_rate",
+              "operator": "gt",
+              "threshold": 85
+            }
+          ]
+        },
+        "threshold": 85,
+        "threshold_display": "85%",
+        "organizations": [
+          "河南",
+          "天津",
+          "云南",
+          "吉林",
+          "新疆"
+        ],
+        "count": 5,
+        "query_id": "monthly-performance.value",
+        "query_version": "1.0.0",
+        "source_rows": [
+          2,
+          13,
+          15,
+          16,
+          24
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "value.month_rate_classification.low",
+        "scene_id": "value",
+        "step_id": "month_rate_classification",
+        "fact_type": "classification",
+        "metric_id": "value.month_rate",
+        "label": "月度价值达成率",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "all",
+          "rules": [
+            {
+              "metric_id": "value.month_rate",
+              "operator": "lt",
+              "threshold": 55
+            }
+          ]
+        },
+        "threshold": 55,
+        "threshold_display": "55%",
+        "organizations": [
+          "上海",
+          "山西",
+          "北京",
+          "宁波",
+          "贵州",
+          "青岛",
+          "宁夏",
+          "深圳"
+        ],
+        "count": 8,
+        "query_id": "monthly-performance.value",
+        "query_version": "1.0.0",
+        "source_rows": [
+          12,
+          22,
+          23,
+          27,
+          29,
+          30,
+          31,
+          32
+        ],
+        "required": true
+      }
+    ],
+    "signals": {},
+    "organization_universe": [
+      "河南",
+      "广东",
+      "重庆",
+      "湖北",
+      "山东",
+      "江苏",
+      "浙江",
+      "福建",
+      "河北",
+      "四川",
+      "上海",
+      "天津",
+      "潍坊",
+      "云南",
+      "吉林",
+      "辽宁",
+      "湖南",
+      "黑龙江",
+      "陕西",
+      "安徽",
+      "山西",
+      "北京",
+      "新疆",
+      "海南",
+      "内蒙古",
+      "宁波",
+      "甘肃",
+      "贵州",
+      "青岛",
+      "宁夏",
+      "深圳"
+    ],
+    "errors": []
+  },
+  {
+    "scene_id": "active-manpower",
+    "scene_title": "活动人力",
+    "status": "ready",
+    "parameters": {
+      "data_month_name": "5月",
+      "cutoff_date": "5月31日",
+      "activity_high_threshold": 90,
+      "activity_target_threshold": 100,
+      "activity_low_threshold": 60
+    },
+    "facts": [
+      {
+        "fact_id": "active-manpower.overall_summary.activity_count",
+        "scene_id": "active-manpower",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "active-manpower.activity_count",
+        "label": "活动人力",
+        "raw_value": 5531,
+        "display_value": "5531人",
+        "unit": "person",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.active-manpower",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "active-manpower.overall_summary.activity_rate",
+        "scene_id": "active-manpower",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "active-manpower.activity_rate",
+        "label": "活动人力达成率",
+        "raw_value": 77.9,
+        "display_value": "77.9%",
+        "unit": "pct",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.active-manpower",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "active-manpower.overall_summary.activity_yoy",
+        "scene_id": "active-manpower",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "active-manpower.activity_yoy",
+        "label": "活动人力同比",
+        "raw_value": -9.4,
+        "display_value": "-9.4%",
+        "unit": "pct",
+        "direction": "decrease",
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.active-manpower",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "active-manpower.activity_rate_classification.high",
+        "scene_id": "active-manpower",
+        "step_id": "activity_rate_classification",
+        "fact_type": "classification",
+        "metric_id": "active-manpower.activity_rate",
+        "label": "活动人力达成率",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "all",
+          "rules": [
+            {
+              "metric_id": "active-manpower.activity_rate",
+              "operator": "gt",
+              "threshold": 90
+            }
+          ]
+        },
+        "threshold": 90,
+        "threshold_display": "90%",
+        "organizations": [
+          "重庆",
+          "陕西",
+          "吉林",
+          "潍坊",
+          "宁波",
+          "新疆"
+        ],
+        "count": 6,
+        "query_id": "monthly-performance.active-manpower",
+        "query_version": "1.0.0",
+        "source_rows": [
+          2,
+          13,
+          14,
+          15,
+          24,
+          25
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "active-manpower.activity_rate_classification.target_met",
+        "scene_id": "active-manpower",
+        "step_id": "activity_rate_classification",
+        "fact_type": "classification",
+        "metric_id": "active-manpower.activity_rate",
+        "label": "活动人力达成率",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "all",
+          "rules": [
+            {
+              "metric_id": "active-manpower.activity_rate",
+              "operator": "gte",
+              "threshold": 100
+            }
+          ]
+        },
+        "threshold": 100,
+        "threshold_display": "100%",
+        "organizations": [
+          "宁波"
+        ],
+        "count": 1,
+        "query_id": "monthly-performance.active-manpower",
+        "query_version": "1.0.0",
+        "source_rows": [
+          24
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "active-manpower.activity_rate_classification.low",
+        "scene_id": "active-manpower",
+        "step_id": "activity_rate_classification",
+        "fact_type": "classification",
+        "metric_id": "active-manpower.activity_rate",
+        "label": "活动人力达成率",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "all",
+          "rules": [
+            {
+              "metric_id": "active-manpower.activity_rate",
+              "operator": "lt",
+              "threshold": 60
+            }
+          ]
+        },
+        "threshold": 60,
+        "threshold_display": "60%",
+        "organizations": [
+          "上海",
+          "安徽",
+          "北京",
+          "内蒙古",
+          "贵州",
+          "深圳"
+        ],
+        "count": 6,
+        "query_id": "monthly-performance.active-manpower",
+        "query_version": "1.0.0",
+        "source_rows": [
+          12,
+          22,
+          23,
+          30,
+          31,
+          32
+        ],
+        "required": true
+      }
+    ],
+    "signals": {
+      "target_met": "active-manpower.activity_rate_classification.target_met"
+    },
+    "organization_universe": [
+      "重庆",
+      "河南",
+      "湖北",
+      "浙江",
+      "江苏",
+      "河北",
+      "四川",
+      "福建",
+      "山东",
+      "广东",
+      "上海",
+      "陕西",
+      "吉林",
+      "潍坊",
+      "辽宁",
+      "湖南",
+      "云南",
+      "天津",
+      "山西",
+      "黑龙江",
+      "安徽",
+      "北京",
+      "宁波",
+      "新疆",
+      "青岛",
+      "宁夏",
+      "甘肃",
+      "海南",
+      "内蒙古",
+      "贵州",
+      "深圳"
+    ],
+    "errors": []
+  },
+  {
+    "scene_id": "sunshine-manpower",
+    "scene_title": "阳光人力",
+    "status": "ready",
+    "parameters": {
+      "data_month_name": "5月",
+      "cutoff_date": "5月31日",
+      "sunshine_high_threshold": 90,
+      "sunshine_low_threshold": 70
+    },
+    "facts": [
+      {
+        "fact_id": "sunshine-manpower.overall_summary.sunshine_count",
+        "scene_id": "sunshine-manpower",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "sunshine-manpower.sunshine_count",
+        "label": "阳光人力达成",
+        "raw_value": 4772,
+        "display_value": "4772人",
+        "unit": "person",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.sunshine-manpower",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "sunshine-manpower.overall_summary.sunshine_rate",
+        "scene_id": "sunshine-manpower",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "sunshine-manpower.sunshine_rate",
+        "label": "阳光人力达成率",
+        "raw_value": 82.2,
+        "display_value": "82.2%",
+        "unit": "pct",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.sunshine-manpower",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "sunshine-manpower.overall_summary.sunshine_yoy",
+        "scene_id": "sunshine-manpower",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "sunshine-manpower.sunshine_yoy",
+        "label": "阳光人力同比",
+        "raw_value": -2.1,
+        "display_value": "-2.1%",
+        "unit": "pct",
+        "direction": "decrease",
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.sunshine-manpower",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "sunshine-manpower.overall_summary.sunshine_share",
+        "scene_id": "sunshine-manpower",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "sunshine-manpower.sunshine_share",
+        "label": "阳光占比活动",
+        "raw_value": 85.2,
+        "display_value": "85.2%",
+        "unit": "pct",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.sunshine-manpower",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "sunshine-manpower.sunshine_rate_classification.high",
+        "scene_id": "sunshine-manpower",
+        "step_id": "sunshine_rate_classification",
+        "fact_type": "classification",
+        "metric_id": "sunshine-manpower.sunshine_rate",
+        "label": "阳光人力达成率",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "all",
+          "rules": [
+            {
+              "metric_id": "sunshine-manpower.sunshine_rate",
+              "operator": "gte",
+              "threshold": 90
+            }
+          ]
+        },
+        "threshold": 90,
+        "threshold_display": "90%",
+        "organizations": [
+          "重庆",
+          "河南",
+          "陕西",
+          "吉林",
+          "潍坊",
+          "湖南",
+          "宁波",
+          "新疆"
+        ],
+        "count": 8,
+        "query_id": "monthly-performance.sunshine-manpower",
+        "query_version": "1.0.0",
+        "source_rows": [
+          2,
+          3,
+          13,
+          14,
+          15,
+          17,
+          24,
+          25
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "sunshine-manpower.sunshine_rate_classification.low",
+        "scene_id": "sunshine-manpower",
+        "step_id": "sunshine_rate_classification",
+        "fact_type": "classification",
+        "metric_id": "sunshine-manpower.sunshine_rate",
+        "label": "阳光人力达成率",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "all",
+          "rules": [
+            {
+              "metric_id": "sunshine-manpower.sunshine_rate",
+              "operator": "lt",
+              "threshold": 70
+            }
+          ]
+        },
+        "threshold": 70,
+        "threshold_display": "70%",
+        "organizations": [
+          "上海",
+          "黑龙江",
+          "安徽",
+          "北京",
+          "内蒙古",
+          "贵州",
+          "深圳"
+        ],
+        "count": 7,
+        "query_id": "monthly-performance.sunshine-manpower",
+        "query_version": "1.0.0",
+        "source_rows": [
+          12,
+          21,
+          22,
+          23,
+          30,
+          31,
+          32
+        ],
+        "required": true
+      }
+    ],
+    "signals": {},
+    "organization_universe": [
+      "重庆",
+      "河南",
+      "湖北",
+      "浙江",
+      "江苏",
+      "河北",
+      "四川",
+      "福建",
+      "山东",
+      "广东",
+      "上海",
+      "陕西",
+      "吉林",
+      "潍坊",
+      "辽宁",
+      "湖南",
+      "云南",
+      "天津",
+      "山西",
+      "黑龙江",
+      "安徽",
+      "北京",
+      "宁波",
+      "新疆",
+      "青岛",
+      "宁夏",
+      "甘肃",
+      "海南",
+      "内蒙古",
+      "贵州",
+      "深圳"
+    ],
+    "errors": []
+  },
+  {
+    "scene_id": "supervisor-activity",
+    "scene_title": "主管活动",
+    "status": "ready",
+    "parameters": {
+      "cutoff_date": "5月31日",
+      "supervisor_activity_high_threshold": 80,
+      "supervisor_activity_low_threshold": 60
+    },
+    "facts": [
+      {
+        "fact_id": "supervisor-activity.overall_summary.in_service",
+        "scene_id": "supervisor-activity",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "supervisor-activity.in_service",
+        "label": "在职主管",
+        "raw_value": 3484,
+        "display_value": "3484人",
+        "unit": "person",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.supervisor-activity",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "supervisor-activity.overall_summary.active_count",
+        "scene_id": "supervisor-activity",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "supervisor-activity.active_count",
+        "label": "主管活动人数",
+        "raw_value": 2485,
+        "display_value": "2485人",
+        "unit": "person",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.supervisor-activity",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "supervisor-activity.overall_summary.activity_rate",
+        "scene_id": "supervisor-activity",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "supervisor-activity.activity_rate",
+        "label": "主管活动率",
+        "raw_value": 71.3,
+        "display_value": "71.3%",
+        "unit": "pct",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.supervisor-activity",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "supervisor-activity.overall_summary.activity_yoy",
+        "scene_id": "supervisor-activity",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "supervisor-activity.activity_yoy",
+        "label": "主管活动率同比",
+        "raw_value": -1.1,
+        "display_value": "-1.1pt",
+        "unit": "pt",
+        "direction": "decrease",
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.supervisor-activity",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "supervisor-activity.activity_rate_classification.high",
+        "scene_id": "supervisor-activity",
+        "step_id": "activity_rate_classification",
+        "fact_type": "classification",
+        "metric_id": "supervisor-activity.activity_rate",
+        "label": "主管活动率",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "all",
+          "rules": [
+            {
+              "metric_id": "supervisor-activity.activity_rate",
+              "operator": "gt",
+              "threshold": 80
+            }
+          ]
+        },
+        "threshold": 80,
+        "threshold_display": "80%",
+        "organizations": [
+          "重庆",
+          "浙江",
+          "江苏",
+          "潍坊",
+          "深圳"
+        ],
+        "count": 5,
+        "query_id": "monthly-performance.supervisor-activity",
+        "query_version": "1.0.0",
+        "source_rows": [
+          2,
+          3,
+          4,
+          13,
+          24
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "supervisor-activity.activity_rate_classification.low",
+        "scene_id": "supervisor-activity",
+        "step_id": "activity_rate_classification",
+        "fact_type": "classification",
+        "metric_id": "supervisor-activity.activity_rate",
+        "label": "主管活动率",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "all",
+          "rules": [
+            {
+              "metric_id": "supervisor-activity.activity_rate",
+              "operator": "lt",
+              "threshold": 60
+            }
+          ]
+        },
+        "threshold": 60,
+        "threshold_display": "60%",
+        "organizations": [
+          "广东",
+          "上海",
+          "陕西",
+          "山西",
+          "宁夏",
+          "青岛"
+        ],
+        "count": 6,
+        "query_id": "monthly-performance.supervisor-activity",
+        "query_version": "1.0.0",
+        "source_rows": [
+          11,
+          12,
+          22,
+          23,
+          31,
+          32
+        ],
+        "required": true
+      }
+    ],
+    "signals": {},
+    "organization_universe": [
+      "重庆",
+      "浙江",
+      "江苏",
+      "河北",
+      "山东",
+      "四川",
+      "湖北",
+      "福建",
+      "河南",
+      "广东",
+      "上海",
+      "潍坊",
+      "辽宁",
+      "吉林",
+      "安徽",
+      "天津",
+      "湖南",
+      "黑龙江",
+      "北京",
+      "云南",
+      "陕西",
+      "山西",
+      "深圳",
+      "海南",
+      "内蒙古",
+      "新疆",
+      "贵州",
+      "甘肃",
+      "宁波",
+      "宁夏",
+      "青岛"
+    ],
+    "errors": []
+  },
+  {
+    "scene_id": "supervisor-double-star",
+    "scene_title": "主管双星",
+    "status": "ready",
+    "parameters": {
+      "cutoff_date": "5月31日",
+      "double_star_high_threshold": 50,
+      "double_star_high_effective_threshold": 55,
+      "double_star_low_threshold": 25
+    },
+    "facts": [
+      {
+        "fact_id": "supervisor-double-star.overall_summary.double_star_count",
+        "scene_id": "supervisor-double-star",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "supervisor-double-star.double_star_count",
+        "label": "主管双星人数",
+        "raw_value": 1300,
+        "display_value": "1300人",
+        "unit": "person",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.supervisor-double-star",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "supervisor-double-star.overall_summary.double_star_rate",
+        "scene_id": "supervisor-double-star",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "supervisor-double-star.double_star_rate",
+        "label": "主管双星率",
+        "raw_value": 37.3,
+        "display_value": "37.3%",
+        "unit": "pct",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.supervisor-double-star",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "supervisor-double-star.overall_summary.double_star_yoy",
+        "scene_id": "supervisor-double-star",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "supervisor-double-star.double_star_yoy",
+        "label": "主管双星率同比",
+        "raw_value": -4.3,
+        "display_value": "-4.3pt",
+        "unit": "pt",
+        "direction": "decrease",
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.supervisor-double-star",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "supervisor-double-star.double_star_rate_classification.high",
+        "scene_id": "supervisor-double-star",
+        "step_id": "double_star_rate_classification",
+        "fact_type": "classification",
+        "metric_id": "supervisor-double-star.double_star_rate",
+        "label": "主管双星率",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "all",
+          "rules": [
+            {
+              "metric_id": "supervisor-double-star.double_star_rate",
+              "operator": "gt",
+              "threshold": 55
+            }
+          ]
+        },
+        "threshold": 50,
+        "threshold_display": "50%",
+        "organizations": [
+          "浙江",
+          "江苏",
+          "福建",
+          "潍坊",
+          "深圳",
+          "海南"
+        ],
+        "count": 6,
+        "query_id": "monthly-performance.supervisor-double-star",
+        "query_version": "1.0.0",
+        "source_rows": [
+          3,
+          4,
+          9,
+          13,
+          24,
+          25
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "supervisor-double-star.double_star_rate_classification.low",
+        "scene_id": "supervisor-double-star",
+        "step_id": "double_star_rate_classification",
+        "fact_type": "classification",
+        "metric_id": "supervisor-double-star.double_star_rate",
+        "label": "主管双星率",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "all",
+          "rules": [
+            {
+              "metric_id": "supervisor-double-star.double_star_rate",
+              "operator": "lt",
+              "threshold": 25
+            }
+          ]
+        },
+        "threshold": 25,
+        "threshold_display": "25%",
+        "organizations": [
+          "陕西",
+          "山西",
+          "贵州",
+          "甘肃",
+          "宁夏",
+          "青岛"
+        ],
+        "count": 6,
+        "query_id": "monthly-performance.supervisor-double-star",
+        "query_version": "1.0.0",
+        "source_rows": [
+          22,
+          23,
+          28,
+          29,
+          31,
+          32
+        ],
+        "required": true
+      }
+    ],
+    "signals": {},
+    "organization_universe": [
+      "重庆",
+      "浙江",
+      "江苏",
+      "河北",
+      "山东",
+      "四川",
+      "湖北",
+      "福建",
+      "河南",
+      "广东",
+      "上海",
+      "潍坊",
+      "辽宁",
+      "吉林",
+      "安徽",
+      "天津",
+      "湖南",
+      "黑龙江",
+      "北京",
+      "云南",
+      "陕西",
+      "山西",
+      "深圳",
+      "海南",
+      "内蒙古",
+      "新疆",
+      "贵州",
+      "甘肃",
+      "宁波",
+      "宁夏",
+      "青岛"
+    ],
+    "errors": []
+  },
+  {
+    "scene_id": "standard-team",
+    "scene_title": "标准组",
+    "status": "ready",
+    "parameters": {
+      "standard_team_yoy_threshold": -20,
+      "standard_team_share_threshold": 30
+    },
+    "facts": [
+      {
+        "fact_id": "standard-team.standard_team_classification.yoy_low",
+        "scene_id": "standard-team",
+        "step_id": "standard_team_classification",
+        "fact_type": "classification",
+        "metric_id": "standard-team.standard_yoy",
+        "label": "标准组同比",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "all",
+          "rules": [
+            {
+              "metric_id": "standard-team.standard_yoy",
+              "operator": "lt",
+              "threshold": -20
+            }
+          ]
+        },
+        "threshold": -20,
+        "threshold_display": "20%",
+        "organizations": [
+          "广东",
+          "上海",
+          "安徽",
+          "黑龙江",
+          "北京",
+          "山西",
+          "深圳",
+          "海南",
+          "内蒙古",
+          "贵州",
+          "宁波"
+        ],
+        "count": 11,
+        "query_id": "monthly-performance.standard-team",
+        "query_version": "1.0.0",
+        "source_rows": [
+          11,
+          12,
+          16,
+          19,
+          20,
+          23,
+          24,
+          25,
+          26,
+          28,
+          30
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "standard-team.standard_team_classification.share_low",
+        "scene_id": "standard-team",
+        "step_id": "standard_team_classification",
+        "fact_type": "classification",
+        "metric_id": "standard-team.standard_share",
+        "label": "标准组占比",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "all",
+          "rules": [
+            {
+              "metric_id": "standard-team.standard_share",
+              "operator": "lt",
+              "threshold": 30
+            }
+          ]
+        },
+        "threshold": 30,
+        "threshold_display": "30%",
+        "organizations": [
+          "山东",
+          "广东",
+          "上海",
+          "安徽",
+          "黑龙江",
+          "北京",
+          "陕西",
+          "山西",
+          "深圳",
+          "海南",
+          "新疆",
+          "贵州",
+          "甘肃",
+          "宁波",
+          "宁夏",
+          "青岛"
+        ],
+        "count": 16,
+        "query_id": "monthly-performance.standard-team",
+        "query_version": "1.0.0",
+        "source_rows": [
+          6,
+          11,
+          12,
+          16,
+          19,
+          20,
+          22,
+          23,
+          24,
+          25,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32
+        ],
+        "required": true
+      }
+    ],
+    "signals": {},
+    "organization_universe": [
+      "重庆",
+      "浙江",
+      "江苏",
+      "河北",
+      "山东",
+      "四川",
+      "湖北",
+      "福建",
+      "河南",
+      "广东",
+      "上海",
+      "潍坊",
+      "辽宁",
+      "吉林",
+      "安徽",
+      "天津",
+      "湖南",
+      "黑龙江",
+      "北京",
+      "云南",
+      "陕西",
+      "山西",
+      "深圳",
+      "海南",
+      "内蒙古",
+      "新疆",
+      "贵州",
+      "甘肃",
+      "宁波",
+      "宁夏",
+      "青岛"
+    ],
+    "errors": []
+  },
+  {
+    "scene_id": "recruitment",
+    "scene_title": "新增",
+    "status": "ready",
+    "parameters": {
+      "data_month_name": "5月",
+      "cutoff_date": "5月31日",
+      "recruitment_middle_low_threshold": 80,
+      "recruitment_target_threshold": 100,
+      "recruitment_low_threshold": 40,
+      "bachelor_target_threshold": 0,
+      "bachelor_excess_threshold": 10
+    },
+    "facts": [
+      {
+        "fact_id": "recruitment.overall_summary.training_count",
+        "scene_id": "recruitment",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "recruitment.training_count",
+        "label": "新增送训",
+        "raw_value": 1510,
+        "display_value": "1510人",
+        "unit": "person",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.recruitment",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "recruitment.overall_summary.added_count",
+        "scene_id": "recruitment",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "recruitment.added_count",
+        "label": "新增人数",
+        "raw_value": 739,
+        "display_value": "739人",
+        "unit": "person",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.recruitment",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "recruitment.overall_summary.added_rate",
+        "scene_id": "recruitment",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "recruitment.added_rate",
+        "label": "新增达成率",
+        "raw_value": 62.6,
+        "display_value": "62.6%",
+        "unit": "pct",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.recruitment",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "recruitment.overall_summary.added_yoy",
+        "scene_id": "recruitment",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "recruitment.added_yoy",
+        "label": "新增同比",
+        "raw_value": -7.4,
+        "display_value": "-7.4%",
+        "unit": "pct",
+        "direction": "decrease",
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.recruitment",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "recruitment.overall_summary.first_sun_count",
+        "scene_id": "recruitment",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "recruitment.first_sun_count",
+        "label": "起聘首阳人数",
+        "raw_value": 425,
+        "display_value": "425人",
+        "unit": "person",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.recruitment",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "recruitment.overall_summary.first_sun_rate",
+        "scene_id": "recruitment",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "recruitment.first_sun_rate",
+        "label": "起聘首阳率",
+        "raw_value": 45.6,
+        "display_value": "45.6%",
+        "unit": "pct",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.recruitment",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "recruitment.overall_summary.college_share",
+        "scene_id": "recruitment",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "recruitment.college_share",
+        "label": "大专加学历人力占比",
+        "raw_value": 47.5,
+        "display_value": "47.5%",
+        "unit": "pct",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.recruitment",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "recruitment.overall_summary.college_yoy",
+        "scene_id": "recruitment",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "recruitment.college_yoy",
+        "label": "大专加学历人力同比",
+        "raw_value": 16.3,
+        "display_value": "16.3pt",
+        "unit": "pt",
+        "direction": "increase",
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.recruitment",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "recruitment.overall_summary.bachelor_share",
+        "scene_id": "recruitment",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "recruitment.bachelor_share",
+        "label": "本科加学历人力占比",
+        "raw_value": 25.4,
+        "display_value": "25.4%",
+        "unit": "pct",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.recruitment",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "recruitment.overall_summary.bachelor_gap",
+        "scene_id": "recruitment",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "recruitment.bachelor_gap",
+        "label": "本科加学历人力目标差额",
+        "raw_value": 5.4,
+        "display_value": "5.4pt",
+        "unit": "pt",
+        "direction": "excess",
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.recruitment",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "recruitment.recruitment_rate_classification.middle",
+        "scene_id": "recruitment",
+        "step_id": "recruitment_rate_classification",
+        "fact_type": "classification",
+        "metric_id": "recruitment.added_rate",
+        "label": "新增达成率",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "all",
+          "rules": [
+            {
+              "metric_id": "recruitment.added_rate",
+              "operator": "gt",
+              "threshold": 80
+            },
+            {
+              "metric_id": "recruitment.added_rate",
+              "operator": "lt",
+              "threshold": 100
+            }
+          ]
+        },
+        "threshold": 80,
+        "threshold_display": "80%",
+        "organizations": [
+          "河北",
+          "河南",
+          "山西",
+          "青岛"
+        ],
+        "count": 4,
+        "query_id": "monthly-performance.recruitment",
+        "query_version": "1.0.0",
+        "source_rows": [
+          2,
+          3,
+          13,
+          26
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "recruitment.recruitment_rate_classification.target_met",
+        "scene_id": "recruitment",
+        "step_id": "recruitment_rate_classification",
+        "fact_type": "classification",
+        "metric_id": "recruitment.added_rate",
+        "label": "新增达成率",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "all",
+          "rules": [
+            {
+              "metric_id": "recruitment.added_rate",
+              "operator": "gte",
+              "threshold": 100
+            }
+          ]
+        },
+        "threshold": 100,
+        "threshold_display": "100%",
+        "organizations": [
+          "宁波",
+          "深圳"
+        ],
+        "count": 2,
+        "query_id": "monthly-performance.recruitment",
+        "query_version": "1.0.0",
+        "source_rows": [
+          24,
+          25
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "recruitment.recruitment_rate_low.low",
+        "scene_id": "recruitment",
+        "step_id": "recruitment_rate_low",
+        "fact_type": "classification",
+        "metric_id": "recruitment.added_rate",
+        "label": "新增达成率",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "all",
+          "rules": [
+            {
+              "metric_id": "recruitment.added_rate",
+              "operator": "lt",
+              "threshold": 40
+            }
+          ]
+        },
+        "threshold": 40,
+        "threshold_display": "40%",
+        "organizations": [
+          "广东",
+          "吉林",
+          "天津",
+          "黑龙江",
+          "北京",
+          "新疆",
+          "宁夏",
+          "贵州",
+          "海南"
+        ],
+        "count": 9,
+        "query_id": "monthly-performance.recruitment",
+        "query_version": "1.0.0",
+        "source_rows": [
+          12,
+          20,
+          21,
+          22,
+          23,
+          29,
+          30,
+          31,
+          32
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "recruitment.bachelor_classification.target_met",
+        "scene_id": "recruitment",
+        "step_id": "bachelor_classification",
+        "fact_type": "classification",
+        "metric_id": "recruitment.bachelor_gap",
+        "label": "本科加学历人力目标差额",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "all",
+          "rules": [
+            {
+              "metric_id": "recruitment.bachelor_gap",
+              "operator": "gte",
+              "threshold": 0
+            }
+          ]
+        },
+        "threshold": 0,
+        "threshold_display": "0pt",
+        "organizations": [
+          "河北",
+          "江苏",
+          "福建",
+          "山东",
+          "湖北",
+          "上海",
+          "四川",
+          "山西",
+          "潍坊",
+          "云南",
+          "湖南",
+          "陕西",
+          "辽宁",
+          "安徽",
+          "吉林",
+          "黑龙江",
+          "北京",
+          "深圳",
+          "甘肃",
+          "内蒙古",
+          "新疆"
+        ],
+        "count": 21,
+        "query_id": "monthly-performance.recruitment",
+        "query_version": "1.0.0",
+        "source_rows": [
+          2,
+          5,
+          6,
+          7,
+          8,
+          10,
+          11,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          22,
+          23,
+          25,
+          27,
+          28,
+          29
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "recruitment.bachelor_classification.excess",
+        "scene_id": "recruitment",
+        "step_id": "bachelor_classification",
+        "fact_type": "classification",
+        "metric_id": "recruitment.bachelor_gap",
+        "label": "本科加学历人力目标差额",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "all",
+          "rules": [
+            {
+              "metric_id": "recruitment.bachelor_gap",
+              "operator": "gt",
+              "threshold": 10
+            }
+          ]
+        },
+        "threshold": 10,
+        "threshold_display": "10pt",
+        "organizations": [
+          "江苏",
+          "福建",
+          "上海",
+          "四川",
+          "陕西",
+          "深圳",
+          "甘肃",
+          "内蒙古"
+        ],
+        "count": 8,
+        "query_id": "monthly-performance.recruitment",
+        "query_version": "1.0.0",
+        "source_rows": [
+          5,
+          6,
+          10,
+          11,
+          17,
+          25,
+          27,
+          28
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "recruitment.bachelor_target_not_met.not_met",
+        "scene_id": "recruitment",
+        "step_id": "bachelor_target_not_met",
+        "fact_type": "classification",
+        "metric_id": "recruitment.bachelor_gap",
+        "label": "本科加学历人力目标差额",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "any",
+          "rules": [
+            {
+              "metric_id": "recruitment.bachelor_gap",
+              "operator": "lt",
+              "threshold": 0
+            },
+            {
+              "metric_id": "recruitment.bachelor_gap",
+              "operator": "is_missing",
+              "threshold": null
+            }
+          ]
+        },
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [
+          "河南",
+          "浙江",
+          "重庆",
+          "广东",
+          "天津",
+          "宁波",
+          "青岛",
+          "宁夏",
+          "贵州",
+          "海南"
+        ],
+        "count": 10,
+        "query_id": "monthly-performance.recruitment",
+        "query_version": "1.0.0",
+        "source_rows": [
+          3,
+          4,
+          9,
+          12,
+          21,
+          24,
+          26,
+          30,
+          31,
+          32
+        ],
+        "required": true
+      }
+    ],
+    "signals": {
+      "target_met": "recruitment.recruitment_rate_classification.target_met"
+    },
+    "organization_universe": [
+      "河北",
+      "河南",
+      "浙江",
+      "江苏",
+      "福建",
+      "山东",
+      "湖北",
+      "重庆",
+      "上海",
+      "四川",
+      "广东",
+      "山西",
+      "潍坊",
+      "云南",
+      "湖南",
+      "陕西",
+      "辽宁",
+      "安徽",
+      "吉林",
+      "天津",
+      "黑龙江",
+      "北京",
+      "宁波",
+      "深圳",
+      "青岛",
+      "甘肃",
+      "内蒙古",
+      "新疆",
+      "宁夏",
+      "贵州",
+      "海南"
+    ],
+    "errors": []
+  },
+  {
+    "scene_id": "co-recruitment",
+    "scene_title": "同引",
+    "status": "ready",
+    "parameters": {
+      "data_month_name": "5月",
+      "quarter_name": "二季度",
+      "cutoff_date": "5月31日",
+      "co_recruitment_target_threshold": 100,
+      "co_recruitment_middle_threshold": 50,
+      "zero_threshold": 0
+    },
+    "facts": [
+      {
+        "fact_id": "co-recruitment.overall_summary.month_training_count",
+        "scene_id": "co-recruitment",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "co-recruitment.month_training_count",
+        "label": "月度同引送训",
+        "raw_value": 111,
+        "display_value": "111人",
+        "unit": "person",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.co-recruitment",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "co-recruitment.overall_summary.month_training_yoy",
+        "scene_id": "co-recruitment",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "co-recruitment.month_training_yoy",
+        "label": "月度同引送训同比",
+        "raw_value": -14,
+        "display_value": "-14%",
+        "unit": "pct",
+        "direction": "decrease",
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.co-recruitment",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "co-recruitment.overall_summary.quarter_achieved",
+        "scene_id": "co-recruitment",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "co-recruitment.quarter_achieved",
+        "label": "季度同引上岗",
+        "raw_value": 105,
+        "display_value": "105人",
+        "unit": "person",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.co-recruitment",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "co-recruitment.overall_summary.quarter_rate",
+        "scene_id": "co-recruitment",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "co-recruitment.quarter_rate",
+        "label": "季度同引达成率",
+        "raw_value": 38.2,
+        "display_value": "38.2%",
+        "unit": "pct",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.co-recruitment",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "co-recruitment.overall_summary.quarter_yoy",
+        "scene_id": "co-recruitment",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "co-recruitment.quarter_yoy",
+        "label": "季度同引同比",
+        "raw_value": 47.9,
+        "display_value": "47.9%",
+        "unit": "pct",
+        "direction": "increase",
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.co-recruitment",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "co-recruitment.overall_summary.quarter_college_share",
+        "scene_id": "co-recruitment",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "co-recruitment.quarter_college_share",
+        "label": "季度同引大专加学历占比",
+        "raw_value": 41,
+        "display_value": "41%",
+        "unit": "pct",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.co-recruitment",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "co-recruitment.overall_summary.quarter_college_yoy",
+        "scene_id": "co-recruitment",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "co-recruitment.quarter_college_yoy",
+        "label": "季度同引大专加学历同比",
+        "raw_value": 0.1,
+        "display_value": "0.1pt",
+        "unit": "pt",
+        "direction": "increase",
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.co-recruitment",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "co-recruitment.overall_summary.quarter_bachelor_share",
+        "scene_id": "co-recruitment",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "co-recruitment.quarter_bachelor_share",
+        "label": "季度同引本科加学历占比",
+        "raw_value": 16.2,
+        "display_value": "16.2%",
+        "unit": "pct",
+        "direction": null,
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.co-recruitment",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "co-recruitment.overall_summary.quarter_bachelor_yoy",
+        "scene_id": "co-recruitment",
+        "step_id": "overall_summary",
+        "fact_type": "summary",
+        "metric_id": "co-recruitment.quarter_bachelor_yoy",
+        "label": "季度同引本科加学历同比",
+        "raw_value": 0.7,
+        "display_value": "0.7pt",
+        "unit": "pt",
+        "direction": "increase",
+        "condition": null,
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [],
+        "count": null,
+        "query_id": "monthly-performance.co-recruitment",
+        "query_version": "1.0.0",
+        "source_rows": [
+          33
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "co-recruitment.quarter_rate_classification.target_met",
+        "scene_id": "co-recruitment",
+        "step_id": "quarter_rate_classification",
+        "fact_type": "classification",
+        "metric_id": "co-recruitment.quarter_rate",
+        "label": "季度同引达成率",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "all",
+          "rules": [
+            {
+              "metric_id": "co-recruitment.quarter_rate",
+              "operator": "gte",
+              "threshold": 100
+            }
+          ]
+        },
+        "threshold": 100,
+        "threshold_display": "100%",
+        "organizations": [
+          "河南",
+          "青岛"
+        ],
+        "count": 2,
+        "query_id": "monthly-performance.co-recruitment",
+        "query_version": "1.0.0",
+        "source_rows": [
+          2,
+          24
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "co-recruitment.quarter_rate_classification.middle",
+        "scene_id": "co-recruitment",
+        "step_id": "quarter_rate_classification",
+        "fact_type": "classification",
+        "metric_id": "co-recruitment.quarter_rate",
+        "label": "季度同引达成率",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "all",
+          "rules": [
+            {
+              "metric_id": "co-recruitment.quarter_rate",
+              "operator": "gte",
+              "threshold": 50
+            },
+            {
+              "metric_id": "co-recruitment.quarter_rate",
+              "operator": "lt",
+              "threshold": 100
+            }
+          ]
+        },
+        "threshold": 50,
+        "threshold_display": "50%",
+        "organizations": [
+          "江苏",
+          "陕西",
+          "甘肃"
+        ],
+        "count": 3,
+        "query_id": "monthly-performance.co-recruitment",
+        "query_version": "1.0.0",
+        "source_rows": [
+          3,
+          13,
+          25
+        ],
+        "required": true
+      },
+      {
+        "fact_id": "co-recruitment.zero_classification.both_zero",
+        "scene_id": "co-recruitment",
+        "step_id": "zero_classification",
+        "fact_type": "classification",
+        "metric_id": "co-recruitment.month_training_count",
+        "label": "月度同引送训",
+        "raw_value": null,
+        "display_value": null,
+        "unit": null,
+        "direction": null,
+        "condition": {
+          "match": "all",
+          "rules": [
+            {
+              "metric_id": "co-recruitment.month_training_count",
+              "operator": "eq",
+              "threshold": 0
+            },
+            {
+              "metric_id": "co-recruitment.quarter_achieved",
+              "operator": "eq",
+              "threshold": 0
+            }
+          ]
+        },
+        "threshold": null,
+        "threshold_display": null,
+        "organizations": [
+          "重庆",
+          "福建",
+          "天津",
+          "贵州",
+          "宁波",
+          "海南",
+          "深圳"
+        ],
+        "count": 7,
+        "query_id": "monthly-performance.co-recruitment",
+        "query_version": "1.0.0",
+        "source_rows": [
+          11,
+          12,
+          23,
+          29,
+          30,
+          31,
+          32
+        ],
+        "required": true
+      }
+    ],
+    "signals": {
+      "target_met": "co-recruitment.quarter_rate_classification.target_met"
+    },
+    "organization_universe": [
+      "河南",
+      "江苏",
+      "湖北",
+      "山东",
+      "广东",
+      "四川",
+      "河北",
+      "上海",
+      "浙江",
+      "重庆",
+      "福建",
+      "陕西",
+      "云南",
+      "湖南",
+      "吉林",
+      "潍坊",
+      "辽宁",
+      "黑龙江",
+      "北京",
+      "山西",
+      "安徽",
+      "天津",
+      "青岛",
+      "甘肃",
+      "宁夏",
+      "内蒙古",
+      "新疆",
+      "贵州",
+      "宁波",
+      "海南",
+      "深圳"
+    ],
+    "errors": []
+  }
+]

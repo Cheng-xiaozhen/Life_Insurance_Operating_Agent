@@ -1,0 +1,382 @@
+{
+  "metrics": {
+    "monthly_biaobao_amount": {
+      "id": "monthly_biaobao_amount",
+      "name": "当月标保达成额",
+      "definition": "当月承保的标准保费合计",
+      "unit": "万元",
+      "data_source": "核心承保系统.standard_premium_detail",
+      "refresh_frequency": "T+1",
+      "category": "保费"
+    },
+    "monthly_biaobao_rate": {
+      "id": "monthly_biaobao_rate",
+      "name": "当月标保达成率",
+      "definition": "当月标保达成额 / 当月标保目标 × 100%",
+      "unit": "%",
+      "data_source": "计算指标",
+      "refresh_frequency": "T+1",
+      "category": "保费"
+    },
+    "monthly_biaobao_yoy": {
+      "id": "monthly_biaobao_yoy",
+      "name": "当月标保同比增长率",
+      "definition": "(当月标保 - 去年同月标保) / 去年同月标保 × 100%",
+      "unit": "%",
+      "data_source": "计算指标",
+      "refresh_frequency": "T+1",
+      "category": "保费"
+    },
+    "yearly_biaobao_amount": {
+      "id": "yearly_biaobao_amount",
+      "name": "全年标保累计达成额",
+      "definition": "年初至当月的累计标保保费",
+      "unit": "万元",
+      "data_source": "核心承保系统.standard_premium_detail",
+      "refresh_frequency": "T+1",
+      "category": "保费"
+    },
+    "yearly_biaobao_progress": {
+      "id": "yearly_biaobao_progress",
+      "name": "全年标保进度",
+      "definition": "全年标保累计 / 年度标保目标 × 100%",
+      "unit": "%",
+      "data_source": "计算指标",
+      "refresh_frequency": "T+1",
+      "category": "保费"
+    },
+    "yearly_biaobao_yoy": {
+      "id": "yearly_biaobao_yoy",
+      "name": "全年标保同比增长率",
+      "definition": "(全年累计标保 - 去年同期累计标保) / 去年同期累计标保 × 100%",
+      "unit": "%",
+      "data_source": "计算指标",
+      "refresh_frequency": "T+1",
+      "category": "保费"
+    },
+    "monthly_value_amount": {
+      "id": "monthly_value_amount",
+      "name": "当月价值达成额",
+      "definition": "当月新业务价值合计",
+      "unit": "万元",
+      "data_source": "精算系统.new_business_value",
+      "refresh_frequency": "T+1",
+      "category": "价值"
+    },
+    "monthly_value_rate": {
+      "id": "monthly_value_rate",
+      "name": "当月价值达成率",
+      "definition": "当月价值达成额 / 当月价值目标 × 100%",
+      "unit": "%",
+      "data_source": "计算指标",
+      "refresh_frequency": "T+1",
+      "category": "价值"
+    },
+    "monthly_value_yoy": {
+      "id": "monthly_value_yoy",
+      "name": "当月价值同比增长率",
+      "definition": "(当月价值 - 去年同月价值) / 去年同月价值 × 100%",
+      "unit": "%",
+      "data_source": "计算指标",
+      "refresh_frequency": "T+1",
+      "category": "价值"
+    },
+    "yearly_value_progress": {
+      "id": "yearly_value_progress",
+      "name": "全年价值进度",
+      "definition": "全年累计价值 / 年度价值目标 × 100%",
+      "unit": "%",
+      "data_source": "计算指标",
+      "refresh_frequency": "T+1",
+      "category": "价值"
+    },
+    "yearly_value_yoy": {
+      "id": "yearly_value_yoy",
+      "name": "全年价值同比增长率",
+      "definition": "(全年累计价值 - 去年同期累计价值) / 去年同期累计价值 × 100%",
+      "unit": "%",
+      "data_source": "计算指标",
+      "refresh_frequency": "T+1",
+      "category": "价值"
+    },
+    "active_manpower": {
+      "id": "active_manpower",
+      "name": "活动人力数",
+      "definition": "当月有出单活动的代理人数量",
+      "unit": "人",
+      "data_source": "人力系统.agent_activity",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "active_manpower_rate": {
+      "id": "active_manpower_rate",
+      "name": "活动人力达成率",
+      "definition": "活动人力 / 活动人力目标 × 100%",
+      "unit": "%",
+      "data_source": "计算指标",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "active_manpower_yoy": {
+      "id": "active_manpower_yoy",
+      "name": "活动人力同比增长率",
+      "definition": "(当月活动人力 - 去年同月活动人力) / 去年同月活动人力 × 100%",
+      "unit": "%",
+      "data_source": "计算指标",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "sunshine_manpower": {
+      "id": "sunshine_manpower",
+      "name": "阳光人力数",
+      "definition": "达到阳光标准的活动人力数量",
+      "unit": "人",
+      "data_source": "人力系统.sunshine_agent",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "sunshine_manpower_rate": {
+      "id": "sunshine_manpower_rate",
+      "name": "阳光人力达成率",
+      "definition": "阳光人力 / 阳光人力目标 × 100%",
+      "unit": "%",
+      "data_source": "计算指标",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "sunshine_manpower_yoy": {
+      "id": "sunshine_manpower_yoy",
+      "name": "阳光人力同比增长率",
+      "definition": "(当月阳光人力 - 去年同月阳光人力) / 去年同月阳光人力 × 100%",
+      "unit": "%",
+      "data_source": "计算指标",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "sunshine_ratio": {
+      "id": "sunshine_ratio",
+      "name": "阳光占比活动率",
+      "definition": "阳光人力 / 活动人力 × 100%",
+      "unit": "%",
+      "data_source": "计算指标",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "supervisor_total": {
+      "id": "supervisor_total",
+      "name": "在职主管数",
+      "definition": "当前在职的主管总人数",
+      "unit": "人",
+      "data_source": "人力系统.supervisor_list",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "supervisor_active_rate": {
+      "id": "supervisor_active_rate",
+      "name": "主管活动率",
+      "definition": "活动主管 / 在职主管 × 100%",
+      "unit": "%",
+      "data_source": "计算指标",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "supervisor_active_rate_yoy": {
+      "id": "supervisor_active_rate_yoy",
+      "name": "主管活动率同比变化",
+      "definition": "当月主管活动率 - 去年同月主管活动率",
+      "unit": "pp",
+      "data_source": "计算指标",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "supervisor_double_star_rate": {
+      "id": "supervisor_double_star_rate",
+      "name": "主管双星达成率",
+      "definition": "达成双星标准的主管 / 在职主管 × 100%",
+      "unit": "%",
+      "data_source": "计算指标",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "supervisor_double_star_yoy": {
+      "id": "supervisor_double_star_yoy",
+      "name": "主管双星率同比变化",
+      "definition": "当月双星率 - 去年同月双星率",
+      "unit": "pp",
+      "data_source": "计算指标",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "standard_group_count": {
+      "id": "standard_group_count",
+      "name": "标准组达成人数",
+      "definition": "达成标准组条件的主管人数",
+      "unit": "人",
+      "data_source": "人力系统.standard_group",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "standard_group_ratio": {
+      "id": "standard_group_ratio",
+      "name": "标准组占比",
+      "definition": "标准组达成人数 / 在职主管 × 100%",
+      "unit": "%",
+      "data_source": "计算指标",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "standard_group_yoy": {
+      "id": "standard_group_yoy",
+      "name": "标准组同比增长率",
+      "definition": "(当月标准组达成 - 去年同月标准组达成) / 去年同月标准组达成 × 100%",
+      "unit": "%",
+      "data_source": "计算指标",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "training_sent": {
+      "id": "training_sent",
+      "name": "送训人数",
+      "definition": "当月送入培训的新增人数",
+      "unit": "人",
+      "data_source": "培训系统.training_enrollment",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "new_recruit": {
+      "id": "new_recruit",
+      "name": "新增人数",
+      "definition": "当月新上岗代理人数量",
+      "unit": "人",
+      "data_source": "人力系统.new_agent_onboard",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "new_recruit_rate": {
+      "id": "new_recruit_rate",
+      "name": "新增达成率",
+      "definition": "新增人数 / 新增目标 × 100%",
+      "unit": "%",
+      "data_source": "计算指标",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "new_recruit_yoy": {
+      "id": "new_recruit_yoy",
+      "name": "新增同比增长率",
+      "definition": "(当月新增 - 去年同月新增) / 去年同月新增 × 100%",
+      "unit": "%",
+      "data_source": "计算指标",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "first_sunshine": {
+      "id": "first_sunshine",
+      "name": "首阳人数",
+      "definition": "新人中首次达到阳光标准的人数",
+      "unit": "人",
+      "data_source": "人力系统.first_sunshine",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "first_sunshine_rate": {
+      "id": "first_sunshine_rate",
+      "name": "首阳率",
+      "definition": "首阳人数 / 新增人数 × 100%",
+      "unit": "%",
+      "data_source": "计算指标",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "college_plus_ratio": {
+      "id": "college_plus_ratio",
+      "name": "大专及以上占比",
+      "definition": "新增人员中大专及以上学历占比",
+      "unit": "%",
+      "data_source": "人力系统.new_agent_education",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "bachelor_plus_ratio": {
+      "id": "bachelor_plus_ratio",
+      "name": "本科及以上占比",
+      "definition": "新增人员中本科及以上学历占比",
+      "unit": "%",
+      "data_source": "人力系统.new_agent_education",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "bachelor_target_gap": {
+      "id": "bachelor_target_gap",
+      "name": "本科占比目标差额",
+      "definition": "实际本科占比 - 本科占比目标",
+      "unit": "pp",
+      "data_source": "计算指标",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "tongyin_monthly_training": {
+      "id": "tongyin_monthly_training",
+      "name": "同引月送训人数",
+      "definition": "当月同业引进送训人数",
+      "unit": "人",
+      "data_source": "培训系统.tongyin_training",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "tongyin_training_yoy": {
+      "id": "tongyin_training_yoy",
+      "name": "同引送训同比增长率",
+      "definition": "(当月同引送训 - 去年同月同引送训) / 去年同月同引送训 × 100%",
+      "unit": "%",
+      "data_source": "计算指标",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "tongyin_quarter_onboard": {
+      "id": "tongyin_quarter_onboard",
+      "name": "同引季度上岗人数",
+      "definition": "当季度同引实际上岗人数",
+      "unit": "人",
+      "data_source": "人力系统.tongyin_onboard",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "tongyin_quarter_rate": {
+      "id": "tongyin_quarter_rate",
+      "name": "同引季度达成率",
+      "definition": "同引季度上岗 / 同引季度目标 × 100%",
+      "unit": "%",
+      "data_source": "计算指标",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "tongyin_onboard_yoy": {
+      "id": "tongyin_onboard_yoy",
+      "name": "同引上岗同比增长率",
+      "definition": "(当季同引上岗 - 去年同季同引上岗) / 去年同季同引上岗 × 100%",
+      "unit": "%",
+      "data_source": "计算指标",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "tongyin_college_ratio": {
+      "id": "tongyin_college_ratio",
+      "name": "同引大专及以上占比",
+      "definition": "同引人员中大专及以上学历占比",
+      "unit": "%",
+      "data_source": "人力系统.tongyin_education",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    },
+    "tongyin_bachelor_ratio": {
+      "id": "tongyin_bachelor_ratio",
+      "name": "同引本科及以上占比",
+      "definition": "同引人员中本科及以上学历占比",
+      "unit": "%",
+      "data_source": "人力系统.tongyin_education",
+      "refresh_frequency": "T+1",
+      "category": "人力"
+    }
+  }
+}

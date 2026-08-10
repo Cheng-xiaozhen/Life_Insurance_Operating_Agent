@@ -1,0 +1,387 @@
+{
+  "contracts": [
+    {
+      "id": "monthly-performance.standard-premium",
+      "version": "1.0.0",
+      "binding_id": "standard_premium",
+      "description": "查询机构及全系统月度标保和年度标保进度。",
+      "parameters": {
+        "data_month_name": {
+          "type": "string",
+          "required": true,
+          "description": "CSV动态月份列名称，例如5月。"
+        }
+      },
+      "output_schema": "canonical.monthly-performance.standard-premium.v1",
+      "grain": "organization",
+      "handler": "csv",
+      "handler_ref": "template_analysis_agent.query.CsvDataAdapter",
+      "profile_id": "standard-premium",
+      "source": {
+        "kind": "local_binding",
+        "owner": "monthly-performance-analysis",
+        "contains_sensitive_data": false
+      },
+      "permissions": {
+        "classification": "internal",
+        "required_scopes": [
+          "monthly-performance:read"
+        ]
+      },
+      "required": true,
+      "timeout_ms": 30000
+    },
+    {
+      "id": "monthly-performance.value",
+      "version": "1.0.0",
+      "binding_id": "value",
+      "description": "查询机构及全系统月度价值和年度价值进度。",
+      "parameters": {
+        "data_month_name": {
+          "type": "string",
+          "required": true,
+          "description": "CSV动态月份列名称，例如5月。"
+        }
+      },
+      "output_schema": "canonical.monthly-performance.value.v1",
+      "grain": "organization",
+      "handler": "csv",
+      "handler_ref": "template_analysis_agent.query.CsvDataAdapter",
+      "profile_id": "value",
+      "source": {
+        "kind": "local_binding",
+        "owner": "monthly-performance-analysis",
+        "contains_sensitive_data": false
+      },
+      "permissions": {
+        "classification": "internal",
+        "required_scopes": [
+          "monthly-performance:read"
+        ]
+      },
+      "required": true,
+      "timeout_ms": 30000
+    },
+    {
+      "id": "monthly-performance.active-manpower",
+      "version": "1.0.0",
+      "binding_id": "active_manpower",
+      "description": "查询机构及全系统活动人力指标。",
+      "parameters": {},
+      "output_schema": "canonical.monthly-performance.active-manpower.v1",
+      "grain": "organization",
+      "handler": "csv",
+      "handler_ref": "template_analysis_agent.query.CsvDataAdapter",
+      "profile_id": "active-manpower",
+      "source": {
+        "kind": "local_binding",
+        "owner": "monthly-performance-analysis",
+        "contains_sensitive_data": false
+      },
+      "permissions": {
+        "classification": "internal",
+        "required_scopes": [
+          "monthly-performance:read"
+        ]
+      },
+      "required": true,
+      "timeout_ms": 30000
+    },
+    {
+      "id": "monthly-performance.sunshine-manpower",
+      "version": "1.0.0",
+      "binding_id": "sunshine_manpower",
+      "description": "查询机构及全系统阳光人力与活动占比。",
+      "parameters": {},
+      "output_schema": "canonical.monthly-performance.sunshine-manpower.v1",
+      "grain": "organization",
+      "handler": "csv",
+      "handler_ref": "template_analysis_agent.query.CsvDataAdapter",
+      "profile_id": "sunshine-manpower",
+      "source": {
+        "kind": "local_binding",
+        "owner": "monthly-performance-analysis",
+        "contains_sensitive_data": false
+      },
+      "permissions": {
+        "classification": "internal",
+        "required_scopes": [
+          "monthly-performance:read"
+        ]
+      },
+      "required": true,
+      "timeout_ms": 30000
+    },
+    {
+      "id": "monthly-performance.supervisor-activity",
+      "version": "1.0.0",
+      "binding_id": "supervisor_activity",
+      "description": "查询机构及全系统主管活动人数和活动率。",
+      "parameters": {},
+      "output_schema": "canonical.monthly-performance.supervisor-activity.v1",
+      "grain": "organization",
+      "handler": "csv",
+      "handler_ref": "template_analysis_agent.query.CsvDataAdapter",
+      "profile_id": "supervisor-activity",
+      "source": {
+        "kind": "local_binding",
+        "owner": "monthly-performance-analysis",
+        "contains_sensitive_data": false
+      },
+      "permissions": {
+        "classification": "internal",
+        "required_scopes": [
+          "monthly-performance:read"
+        ]
+      },
+      "required": true,
+      "timeout_ms": 30000
+    },
+    {
+      "id": "monthly-performance.supervisor-double-star",
+      "version": "1.0.0",
+      "binding_id": "supervisor_double_star",
+      "description": "查询机构及全系统主管双星人数和双星率。",
+      "parameters": {},
+      "output_schema": "canonical.monthly-performance.supervisor-double-star.v1",
+      "grain": "organization",
+      "handler": "csv",
+      "handler_ref": "template_analysis_agent.query.CsvDataAdapter",
+      "profile_id": "supervisor-double-star",
+      "source": {
+        "kind": "local_binding",
+        "owner": "monthly-performance-analysis",
+        "contains_sensitive_data": false
+      },
+      "permissions": {
+        "classification": "internal",
+        "required_scopes": [
+          "monthly-performance:read"
+        ]
+      },
+      "required": true,
+      "timeout_ms": 30000
+    },
+    {
+      "id": "monthly-performance.standard-team",
+      "version": "1.0.0",
+      "binding_id": "standard_team",
+      "description": "查询机构及全系统标准组数量、同比和占比。",
+      "parameters": {},
+      "output_schema": "canonical.monthly-performance.standard-team.v1",
+      "grain": "organization",
+      "handler": "csv",
+      "handler_ref": "template_analysis_agent.query.CsvDataAdapter",
+      "profile_id": "standard-team",
+      "source": {
+        "kind": "local_binding",
+        "owner": "monthly-performance-analysis",
+        "contains_sensitive_data": false
+      },
+      "permissions": {
+        "classification": "internal",
+        "required_scopes": [
+          "monthly-performance:read"
+        ]
+      },
+      "required": true,
+      "timeout_ms": 30000
+    },
+    {
+      "id": "monthly-performance.recruitment",
+      "version": "1.0.0",
+      "binding_id": "recruitment",
+      "description": "查询机构及全系统新增、首阳和学历结构指标。",
+      "parameters": {},
+      "output_schema": "canonical.monthly-performance.recruitment.v1",
+      "grain": "organization",
+      "handler": "csv",
+      "handler_ref": "template_analysis_agent.query.CsvDataAdapter",
+      "profile_id": "recruitment",
+      "source": {
+        "kind": "local_binding",
+        "owner": "monthly-performance-analysis",
+        "contains_sensitive_data": false
+      },
+      "permissions": {
+        "classification": "internal",
+        "required_scopes": [
+          "monthly-performance:read"
+        ]
+      },
+      "required": true,
+      "timeout_ms": 30000
+    },
+    {
+      "id": "monthly-performance.co-recruitment",
+      "version": "1.0.0",
+      "binding_id": "co_recruitment",
+      "description": "查询月度送训、季度同引及学历结构指标。",
+      "parameters": {
+        "data_month_name": {
+          "type": "string",
+          "required": true,
+          "description": "CSV动态月份列名称，例如5月。"
+        },
+        "quarter_name": {
+          "type": "string",
+          "required": true,
+          "description": "CSV动态季度列名称，例如二季度。"
+        }
+      },
+      "output_schema": "canonical.monthly-performance.co-recruitment.v1",
+      "grain": "organization",
+      "handler": "csv",
+      "handler_ref": "template_analysis_agent.query.CsvDataAdapter",
+      "profile_id": "co-recruitment",
+      "source": {
+        "kind": "local_binding",
+        "owner": "monthly-performance-analysis",
+        "contains_sensitive_data": false
+      },
+      "permissions": {
+        "classification": "internal",
+        "required_scopes": [
+          "monthly-performance:read"
+        ]
+      },
+      "required": true,
+      "timeout_ms": 30000
+    }
+  ],
+  "calls": [
+    {
+      "query_id": "monthly-performance.standard-premium",
+      "query_version": "1.0.0",
+      "binding_id": "standard_premium",
+      "adapter": "csv",
+      "profile_id": "standard-premium",
+      "parameters": {
+        "data_month_name": "5月"
+      },
+      "source": "docs\\标保.csv",
+      "source_hash": "c814de8d519c38e87e38ae350518a9f6b504f9819aaae925d8e8bd8198a3763c",
+      "cache_hit": false,
+      "status": "success",
+      "duration_ms": 6.6494000000147935,
+      "error": null
+    },
+    {
+      "query_id": "monthly-performance.value",
+      "query_version": "1.0.0",
+      "binding_id": "value",
+      "adapter": "csv",
+      "profile_id": "value",
+      "parameters": {
+        "data_month_name": "5月"
+      },
+      "source": "docs\\价值.csv",
+      "source_hash": "5a206d7c9899e46303f0def0109b0985d68c010abe5303458a57715d58264a4f",
+      "cache_hit": false,
+      "status": "success",
+      "duration_ms": 3.297000000202388,
+      "error": null
+    },
+    {
+      "query_id": "monthly-performance.active-manpower",
+      "query_version": "1.0.0",
+      "binding_id": "active_manpower",
+      "adapter": "csv",
+      "profile_id": "active-manpower",
+      "parameters": {},
+      "source": "docs\\活动人力.csv",
+      "source_hash": "0e488a5f4cfc880624e8b042dfed90fcd8ba6e3526326c7199e48cf9f83af569",
+      "cache_hit": false,
+      "status": "success",
+      "duration_ms": 3.4235000000535365,
+      "error": null
+    },
+    {
+      "query_id": "monthly-performance.sunshine-manpower",
+      "query_version": "1.0.0",
+      "binding_id": "sunshine_manpower",
+      "adapter": "csv",
+      "profile_id": "sunshine-manpower",
+      "parameters": {},
+      "source": "docs\\阳光人力.csv",
+      "source_hash": "3abd481fc311bd1125d7248c9ef007114e17d6ef36aba7f6d8f31767cabe2a63",
+      "cache_hit": false,
+      "status": "success",
+      "duration_ms": 2.6026999998975953,
+      "error": null
+    },
+    {
+      "query_id": "monthly-performance.supervisor-activity",
+      "query_version": "1.0.0",
+      "binding_id": "supervisor_activity",
+      "adapter": "csv",
+      "profile_id": "supervisor-activity",
+      "parameters": {},
+      "source": "docs\\主管活动.csv",
+      "source_hash": "a32723f95d865a9de24db910a83552992ccee23dabb54fb21652c5ff2c668fa4",
+      "cache_hit": false,
+      "status": "success",
+      "duration_ms": 2.7726000000711792,
+      "error": null
+    },
+    {
+      "query_id": "monthly-performance.supervisor-double-star",
+      "query_version": "1.0.0",
+      "binding_id": "supervisor_double_star",
+      "adapter": "csv",
+      "profile_id": "supervisor-double-star",
+      "parameters": {},
+      "source": "docs\\主管双星.csv",
+      "source_hash": "02a65d75fad577860e319a3c500cceb27c67d5617620c7fd6c4b0bee4c21eedd",
+      "cache_hit": false,
+      "status": "success",
+      "duration_ms": 2.4948000000222237,
+      "error": null
+    },
+    {
+      "query_id": "monthly-performance.standard-team",
+      "query_version": "1.0.0",
+      "binding_id": "standard_team",
+      "adapter": "csv",
+      "profile_id": "standard-team",
+      "parameters": {},
+      "source": "docs\\标准组.csv",
+      "source_hash": "17e9a07b1d0543f363352860a8ab600f3f275b7515cd524e308c0f4ef7158490",
+      "cache_hit": false,
+      "status": "success",
+      "duration_ms": 2.4670000000242,
+      "error": null
+    },
+    {
+      "query_id": "monthly-performance.recruitment",
+      "query_version": "1.0.0",
+      "binding_id": "recruitment",
+      "adapter": "csv",
+      "profile_id": "recruitment",
+      "parameters": {},
+      "source": "docs\\新增.csv",
+      "source_hash": "b670e1cbf011a610d29a8642105958f16430628236f6b8324f0b6435437b59ae",
+      "cache_hit": false,
+      "status": "success",
+      "duration_ms": 3.2868999999209336,
+      "error": null
+    },
+    {
+      "query_id": "monthly-performance.co-recruitment",
+      "query_version": "1.0.0",
+      "binding_id": "co_recruitment",
+      "adapter": "csv",
+      "profile_id": "co-recruitment",
+      "parameters": {
+        "data_month_name": "5月",
+        "quarter_name": "二季度"
+      },
+      "source": "docs\\同引.csv",
+      "source_hash": "5d103138600e7484c422a6eb0629c0aadd0768318dddf3fdc896d4e8b94d3a45",
+      "cache_hit": false,
+      "status": "success",
+      "duration_ms": 2.579100000048129,
+      "error": null
+    }
+  ]
+}

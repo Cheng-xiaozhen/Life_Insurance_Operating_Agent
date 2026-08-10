@@ -1,0 +1,111 @@
+id: standard-premium
+version: 4.0.0
+title: 标保达成分析
+description: 汇总月度标保与年度进度，输出排名和互斥阈值分层。
+keywords: [标保达成, 标保, 标准保费, 标保排名, 全年进度]
+
+parameters:
+  monthly_target:
+    type: number
+    default: 100
+    description: 月度标保目标达成阈值。
+  monthly_high:
+    type: number
+    default: 70
+    description: 月度标保较高阈值。
+  monthly_low:
+    type: number
+    default: 50
+    description: 月度标保偏低阈值。
+  monthly_severe_low:
+    type: number
+    default: 5
+    description: 月度标保严重偏低阈值。
+  yearly_very_high:
+    type: number
+    default: 80
+    description: 年度进度突出阈值。
+  yearly_high:
+    type: number
+    default: 60
+    description: 年度进度较高阈值。
+  yearly_low:
+    type: number
+    default: 45
+    description: 年度进度偏低阈值。
+
+metrics:
+  month_amount: {label: 月度标保达成, formatter: wan}
+  month_rate: {label: 月度标保达成率, formatter: pct}
+  month_yoy: {label: 月度标保同比, formatter: pct}
+  year_amount: {label: 全年标保达成, formatter: wan}
+  year_progress: {label: 全年标保进度, formatter: pct}
+  year_yoy: {label: 全年标保同比, formatter: pct}
+
+steps:
+  - id: summary
+    title: 全系统概况
+    op: summarize
+    metrics: [month_amount, month_rate, month_yoy, year_amount, year_progress, year_yoy]
+
+  - id: top5
+    title: 月度标保达成率 Top 5
+    op: rank
+    metric: month_rate
+    order: desc
+    limit: 5
+
+  - id: monthly_bands
+    title: 月度达成分层
+    op: classify
+    exclusive: true
+    order: metric_desc
+    bands:
+      - id: target
+        label: 目标达成机构
+        metric: month_rate
+        operator: gte
+        threshold_param: monthly_target
+      - id: high
+        label: 较高机构
+        conditions:
+          match: all
+          rules:
+            - {metric: month_rate, operator: gte, threshold_param: monthly_high}
+            - {metric: month_rate, operator: lt, threshold_param: monthly_target}
+      - id: severe_low
+        label: 严重偏低机构
+        metric: month_rate
+        operator: lt
+        threshold_param: monthly_severe_low
+      - id: low
+        label: 偏低机构
+        conditions:
+          match: all
+          rules:
+            - {metric: month_rate, operator: gte, threshold_param: monthly_severe_low}
+            - {metric: month_rate, operator: lt, threshold_param: monthly_low}
+
+  - id: yearly_bands
+    title: 年度进度分层
+    op: classify
+    exclusive: true
+    order: metric_desc
+    bands:
+      - id: very_high
+        label: 年度进度突出机构
+        metric: year_progress
+        operator: gte
+        threshold_param: yearly_very_high
+      - id: high
+        label: 年度进度较高机构
+        conditions:
+          match: all
+          rules:
+            - {metric: year_progress, operator: gte, threshold_param: yearly_high}
+            - {metric: year_progress, operator: lt, threshold_param: yearly_very_high}
+      - id: low
+        label: 年度进度偏低机构
+        metric: year_progress
+        operator: lt
+        threshold_param: yearly_low

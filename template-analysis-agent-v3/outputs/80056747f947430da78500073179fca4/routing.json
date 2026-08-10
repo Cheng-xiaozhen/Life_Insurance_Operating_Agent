@@ -1,0 +1,24 @@
+{
+  "template_id": null,
+  "report_id": "monthly-performance",
+  "scene_ids": [
+    "standard-premium",
+    "value",
+    "active-manpower",
+    "sunshine-manpower",
+    "supervisor-activity",
+    "supervisor-double-star",
+    "standard-team",
+    "recruitment",
+    "co-recruitment"
+  ],
+  "parameters": {
+    "report_month_name": "五月",
+    "data_month_name": "5月",
+    "quarter_name": "二季度",
+    "cutoff_date": "5月31日"
+  },
+  "confidence": 1.0,
+  "missing_parameters": [],
+  "clarification": null
+}

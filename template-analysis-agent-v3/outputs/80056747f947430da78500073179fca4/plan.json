@@ -1,0 +1,676 @@
+{
+  "report_id": "monthly-performance",
+  "report_version": "3.0.0",
+  "title": "五月业绩分析报告",
+  "parameters": {
+    "report_month_name": "五月",
+    "data_month_name": "5月",
+    "quarter_name": "二季度",
+    "cutoff_date": "5月31日"
+  },
+  "scenes": [
+    {
+      "scene_id": "standard-premium",
+      "version": "3.0.0",
+      "title": "标保",
+      "required": true,
+      "query_ref": "monthly-performance.standard-premium",
+      "parameters": {
+        "data_month_name": "5月",
+        "cutoff_date": "5月31日",
+        "monthly_high_threshold": 70,
+        "monthly_target_threshold": 100,
+        "monthly_low_threshold": 50,
+        "monthly_very_low_threshold": 5,
+        "yearly_high_threshold": 60,
+        "yearly_very_high_threshold": 80,
+        "yearly_low_threshold": 45
+      },
+      "steps": [
+        {
+          "id": "overall_summary",
+          "type": "summarize",
+          "metrics": [
+            "month_amount",
+            "month_rate",
+            "month_yoy",
+            "year_amount",
+            "year_progress",
+            "year_yoy"
+          ]
+        },
+        {
+          "id": "monthly_rate_classification",
+          "type": "classify",
+          "metric": "month_rate",
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "high",
+              "operator": "gt",
+              "threshold_param": "monthly_high_threshold"
+            },
+            {
+              "id": "target_met",
+              "operator": "gte",
+              "threshold_param": "monthly_target_threshold"
+            },
+            {
+              "id": "low",
+              "operator": "lt",
+              "threshold_param": "monthly_low_threshold"
+            },
+            {
+              "id": "very_low",
+              "operator": "lt",
+              "threshold_param": "monthly_very_low_threshold"
+            }
+          ]
+        },
+        {
+          "id": "yearly_progress_classification",
+          "type": "classify",
+          "metric": "year_progress",
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "high",
+              "operator": "gt",
+              "threshold_param": "yearly_high_threshold"
+            },
+            {
+              "id": "very_high",
+              "operator": "gt",
+              "threshold_param": "yearly_very_high_threshold"
+            },
+            {
+              "id": "low",
+              "operator": "lt",
+              "threshold_param": "yearly_low_threshold"
+            }
+          ]
+        }
+      ],
+      "signals": {
+        "target_met": {
+          "from": {
+            "step": "monthly_rate_classification",
+            "band": "target_met"
+          }
+        },
+        "severe_low": {
+          "from": {
+            "step": "monthly_rate_classification",
+            "band": "very_low"
+          }
+        }
+      },
+      "expression": {
+        "style_profile": "monthly-operation-report",
+        "example_tags": [
+          "summary",
+          "threshold-classification"
+        ]
+      }
+    },
+    {
+      "scene_id": "value",
+      "version": "3.0.0",
+      "title": "价值",
+      "required": true,
+      "query_ref": "monthly-performance.value",
+      "parameters": {
+        "data_month_name": "5月",
+        "cutoff_date": "5月31日",
+        "value_high_threshold": 85,
+        "value_low_threshold": 55
+      },
+      "steps": [
+        {
+          "id": "overall_summary",
+          "type": "summarize",
+          "metrics": [
+            "month_amount",
+            "month_rate",
+            "month_yoy",
+            "year_progress",
+            "year_yoy"
+          ]
+        },
+        {
+          "id": "month_rate_classification",
+          "type": "classify",
+          "metric": "month_rate",
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "high",
+              "operator": "gt",
+              "threshold_param": "value_high_threshold"
+            },
+            {
+              "id": "low",
+              "operator": "lt",
+              "threshold_param": "value_low_threshold"
+            }
+          ]
+        }
+      ],
+      "signals": {},
+      "expression": {
+        "style_profile": "monthly-operation-report",
+        "example_tags": [
+          "summary",
+          "threshold-classification"
+        ]
+      }
+    },
+    {
+      "scene_id": "active-manpower",
+      "version": "3.0.0",
+      "title": "活动人力",
+      "required": true,
+      "query_ref": "monthly-performance.active-manpower",
+      "parameters": {
+        "data_month_name": "5月",
+        "cutoff_date": "5月31日",
+        "activity_high_threshold": 90,
+        "activity_target_threshold": 100,
+        "activity_low_threshold": 60
+      },
+      "steps": [
+        {
+          "id": "overall_summary",
+          "type": "summarize",
+          "metrics": [
+            "activity_count",
+            "activity_rate",
+            "activity_yoy"
+          ]
+        },
+        {
+          "id": "activity_rate_classification",
+          "type": "classify",
+          "metric": "activity_rate",
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "high",
+              "operator": "gt",
+              "threshold_param": "activity_high_threshold"
+            },
+            {
+              "id": "target_met",
+              "operator": "gte",
+              "threshold_param": "activity_target_threshold"
+            },
+            {
+              "id": "low",
+              "operator": "lt",
+              "threshold_param": "activity_low_threshold"
+            }
+          ]
+        }
+      ],
+      "signals": {
+        "target_met": {
+          "from": {
+            "step": "activity_rate_classification",
+            "band": "target_met"
+          }
+        }
+      },
+      "expression": {
+        "style_profile": "monthly-operation-report",
+        "example_tags": [
+          "summary",
+          "threshold-classification"
+        ]
+      }
+    },
+    {
+      "scene_id": "sunshine-manpower",
+      "version": "3.0.0",
+      "title": "阳光人力",
+      "required": true,
+      "query_ref": "monthly-performance.sunshine-manpower",
+      "parameters": {
+        "data_month_name": "5月",
+        "cutoff_date": "5月31日",
+        "sunshine_high_threshold": 90,
+        "sunshine_low_threshold": 70
+      },
+      "steps": [
+        {
+          "id": "overall_summary",
+          "type": "summarize",
+          "metrics": [
+            "sunshine_count",
+            "sunshine_rate",
+            "sunshine_yoy",
+            "sunshine_share"
+          ]
+        },
+        {
+          "id": "sunshine_rate_classification",
+          "type": "classify",
+          "metric": "sunshine_rate",
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "high",
+              "operator": "gte",
+              "threshold_param": "sunshine_high_threshold"
+            },
+            {
+              "id": "low",
+              "operator": "lt",
+              "threshold_param": "sunshine_low_threshold"
+            }
+          ]
+        }
+      ],
+      "signals": {},
+      "expression": {
+        "style_profile": "monthly-operation-report",
+        "example_tags": [
+          "summary",
+          "threshold-classification"
+        ]
+      }
+    },
+    {
+      "scene_id": "supervisor-activity",
+      "version": "3.0.0",
+      "title": "主管活动",
+      "required": true,
+      "query_ref": "monthly-performance.supervisor-activity",
+      "parameters": {
+        "cutoff_date": "5月31日",
+        "supervisor_activity_high_threshold": 80,
+        "supervisor_activity_low_threshold": 60
+      },
+      "steps": [
+        {
+          "id": "overall_summary",
+          "type": "summarize",
+          "metrics": [
+            "in_service",
+            "active_count",
+            "activity_rate",
+            "activity_yoy"
+          ]
+        },
+        {
+          "id": "activity_rate_classification",
+          "type": "classify",
+          "metric": "activity_rate",
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "high",
+              "operator": "gt",
+              "threshold_param": "supervisor_activity_high_threshold"
+            },
+            {
+              "id": "low",
+              "operator": "lt",
+              "threshold_param": "supervisor_activity_low_threshold"
+            }
+          ]
+        }
+      ],
+      "signals": {},
+      "expression": {
+        "style_profile": "monthly-operation-report",
+        "example_tags": [
+          "summary",
+          "threshold-classification"
+        ]
+      }
+    },
+    {
+      "scene_id": "supervisor-double-star",
+      "version": "3.0.0",
+      "title": "主管双星",
+      "required": true,
+      "query_ref": "monthly-performance.supervisor-double-star",
+      "parameters": {
+        "cutoff_date": "5月31日",
+        "double_star_high_threshold": 50,
+        "double_star_high_effective_threshold": 55,
+        "double_star_low_threshold": 25
+      },
+      "steps": [
+        {
+          "id": "overall_summary",
+          "type": "summarize",
+          "metrics": [
+            "double_star_count",
+            "double_star_rate",
+            "double_star_yoy"
+          ]
+        },
+        {
+          "id": "double_star_rate_classification",
+          "type": "classify",
+          "metric": "double_star_rate",
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "high",
+              "operator": "gt",
+              "threshold_param": "double_star_high_effective_threshold",
+              "display_threshold_param": "double_star_high_threshold"
+            },
+            {
+              "id": "low",
+              "operator": "lt",
+              "threshold_param": "double_star_low_threshold"
+            }
+          ]
+        }
+      ],
+      "signals": {},
+      "expression": {
+        "style_profile": "monthly-operation-report",
+        "example_tags": [
+          "summary",
+          "threshold-classification"
+        ]
+      }
+    },
+    {
+      "scene_id": "standard-team",
+      "version": "3.0.0",
+      "title": "标准组",
+      "required": true,
+      "query_ref": "monthly-performance.standard-team",
+      "parameters": {
+        "standard_team_yoy_threshold": -20,
+        "standard_team_share_threshold": 30
+      },
+      "steps": [
+        {
+          "id": "standard_team_classification",
+          "type": "classify",
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "yoy_low",
+              "metric": "standard_yoy",
+              "operator": "lt",
+              "threshold_param": "standard_team_yoy_threshold"
+            },
+            {
+              "id": "share_low",
+              "metric": "standard_share",
+              "operator": "lt",
+              "threshold_param": "standard_team_share_threshold"
+            }
+          ]
+        }
+      ],
+      "signals": {},
+      "expression": {
+        "style_profile": "monthly-operation-report",
+        "example_tags": [
+          "threshold-classification"
+        ]
+      }
+    },
+    {
+      "scene_id": "recruitment",
+      "version": "3.0.0",
+      "title": "新增",
+      "required": true,
+      "query_ref": "monthly-performance.recruitment",
+      "parameters": {
+        "data_month_name": "5月",
+        "cutoff_date": "5月31日",
+        "recruitment_middle_low_threshold": 80,
+        "recruitment_target_threshold": 100,
+        "recruitment_low_threshold": 40,
+        "bachelor_target_threshold": 0,
+        "bachelor_excess_threshold": 10
+      },
+      "steps": [
+        {
+          "id": "overall_summary",
+          "type": "summarize",
+          "metrics": [
+            "training_count",
+            "added_count",
+            "added_rate",
+            "added_yoy",
+            "first_sun_count",
+            "first_sun_rate",
+            "college_share",
+            "college_yoy",
+            "bachelor_share",
+            "bachelor_gap"
+          ]
+        },
+        {
+          "id": "recruitment_rate_classification",
+          "type": "classify",
+          "metric": "added_rate",
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "middle",
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "added_rate",
+                    "operator": "gt",
+                    "threshold_param": "recruitment_middle_low_threshold"
+                  },
+                  {
+                    "metric": "added_rate",
+                    "operator": "lt",
+                    "threshold_param": "recruitment_target_threshold"
+                  }
+                ]
+              },
+              "display_metric": "added_rate",
+              "display_threshold_param": "recruitment_middle_low_threshold"
+            },
+            {
+              "id": "target_met",
+              "operator": "gte",
+              "threshold_param": "recruitment_target_threshold"
+            }
+          ]
+        },
+        {
+          "id": "recruitment_rate_low",
+          "type": "classify",
+          "metric": "added_rate",
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "low",
+              "operator": "lt",
+              "threshold_param": "recruitment_low_threshold"
+            }
+          ]
+        },
+        {
+          "id": "bachelor_classification",
+          "type": "classify",
+          "metric": "bachelor_gap",
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "target_met",
+              "operator": "gte",
+              "threshold_param": "bachelor_target_threshold"
+            },
+            {
+              "id": "excess",
+              "operator": "gt",
+              "threshold_param": "bachelor_excess_threshold"
+            }
+          ]
+        },
+        {
+          "id": "bachelor_target_not_met",
+          "type": "classify",
+          "metric": "bachelor_gap",
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "not_met",
+              "conditions": {
+                "match": "any",
+                "rules": [
+                  {
+                    "metric": "bachelor_gap",
+                    "operator": "lt",
+                    "threshold_param": "bachelor_target_threshold"
+                  },
+                  {
+                    "metric": "bachelor_gap",
+                    "operator": "is_missing"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "signals": {
+        "target_met": {
+          "from": {
+            "step": "recruitment_rate_classification",
+            "band": "target_met"
+          }
+        }
+      },
+      "expression": {
+        "style_profile": "monthly-operation-report",
+        "example_tags": [
+          "summary",
+          "compound-condition",
+          "missing-value"
+        ]
+      }
+    },
+    {
+      "scene_id": "co-recruitment",
+      "version": "3.0.0",
+      "title": "同引",
+      "required": true,
+      "query_ref": "monthly-performance.co-recruitment",
+      "parameters": {
+        "data_month_name": "5月",
+        "quarter_name": "二季度",
+        "cutoff_date": "5月31日",
+        "co_recruitment_target_threshold": 100,
+        "co_recruitment_middle_threshold": 50,
+        "zero_threshold": 0
+      },
+      "steps": [
+        {
+          "id": "overall_summary",
+          "type": "summarize",
+          "metrics": [
+            "month_training_count",
+            "month_training_yoy",
+            "quarter_achieved",
+            "quarter_rate",
+            "quarter_yoy",
+            "quarter_college_share",
+            "quarter_college_yoy",
+            "quarter_bachelor_share",
+            "quarter_bachelor_yoy"
+          ]
+        },
+        {
+          "id": "quarter_rate_classification",
+          "type": "classify",
+          "metric": "quarter_rate",
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "target_met",
+              "operator": "gte",
+              "threshold_param": "co_recruitment_target_threshold"
+            },
+            {
+              "id": "middle",
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "quarter_rate",
+                    "operator": "gte",
+                    "threshold_param": "co_recruitment_middle_threshold"
+                  },
+                  {
+                    "metric": "quarter_rate",
+                    "operator": "lt",
+                    "threshold_param": "co_recruitment_target_threshold"
+                  }
+                ]
+              },
+              "display_metric": "quarter_rate",
+              "display_threshold_param": "co_recruitment_middle_threshold"
+            }
+          ]
+        },
+        {
+          "id": "zero_classification",
+          "type": "classify",
+          "display_order": "source",
+          "bands": [
+            {
+              "id": "both_zero",
+              "conditions": {
+                "match": "all",
+                "rules": [
+                  {
+                    "metric": "month_training_count",
+                    "operator": "eq",
+                    "threshold_param": "zero_threshold"
+                  },
+                  {
+                    "metric": "quarter_achieved",
+                    "operator": "eq",
+                    "threshold_param": "zero_threshold"
+                  }
+                ]
+              },
+              "display_metric": "month_training_count"
+            }
+          ]
+        }
+      ],
+      "signals": {
+        "target_met": {
+          "from": {
+            "step": "quarter_rate_classification",
+            "band": "target_met"
+          }
+        }
+      },
+      "expression": {
+        "style_profile": "monthly-operation-report",
+        "example_tags": [
+          "summary",
+          "compound-condition"
+        ]
+      }
+    }
+  ],
+  "callouts": [
+    {
+      "id": "standard_premium_target_met",
+      "title": "贺报",
+      "scene_id": "standard-premium",
+      "signal": "target_met"
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "state_history": [
+    "ROUTED",
+    "PLAN_COMPILED",
+    "QUERY_EXECUTED",
+    "DATA_NORMALIZED",
+    "FACTS_COMPUTED",
+    "NARRATIVE_GENERATED",
+    "NARRATIVE_VALIDATED",
+    "REPORT_ASSEMBLED",
+    "COMPLETED"
+  ],
+  "scenes": [
+    {
+      "scene_id": "standard-premium",
+      "valid": true,
+      "errors": []
+    },
+    {
+      "scene_id": "value",
+      "valid": true,
+      "errors": []
+    },
+    {
+      "scene_id": "active-manpower",
+      "valid": true,
+      "errors": []
+    },
+    {
+      "scene_id": "sunshine-manpower",
+      "valid": true,
+      "errors": []
+    },
+    {
+      "scene_id": "supervisor-activity",
+      "valid": true,
+      "errors": []
+    },
+    {
+      "scene_id": "supervisor-double-star",
+      "valid": true,
+      "errors": []
+    },
+    {
+      "scene_id": "standard-team",
+      "valid": true,
+      "errors": []
+    },
+    {
+      "scene_id": "recruitment",
+      "valid": true,
+      "errors": []
+    },
+    {
+      "scene_id": "co-recruitment",
+      "valid": true,
+      "errors": []
+    }
+  ]
+}

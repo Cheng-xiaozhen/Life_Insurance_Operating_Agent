@@ -1,0 +1,20 @@
+{
+  "summary": {
+    "month_amount": 12444,
+    "month_rate": 61.8,
+    "month_yoy": -11.6,
+    "year_amount": 100538,
+    "year_progress": 53.8,
+    "year_yoy": 20.6
+  },
+  "rows": [
+    {"organization": "天津", "metrics": {"month_rate": 100.1, "month_yoy": 25.6, "year_progress": 62.1, "year_yoy": 28.3}},
+    {"organization": "新疆", "metrics": {"month_rate": 100.5, "month_yoy": 32.1, "year_progress": 63.2, "year_yoy": 35.6}},
+    {"organization": "河南", "metrics": {"month_rate": 85.2, "month_yoy": 15.3, "year_progress": 58.3, "year_yoy": 22.1}},
+    {"organization": "上海", "metrics": {"month_rate": 42.3, "month_yoy": -25.3, "year_progress": 38.5, "year_yoy": -5.2}},
+    {"organization": "深圳", "metrics": {"month_rate": 4.5, "month_yoy": -85.2, "year_progress": 28.5, "year_yoy": -35.2}},
+    {"organization": "宁波", "metrics": {"month_rate": 78.5, "month_yoy": 12.3, "year_progress": 82.5, "year_yoy": 45.2}},
+    {"organization": "安徽", "metrics": {"month_rate": 45.2, "month_yoy": -18.5, "year_progress": 42.3, "year_yoy": -3.2}},
+    {"organization": "北京", "metrics": {"month_rate": 35.2, "month_yoy": -32.5, "year_progress": 38.2, "year_yoy": -10.5}}
+  ]
+}

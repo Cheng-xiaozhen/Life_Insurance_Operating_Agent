@@ -1,0 +1,453 @@
+{
+  "meta": {
+    "report_month_name": "五月",
+    "data_month_name": "5月",
+    "cutoff_date": "5月31日",
+    "quarter_name": "二季度"
+  },
+  "summary": {
+    "standard_premium": {
+      "month_amount": 12444,
+      "month_rate": 61.8,
+      "month_yoy": -11.6,
+      "year_amount": 100538,
+      "year_progress": 53.8,
+      "year_yoy": 20.6
+    },
+    "value": {
+      "month_amount": 7045,
+      "month_rate": 74.1,
+      "month_yoy": 9.8,
+      "year_progress": 54.2,
+      "year_yoy": 7.2
+    },
+    "active_manpower": {
+      "headcount": 5531,
+      "yoy": -9.4,
+      "rate": 77.9
+    },
+    "sunshine_manpower": {
+      "headcount": 4772,
+      "yoy": -2.1,
+      "rate": 82.2,
+      "share_of_active": 85.2
+    },
+    "supervisor": {
+      "in_service": 3484,
+      "active": 2485,
+      "active_rate": 71.3,
+      "active_rate_yoy": -1.1,
+      "double_star": 1300,
+      "double_star_rate": 37.3,
+      "double_star_rate_yoy": -4.3
+    },
+    "recruitment": {
+      "trained": 1510,
+      "added": 739,
+      "rate": 62.6,
+      "yoy": -7.4,
+      "first_month_sunshine": 425,
+      "first_month_sunshine_rate": 45.6,
+      "college_share": 47.5,
+      "college_share_yoy": 16.3,
+      "bachelor_share": 25.4,
+      "bachelor_gap": 5.4
+    },
+    "co_recruitment": {
+      "month_trained": 111,
+      "month_trained_yoy": -14,
+      "quarter_onboarded": 105,
+      "quarter_rate": 38.2,
+      "quarter_yoy": 47.9,
+      "college_share": 41,
+      "college_share_yoy": 0.1,
+      "bachelor_share": 16.2,
+      "bachelor_share_yoy": 0.7
+    }
+  },
+  "derived": {
+    "standard_premium": {
+      "month_rate_high": {
+        "organizations": [
+          "河南",
+          "天津",
+          "潍坊",
+          "云南",
+          "新疆",
+          "海南",
+          "内蒙古",
+          "宁波",
+          "甘肃"
+        ],
+        "threshold": 70,
+        "selection_mode": "default_threshold"
+      },
+      "month_target_met": {
+        "organizations": [
+          "天津",
+          "新疆"
+        ],
+        "threshold": 100,
+        "selection_mode": "default_threshold"
+      },
+      "month_rate_low": {
+        "organizations": [
+          "上海",
+          "安徽",
+          "山西",
+          "北京",
+          "贵州",
+          "青岛",
+          "宁夏",
+          "深圳"
+        ],
+        "threshold": 50,
+        "selection_mode": "default_threshold"
+      },
+      "month_rate_very_low": {
+        "organizations": [
+          "深圳"
+        ],
+        "threshold": 5,
+        "selection_mode": "default_threshold"
+      },
+      "year_progress_high": {
+        "organizations": [
+          "天津",
+          "潍坊",
+          "云南",
+          "新疆",
+          "宁波",
+          "甘肃",
+          "贵州"
+        ],
+        "threshold": 60,
+        "selection_mode": "default_threshold"
+      },
+      "year_progress_very_high": {
+        "organizations": [
+          "宁波"
+        ],
+        "threshold": 80,
+        "selection_mode": "default_threshold"
+      },
+      "year_progress_low": {
+        "organizations": [
+          "安徽",
+          "北京",
+          "海南",
+          "青岛",
+          "宁夏",
+          "深圳"
+        ],
+        "threshold": 45,
+        "selection_mode": "default_threshold"
+      }
+    },
+    "value": {
+      "month_rate_high": {
+        "organizations": [
+          "河南",
+          "天津",
+          "云南",
+          "吉林",
+          "新疆"
+        ],
+        "threshold": 85,
+        "selection_mode": "default_threshold"
+      },
+      "month_rate_low": {
+        "organizations": [
+          "上海",
+          "山西",
+          "北京",
+          "宁波",
+          "贵州",
+          "青岛",
+          "宁夏",
+          "深圳"
+        ],
+        "threshold": 55,
+        "selection_mode": "default_threshold"
+      }
+    },
+    "active_manpower": {
+      "rate_high": {
+        "organizations": [
+          "重庆",
+          "陕西",
+          "吉林",
+          "潍坊",
+          "宁波",
+          "新疆"
+        ],
+        "threshold": 90,
+        "selection_mode": "default_threshold"
+      },
+      "target_met": {
+        "organizations": [
+          "宁波"
+        ],
+        "threshold": 100,
+        "selection_mode": "default_threshold"
+      },
+      "rate_low": {
+        "organizations": [
+          "上海",
+          "安徽",
+          "北京",
+          "内蒙古",
+          "贵州",
+          "深圳"
+        ],
+        "threshold": 60,
+        "selection_mode": "default_threshold"
+      }
+    },
+    "sunshine_manpower": {
+      "rate_high": {
+        "organizations": [
+          "重庆",
+          "河南",
+          "陕西",
+          "吉林",
+          "潍坊",
+          "湖南",
+          "宁波",
+          "新疆"
+        ],
+        "threshold": 90,
+        "selection_mode": "default_threshold"
+      },
+      "rate_low": {
+        "organizations": [
+          "上海",
+          "黑龙江",
+          "安徽",
+          "北京",
+          "内蒙古",
+          "贵州",
+          "深圳"
+        ],
+        "threshold": 70,
+        "selection_mode": "default_threshold"
+      }
+    },
+    "supervisor": {
+      "active_rate_high": {
+        "organizations": [
+          "重庆",
+          "浙江",
+          "江苏",
+          "潍坊",
+          "深圳"
+        ],
+        "threshold": 80,
+        "selection_mode": "default_threshold"
+      },
+      "active_rate_low": {
+        "organizations": [
+          "广东",
+          "上海",
+          "陕西",
+          "山西",
+          "宁夏",
+          "青岛"
+        ],
+        "threshold": 60,
+        "selection_mode": "default_threshold"
+      },
+      "double_star_rate_high": {
+        "organizations": [
+          "浙江",
+          "江苏",
+          "福建",
+          "潍坊",
+          "吉林",
+          "深圳",
+          "海南"
+        ],
+        "threshold": 50,
+        "selection_mode": "default_threshold"
+      },
+      "double_star_rate_low": {
+        "organizations": [
+          "陕西",
+          "山西",
+          "贵州",
+          "甘肃",
+          "宁夏",
+          "青岛"
+        ],
+        "threshold": 25,
+        "selection_mode": "default_threshold"
+      }
+    },
+    "standard_team": {
+      "yoy_low": {
+        "organizations": [
+          "广东",
+          "上海",
+          "安徽",
+          "黑龙江",
+          "北京",
+          "山西",
+          "深圳",
+          "海南",
+          "内蒙古",
+          "贵州",
+          "宁波"
+        ],
+        "threshold": -20,
+        "selection_mode": "default_threshold",
+        "threshold_abs": 20
+      },
+      "share_low": {
+        "organizations": [
+          "山东",
+          "广东",
+          "上海",
+          "安徽",
+          "黑龙江",
+          "北京",
+          "陕西",
+          "山西",
+          "深圳",
+          "海南",
+          "新疆",
+          "贵州",
+          "甘肃",
+          "宁波",
+          "宁夏",
+          "青岛"
+        ],
+        "threshold": 30,
+        "selection_mode": "default_threshold"
+      }
+    },
+    "recruitment": {
+      "target_met": {
+        "organizations": [
+          "宁波",
+          "深圳"
+        ],
+        "threshold": 100,
+        "selection_mode": "default_threshold"
+      },
+      "rate_middle": {
+        "organizations": [
+          "河北",
+          "河南",
+          "山西",
+          "青岛"
+        ],
+        "lower_threshold": 80,
+        "upper_threshold": 100,
+        "selection_mode": "default_threshold"
+      },
+      "rate_low": {
+        "organizations": [
+          "广东",
+          "吉林",
+          "天津",
+          "黑龙江",
+          "北京",
+          "新疆",
+          "宁夏",
+          "贵州",
+          "海南"
+        ],
+        "threshold": 40,
+        "selection_mode": "default_threshold"
+      },
+      "bachelor_target_met": {
+        "organizations": [
+          "河北",
+          "江苏",
+          "福建",
+          "山东",
+          "湖北",
+          "上海",
+          "四川",
+          "山西",
+          "潍坊",
+          "云南",
+          "湖南",
+          "陕西",
+          "辽宁",
+          "安徽",
+          "吉林",
+          "黑龙江",
+          "北京",
+          "深圳",
+          "甘肃",
+          "内蒙古",
+          "新疆"
+        ],
+        "threshold": 0,
+        "selection_mode": "default_threshold"
+      },
+      "bachelor_gap_high": {
+        "organizations": [
+          "江苏",
+          "福建",
+          "上海",
+          "四川",
+          "陕西",
+          "深圳",
+          "甘肃",
+          "内蒙古"
+        ],
+        "threshold": 10,
+        "selection_mode": "default_threshold"
+      },
+      "bachelor_target_not_met": {
+        "organizations": [
+          "河南",
+          "浙江",
+          "重庆",
+          "广东",
+          "天津",
+          "宁波",
+          "青岛",
+          "宁夏",
+          "贵州",
+          "海南"
+        ],
+        "selection_mode": "complement"
+      }
+    },
+    "co_recruitment": {
+      "target_met": {
+        "organizations": [
+          "河南",
+          "青岛"
+        ],
+        "threshold": 100,
+        "selection_mode": "default_threshold"
+      },
+      "rate_middle": {
+        "organizations": [
+          "江苏",
+          "陕西",
+          "甘肃"
+        ],
+        "lower_threshold": 50,
+        "upper_threshold": 100,
+        "selection_mode": "default_threshold"
+      },
+      "month_trained_zero_and_quarter_onboarded_zero": {
+        "organizations": [
+          "重庆",
+          "福建",
+          "天津",
+          "贵州",
+          "宁波",
+          "海南",
+          "深圳"
+        ],
+        "selection_mode": "compound_condition"
+      }
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "question": "生成五月业绩分析报告",
+  "report_id": "monthly-performance",
+  "scene_ids": [],
+  "parameters": {
+    "report_month_name": "五月",
+    "data_month_name": "5月",
+    "quarter_name": "二季度",
+    "cutoff_date": "5月31日"
+  },
+  "data_bindings": {
+    "standard_premium": {
+      "adapter": "csv",
+      "source": "docs\\标保.csv",
+      "profile_id": null,
+      "records": null
+    },
+    "value": {
+      "adapter": "csv",
+      "source": "docs\\价值.csv",
+      "profile_id": null,
+      "records": null
+    },
+    "active_manpower": {
+      "adapter": "csv",
+      "source": "docs\\活动人力.csv",
+      "profile_id": null,
+      "records": null
+    },
+    "sunshine_manpower": {
+      "adapter": "csv",
+      "source": "docs\\阳光人力.csv",
+      "profile_id": null,
+      "records": null
+    },
+    "supervisor_activity": {
+      "adapter": "csv",
+      "source": "docs\\主管活动.csv",
+      "profile_id": null,
+      "records": null
+    },
+    "supervisor_double_star": {
+      "adapter": "csv",
+      "source": "docs\\主管双星.csv",
+      "profile_id": null,
+      "records": null
+    },
+    "standard_team": {
+      "adapter": "csv",
+      "source": "docs\\标准组.csv",
+      "profile_id": null,
+      "records": null
+    },
+    "recruitment": {
+      "adapter": "csv",
+      "source": "docs\\新增.csv",
+      "profile_id": null,
+      "records": null
+    },
+    "co_recruitment": {
+      "adapter": "csv",
+      "source": "docs\\同引.csv",
+      "profile_id": null,
+      "records": null
+    }
+  },
+  "expression_provider": "deterministic",
+  "output_style": null,
+  "output_dir": "template-analysis-agent-v3\\outputs"
+}

@@ -1,0 +1,167 @@
+{
+  "scenarios": [
+    {
+      "id": "scenario-biaobao-achievement",
+      "name": "标保达成分析",
+      "category": "保费分析",
+      "description": "分析全系统及各机构标保达成情况，包括当月达成、同比趋势、全年进度",
+      "trigger_patterns": [
+        "标保达成", "标保怎么样", "标保情况", "保费达成", "保费目标",
+        "达成率排名", "标保同比", "哪些机构标保"
+      ],
+      "analysis_steps": [
+        { "step": 1, "action": "汇总全系统标保总体数据", "metrics": ["monthly_biaobao_amount", "monthly_biaobao_rate", "monthly_biaobao_yoy", "yearly_biaobao_amount", "yearly_biaobao_progress", "yearly_biaobao_yoy"] },
+        { "step": 2, "action": "按达成率对机构进行排名分组", "metrics": ["monthly_biaobao_rate"], "params": { "group_thresholds": { "excellent": 70, "warning": 50 } } },
+        { "step": 3, "action": "识别达成率优秀的机构（>70%）和预警机构（<50%）", "metrics": ["monthly_biaobao_rate"] },
+        { "step": 4, "action": "对比全年进度，分析年度趋势", "metrics": ["yearly_biaobao_progress", "yearly_biaobao_yoy"] }
+      ],
+      "required_metrics": [
+        "monthly_biaobao_amount", "monthly_biaobao_rate", "monthly_biaobao_yoy",
+        "yearly_biaobao_amount", "yearly_biaobao_progress", "yearly_biaobao_yoy"
+      ],
+      "visual_suggestion": "bar_chart",
+      "applied_patterns": ["pattern-benchmark-ranking", "pattern-yoy-trend", "pattern-progress-tracking"]
+    },
+    {
+      "id": "scenario-value-achievement",
+      "name": "价值达成分析",
+      "category": "保费分析",
+      "description": "分析全系统及各机构价值达成情况，包括当月达成、同比和全年进度",
+      "trigger_patterns": [
+        "价值达成", "价值情况", "价值怎么样", "价值达成率", "价值同比",
+        "新业务价值", "VNB"
+      ],
+      "analysis_steps": [
+        { "step": 1, "action": "汇总全系统价值总体数据", "metrics": ["monthly_value_amount", "monthly_value_rate", "monthly_value_yoy", "yearly_value_progress", "yearly_value_yoy"] },
+        { "step": 2, "action": "按价值达成率对机构排名分组", "metrics": ["monthly_value_rate"], "params": { "group_thresholds": { "excellent": 85, "warning": 55 } } },
+        { "step": 3, "action": "识别优秀机构（>85%）和落后机构（<55%）", "metrics": ["monthly_value_rate"] },
+        { "step": 4, "action": "标保与价值交叉对比，分析业务质量", "metrics": ["monthly_biaobao_rate", "monthly_value_rate"] }
+      ],
+      "required_metrics": [
+        "monthly_value_amount", "monthly_value_rate", "monthly_value_yoy",
+        "yearly_value_progress", "yearly_value_yoy"
+      ],
+      "visual_suggestion": "bar_chart",
+      "applied_patterns": ["pattern-benchmark-ranking", "pattern-yoy-trend", "pattern-cross-evaluation"]
+    },
+    {
+      "id": "scenario-manpower-active",
+      "name": "活动人力与阳光人力分析",
+      "category": "人力分析",
+      "description": "分析全系统及各机构活动人力和阳光人力的达成情况、占比及同比趋势",
+      "trigger_patterns": [
+        "活动人力", "阳光人力", "人力达成", "人力怎么样", "人力情况",
+        "阳光占比", "人力同比", "出勤人力"
+      ],
+      "analysis_steps": [
+        { "step": 1, "action": "汇总全系统活动人力和阳光人力总体数据", "metrics": ["active_manpower", "active_manpower_rate", "active_manpower_yoy", "sunshine_manpower", "sunshine_manpower_rate", "sunshine_manpower_yoy", "sunshine_ratio"] },
+        { "step": 2, "action": "按活动人力达成率分组分析机构表现", "metrics": ["active_manpower_rate"], "params": { "group_thresholds": { "excellent": 90, "warning": 60 } } },
+        { "step": 3, "action": "分析阳光人力占比，评估人力质量", "metrics": ["sunshine_ratio", "sunshine_manpower_rate"] },
+        { "step": 4, "action": "交叉分析：活动人力达成高但阳光占比低的机构", "metrics": ["active_manpower_rate", "sunshine_ratio"] }
+      ],
+      "required_metrics": [
+        "active_manpower", "active_manpower_rate", "active_manpower_yoy",
+        "sunshine_manpower", "sunshine_manpower_rate", "sunshine_manpower_yoy",
+        "sunshine_ratio"
+      ],
+      "visual_suggestion": "scatter_chart",
+      "applied_patterns": ["pattern-benchmark-ranking", "pattern-structure-distribution", "pattern-cross-evaluation"]
+    },
+    {
+      "id": "scenario-supervisor-activity",
+      "name": "主管活动与标准组分析",
+      "category": "人力分析",
+      "description": "分析主管活动率、双星达成率和标准组达成情况",
+      "trigger_patterns": [
+        "主管活动", "主管活动率", "主管双星", "双星达成", "标准组",
+        "主管表现", "团队管理"
+      ],
+      "analysis_steps": [
+        { "step": 1, "action": "汇总主管活动、双星、标准组全系统数据", "metrics": ["supervisor_total", "supervisor_active_rate", "supervisor_active_rate_yoy", "supervisor_double_star_rate", "supervisor_double_star_yoy", "standard_group_count", "standard_group_ratio", "standard_group_yoy"] },
+        { "step": 2, "action": "分析主管活动率机构分组", "metrics": ["supervisor_active_rate"], "params": { "group_thresholds": { "excellent": 80, "warning": 60 } } },
+        { "step": 3, "action": "分析标准组同比变化，识别大幅下降机构", "metrics": ["standard_group_yoy"], "params": { "warning_threshold": -20 } },
+        { "step": 4, "action": "标准组占比 < 30% 的机构清单", "metrics": ["standard_group_ratio"], "params": { "warning_threshold": 30 } }
+      ],
+      "required_metrics": [
+        "supervisor_total", "supervisor_active_rate", "supervisor_active_rate_yoy",
+        "supervisor_double_star_rate", "supervisor_double_star_yoy",
+        "standard_group_count", "standard_group_ratio", "standard_group_yoy"
+      ],
+      "visual_suggestion": "quadrant_chart",
+      "applied_patterns": ["pattern-benchmark-ranking", "pattern-structure-distribution", "pattern-anomaly-detection"]
+    },
+    {
+      "id": "scenario-recruitment",
+      "name": "新增人力分析",
+      "category": "人力分析",
+      "description": "分析新增人力达成情况、首阳率及学历结构",
+      "trigger_patterns": [
+        "新增人力", "增员", "新增达成", "招聘情况", "首阳率", "首阳",
+        "学历结构", "本科占比", "大专占比", "增员质量"
+      ],
+      "analysis_steps": [
+        { "step": 1, "action": "汇总新增、首阳、学历全系统数据", "metrics": ["training_sent", "new_recruit", "new_recruit_rate", "new_recruit_yoy", "first_sunshine", "first_sunshine_rate", "college_plus_ratio", "bachelor_plus_ratio", "bachelor_target_gap"] },
+        { "step": 2, "action": "新增达成率机构排名", "metrics": ["new_recruit_rate"], "params": { "group_thresholds": { "excellent": 80, "warning": 40 } } },
+        { "step": 3, "action": "学历结构分析：本科占比达标与超标机构", "metrics": ["bachelor_plus_ratio", "bachelor_target_gap"] },
+        { "step": 4, "action": "交叉分析：高新增低学历 vs 低新增高学历的机构", "metrics": ["new_recruit_rate", "bachelor_plus_ratio"] }
+      ],
+      "required_metrics": [
+        "training_sent", "new_recruit", "new_recruit_rate", "new_recruit_yoy",
+        "first_sunshine", "first_sunshine_rate",
+        "college_plus_ratio", "bachelor_plus_ratio", "bachelor_target_gap"
+      ],
+      "visual_suggestion": "funnel_chart",
+      "applied_patterns": ["pattern-benchmark-ranking", "pattern-structure-distribution", "pattern-cross-evaluation"]
+    },
+    {
+      "id": "scenario-tongyin",
+      "name": "同引分析",
+      "category": "人力分析",
+      "description": "分析同业引进的送训、上岗达成及学历情况",
+      "trigger_patterns": [
+        "同引", "同业引进", "同引达成", "同引送训", "同引上岗",
+        "同业招聘"
+      ],
+      "analysis_steps": [
+        { "step": 1, "action": "汇总同引送训和上岗全系统数据", "metrics": ["tongyin_monthly_training", "tongyin_training_yoy", "tongyin_quarter_onboard", "tongyin_quarter_rate", "tongyin_onboard_yoy", "tongyin_college_ratio", "tongyin_bachelor_ratio"] },
+        { "step": 2, "action": "同引达成率机构排名", "metrics": ["tongyin_quarter_rate"], "params": { "group_thresholds": { "excellent": 50 } } },
+        { "step": 3, "action": "识别挂零机构（送训和上岗均为0）", "metrics": ["tongyin_monthly_training", "tongyin_quarter_onboard"] },
+        { "step": 4, "action": "同引学历结构对比分析", "metrics": ["tongyin_college_ratio", "tongyin_bachelor_ratio"] }
+      ],
+      "required_metrics": [
+        "tongyin_monthly_training", "tongyin_training_yoy",
+        "tongyin_quarter_onboard", "tongyin_quarter_rate", "tongyin_onboard_yoy",
+        "tongyin_college_ratio", "tongyin_bachelor_ratio"
+      ],
+      "visual_suggestion": "progress_bar",
+      "applied_patterns": ["pattern-benchmark-ranking", "pattern-anomaly-detection", "pattern-structure-distribution"]
+    },
+    {
+      "id": "scenario-comprehensive-evaluation",
+      "name": "综合经营评价（红黄蓝）",
+      "category": "综合评价",
+      "description": "基于标保、价值、活动人力、阳光人力四维度的机构综合评级",
+      "trigger_patterns": [
+        "综合表现", "综合评价", "红黄蓝", "跑赢大盘", "全面评价",
+        "机构排名", "综合排名", "经营评级"
+      ],
+      "analysis_steps": [
+        { "step": 1, "action": "计算各机构在四个维度的达成率", "metrics": ["monthly_biaobao_rate", "monthly_value_rate", "active_manpower_rate", "sunshine_manpower_rate"] },
+        { "step": 2, "action": "逐项与全系统平均水平对比，统计跑赢项数", "metrics": ["monthly_biaobao_rate", "monthly_value_rate", "active_manpower_rate", "sunshine_manpower_rate"] },
+        { "step": 3, "action": "按跑赢项数分类：4项（蓝）、3-2项（黄）、1项（浅红）、0项（深红）", "metrics": [] },
+        { "step": 4, "action": "生成机构评价矩阵和排名", "metrics": [] }
+      ],
+      "required_metrics": [
+        "monthly_biaobao_rate", "monthly_value_rate",
+        "active_manpower_rate", "sunshine_manpower_rate"
+      ],
+      "visual_suggestion": "heatmap",
+      "applied_patterns": ["pattern-cross-evaluation", "pattern-anomaly-detection"]
+    }
+  ],
+  "categories": [
+    { "id": "premium", "name": "保费分析", "scenarios": ["scenario-biaobao-achievement", "scenario-value-achievement"] },
+    { "id": "manpower", "name": "人力分析", "scenarios": ["scenario-manpower-active", "scenario-supervisor-activity", "scenario-recruitment", "scenario-tongyin"] },
+    { "id": "comprehensive", "name": "综合评价", "scenarios": ["scenario-comprehensive-evaluation"] }
+  ]
+}
