@@ -1,0 +1,26 @@
+id: standard-team
+version: 4.1.0
+title: 标准组
+description: 按标准组同比和标准组占比识别偏低机构。
+keywords: [标准组, 标准组同比, 标准组占比]
+parameters:
+  standard_team_yoy_threshold: {default: -20, description: 标准组同比负增阈值。}
+  standard_team_share_threshold: {default: 30, description: 标准组占比低位阈值。}
+metrics:
+  standard_yoy: {label: 标准组同比, formatter: pct, threshold_formatter: abs_pct, semantic: yoy}
+  standard_share: {label: 标准组占比, formatter: pct}
+steps:
+  - id: standard_team_classification
+    title: 标准组偏低机构
+    op: classify
+    order: source
+    bands:
+      - id: yoy_low
+        label: 标准组同比负增机构
+        metric: standard_yoy
+        operator: lt
+        threshold_param: standard_team_yoy_threshold
+        rule_text: "标准组同比负增超过{threshold_display}"
+      - {id: share_low, label: 标准组占比偏低机构, metric: standard_share, operator: lt, threshold_param: standard_team_share_threshold}
+narrative_groups:
+  - {id: classification, title: 标准组偏低机构, fact_ids: [standard_team_classification.yoy_low, standard_team_classification.share_low]}

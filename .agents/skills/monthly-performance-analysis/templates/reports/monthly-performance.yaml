@@ -1,0 +1,19 @@
+report:
+  id: monthly-performance
+  version: 4.0.0
+  title: "{report_month_name}业绩分析报告"
+  scenes:
+    - standard-premium
+    - value
+    - active-manpower
+    - sunshine-manpower
+    - supervisor-activity
+    - supervisor-double-star
+    - standard-team
+    - recruitment
+    - co-recruitment
+  callout:
+    title: 贺报
+    scene_id: standard-premium
+    signal: target_met
+    text: "热烈祝贺 {organizations} 达成{data_month_name}标保目标"

@@ -1,0 +1,25 @@
+id: sunshine-manpower
+version: 4.1.0
+title: 阳光人力
+description: 汇总阳光人力及活动占比，并识别达成率高低机构。
+keywords: [阳光人力, 阳光人力达成率, 阳光占比活动]
+parameters:
+  sunshine_high_threshold: {default: 90, description: 阳光人力高位阈值。}
+  sunshine_low_threshold: {default: 70, description: 阳光人力低位阈值。}
+metrics:
+  sunshine_count: {label: 阳光人力达成, formatter: person}
+  sunshine_rate: {label: 阳光人力达成率, formatter: pct}
+  sunshine_yoy: {label: 阳光人力同比, formatter: pct, semantic: yoy}
+  sunshine_share: {label: 阳光占比活动, formatter: pct}
+steps:
+  - {id: overall_summary, title: 全系统概况, op: summarize, metrics: [sunshine_count, sunshine_rate, sunshine_yoy, sunshine_share]}
+  - id: sunshine_rate_classification
+    title: 阳光人力达成机构
+    op: classify
+    order: source
+    bands:
+      - {id: high, label: 阳光人力达成率较高机构, metric: sunshine_rate, operator: gte, threshold_param: sunshine_high_threshold}
+      - {id: low, label: 阳光人力达成率偏低机构, metric: sunshine_rate, operator: lt, threshold_param: sunshine_low_threshold}
+narrative_groups:
+  - {id: overall, title: 全系统概况, fact_ids: [overall_summary.sunshine_count, overall_summary.sunshine_rate, overall_summary.sunshine_yoy, overall_summary.sunshine_share]}
+  - {id: classification, title: 阳光人力达成机构, fact_ids: [sunshine_rate_classification.high, sunshine_rate_classification.low]}

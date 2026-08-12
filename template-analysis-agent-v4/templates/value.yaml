@@ -1,0 +1,26 @@
+id: value
+version: 4.1.0
+title: 价值
+description: 汇总月度价值和年度价值进度，并识别达成率高低机构。
+keywords: [价值, 价值达成率, 全年价值进度]
+parameters:
+  value_high_threshold: {default: 85, description: 价值达成率高位阈值。}
+  value_low_threshold: {default: 55, description: 价值达成率低位阈值。}
+metrics:
+  month_amount: {label: 月度价值达成, formatter: wan}
+  month_rate: {label: 月度价值达成率, formatter: pct}
+  month_yoy: {label: 月度价值同比, formatter: pct, semantic: yoy}
+  year_progress: {label: 全年价值进度, formatter: pct}
+  year_yoy: {label: 全年价值同比, formatter: pct, semantic: yoy}
+steps:
+  - {id: overall_summary, title: 全系统概况, op: summarize, metrics: [month_amount, month_rate, month_yoy, year_progress, year_yoy]}
+  - id: month_rate_classification
+    title: 价值达成机构
+    op: classify
+    order: source
+    bands:
+      - {id: high, label: 价值达成率较高机构, metric: month_rate, operator: gt, threshold_param: value_high_threshold}
+      - {id: low, label: 价值达成率偏低机构, metric: month_rate, operator: lt, threshold_param: value_low_threshold}
+narrative_groups:
+  - {id: overall, title: 全系统概况, fact_ids: [overall_summary.month_amount, overall_summary.month_rate, overall_summary.month_yoy, overall_summary.year_progress, overall_summary.year_yoy]}
+  - {id: classification, title: 价值达成机构, fact_ids: [month_rate_classification.high, month_rate_classification.low]}

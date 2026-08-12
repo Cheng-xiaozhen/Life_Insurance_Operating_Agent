@@ -1,0 +1,55 @@
+id: co-recruitment
+version: 4.1.0
+title: 同引
+description: 汇总月度送训、季度同引和学历指标，并识别目标及挂零机构。
+keywords: [同引, 同引达成率, 同引主管, 送训挂零]
+parameters:
+  co_recruitment_target_threshold: {default: 100, description: 同引目标阈值。}
+  co_recruitment_middle_threshold: {default: 50, description: 同引中档下限。}
+  zero_threshold: {default: 0, description: 挂零判断阈值。}
+metrics:
+  month_training_count: {label: 月度同引送训, formatter: person}
+  month_training_yoy: {label: 月度同引送训同比, formatter: pct, semantic: yoy}
+  quarter_target: {label: 季度同引目标, formatter: person}
+  quarter_achieved: {label: 季度同引上岗, formatter: person}
+  quarter_rate: {label: 季度同引达成率, formatter: pct}
+  quarter_yoy: {label: 季度同引同比, formatter: pct, semantic: yoy}
+  quarter_college_share: {label: 季度同引大专及以上占比, formatter: pct}
+  quarter_college_yoy: {label: 季度同引大专及以上同比, formatter: pt, semantic: yoy}
+  quarter_bachelor_share: {label: 季度同引本科及以上占比, formatter: pct}
+  quarter_bachelor_yoy: {label: 季度同引本科及以上同比, formatter: pt, semantic: yoy}
+steps:
+  - {id: overall_summary, title: 全系统概况, op: summarize, metrics: [month_training_count, month_training_yoy, quarter_achieved, quarter_rate, quarter_yoy, quarter_college_share, quarter_college_yoy, quarter_bachelor_share, quarter_bachelor_yoy]}
+  - id: quarter_rate_classification
+    title: 同引达成机构
+    op: classify
+    order: source
+    bands:
+      - {id: target_met, label: 同引目标达成机构, metric: quarter_rate, operator: gte, threshold_param: co_recruitment_target_threshold}
+      - id: middle
+        label: 同引中档机构
+        conditions:
+          match: all
+          rules:
+            - {metric: quarter_rate, operator: gte, threshold_param: co_recruitment_middle_threshold}
+            - {metric: quarter_rate, operator: lt, threshold_param: co_recruitment_target_threshold}
+        display_metric: quarter_rate
+  - id: zero_classification
+    title: 同引挂零机构
+    op: classify
+    order: source
+    bands:
+      - id: both_zero
+        label: 月度送训和季度上岗同时挂零机构
+        conditions:
+          match: all
+          rules:
+            - {metric: month_training_count, operator: eq, threshold_param: zero_threshold}
+            - {metric: quarter_achieved, operator: eq, threshold_param: zero_threshold}
+        display_metric: month_training_count
+signals:
+  target_met: quarter_rate_classification.target_met
+narrative_groups:
+  - {id: overall, title: 全系统概况, fact_ids: [overall_summary.month_training_count, overall_summary.month_training_yoy, overall_summary.quarter_achieved, overall_summary.quarter_rate, overall_summary.quarter_yoy, overall_summary.quarter_college_share, overall_summary.quarter_college_yoy, overall_summary.quarter_bachelor_share, overall_summary.quarter_bachelor_yoy]}
+  - {id: classification, title: 同引达成机构, fact_ids: [quarter_rate_classification.target_met, quarter_rate_classification.middle]}
+  - {id: zero, title: 同引挂零机构, fact_ids: [zero_classification.both_zero]}

@@ -5,17 +5,19 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "template-analysis-agent-v4"
 version = "0.1.0"
-description = "A small template-driven deterministic analysis engine with constrained LLM narration."
+description = "A small template-driven fact engine with constrained LLM narration."
 requires-python = ">=3.11"
 dependencies = [
   "langchain>=1,<2",
   "langchain-deepseek>=1,<2",
+  "loguru>=0.7,<1",
   "pydantic>=2.10,<3",
   "PyYAML>=6,<7",
 ]
 
 [project.scripts]
-template-analysis-v4 = "template_analysis_agent_v4.cli:main"
+template-analysis-v4 = "src.cli:main"
 
 [tool.setuptools.packages.find]
-where = ["src"]
+where = ["."]
+include = ["src"]

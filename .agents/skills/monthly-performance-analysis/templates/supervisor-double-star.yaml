@@ -1,0 +1,31 @@
+id: supervisor-double-star
+version: 4.1.0
+title: 主管双星
+description: 汇总主管双星人数和双星率，并识别高低机构。
+keywords: [主管双星, 双星率]
+parameters:
+  double_star_high_threshold: {default: 50, description: 报告展示的双星率高位阈值。}
+  double_star_high_effective_threshold: {default: 55, description: 历史名单实际筛选阈值。}
+  double_star_low_threshold: {default: 25, description: 双星率低位阈值。}
+metrics:
+  double_star_count: {label: 主管双星人数, formatter: person}
+  double_star_rate: {label: 主管双星率, formatter: pct}
+  double_star_yoy: {label: 主管双星率同比, formatter: pt, semantic: yoy}
+steps:
+  - {id: overall_summary, title: 全系统概况, op: summarize, metrics: [double_star_count, double_star_rate, double_star_yoy]}
+  - id: double_star_rate_classification
+    title: 主管双星率机构
+    op: classify
+    order: source
+    bands:
+      - id: high
+        label: 主管双星率较高机构
+        metric: double_star_rate
+        operator: gt
+        threshold_param: double_star_high_effective_threshold
+        display_threshold_param: double_star_high_threshold
+        rule_text: "主管双星率高于{threshold_display}"
+      - {id: low, label: 主管双星率偏低机构, metric: double_star_rate, operator: lt, threshold_param: double_star_low_threshold}
+narrative_groups:
+  - {id: overall, title: 全系统概况, fact_ids: [overall_summary.double_star_count, overall_summary.double_star_rate, overall_summary.double_star_yoy]}
+  - {id: classification, title: 主管双星率机构, fact_ids: [double_star_rate_classification.high, double_star_rate_classification.low]}

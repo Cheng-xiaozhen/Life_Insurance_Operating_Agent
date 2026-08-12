@@ -1,0 +1,7 @@
+interface:
+  display_name: "月度经营分析（五月 MVP）"
+  short_description: "基于外部五月业务 CSV 生成寿险月度经营分析报告"
+  default_prompt: "Use $monthly-performance-analysis to generate the fixed May report from an external CSV data directory."
+
+policy:
+  allow_implicit_invocation: true

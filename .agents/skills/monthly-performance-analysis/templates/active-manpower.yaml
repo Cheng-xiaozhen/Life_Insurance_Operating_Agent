@@ -1,0 +1,28 @@
+id: active-manpower
+version: 4.1.0
+title: 活动人力
+description: 汇总活动人力并按达成率识别高位、目标和低位机构。
+keywords: [活动人力, 活动人力达成率]
+parameters:
+  activity_high_threshold: {default: 90, description: 活动人力高位阈值。}
+  activity_target_threshold: {default: 100, description: 活动人力目标阈值。}
+  activity_low_threshold: {default: 60, description: 活动人力低位阈值。}
+metrics:
+  activity_count: {label: 活动人力, formatter: person}
+  activity_rate: {label: 活动人力达成率, formatter: pct}
+  activity_yoy: {label: 活动人力同比, formatter: pct, semantic: yoy}
+steps:
+  - {id: overall_summary, title: 全系统概况, op: summarize, metrics: [activity_count, activity_rate, activity_yoy]}
+  - id: activity_rate_classification
+    title: 活动人力达成机构
+    op: classify
+    order: source
+    bands:
+      - {id: high, label: 活动人力达成率较高机构, metric: activity_rate, operator: gt, threshold_param: activity_high_threshold}
+      - {id: target_met, label: 活动人力目标达成机构, metric: activity_rate, operator: gte, threshold_param: activity_target_threshold}
+      - {id: low, label: 活动人力达成率偏低机构, metric: activity_rate, operator: lt, threshold_param: activity_low_threshold}
+signals:
+  target_met: activity_rate_classification.target_met
+narrative_groups:
+  - {id: overall, title: 全系统概况, fact_ids: [overall_summary.activity_count, overall_summary.activity_rate, overall_summary.activity_yoy]}
+  - {id: classification, title: 活动人力达成机构, fact_ids: [activity_rate_classification.high, activity_rate_classification.target_met, activity_rate_classification.low]}
