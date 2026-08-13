@@ -1,0 +1,47 @@
+id: active-manpower
+title: 活动人力
+description: 分析活动人力规模、同比和达成率，识别高位、目标达成与低位机构。
+
+parameters:
+  high_rate: 90
+  target_rate: 100
+  low_rate: 60
+
+metrics:
+  activity_count: {label: 活动人力, unit: 人}
+  activity_rate: {label: 活动人力达成率}
+  activity_yoy: {label: 活动人力同比}
+
+analysis:
+  - id: overall
+    type: summary
+    title: 全系统概况
+    fields:
+      - activity_count
+      - activity_rate
+      - activity_yoy
+
+  - id: high_activity_rate
+    type: select
+    title: 活动人力达成率高于 ${high_rate}% 的机构
+    where: {field: activity_rate, operator: ">", value: "${high_rate}"}
+    order_by: {field: activity_rate, direction: desc}
+    display_field: activity_rate
+
+  - id: target_met
+    type: select
+    title: 活动人力达成率达到 ${target_rate}% 的机构
+    where: {field: activity_rate, operator: ">=", value: "${target_rate}"}
+    order_by: {field: activity_rate, direction: desc}
+    display_field: activity_rate
+
+  - id: low_activity_rate
+    type: select
+    title: 活动人力达成率低于 ${low_rate}% 的机构
+    where: {field: activity_rate, operator: "<", value: "${low_rate}"}
+    order_by: {field: activity_rate, direction: asc}
+    display_field: activity_rate
+
+narrative:
+  objective: 概括全系统活动人力规模、达成率和同比，并指出高位、目标达成与低位机构。
+  style: 使用简洁的经营分析语言，先整体、后机构；只引用执行结果中的数字。

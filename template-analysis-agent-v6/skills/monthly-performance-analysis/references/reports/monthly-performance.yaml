@@ -1,0 +1,44 @@
+id: monthly-performance
+title: "{report_month}业绩分析报告"
+binding: monthly-csv
+
+routing:
+  scenario_desc: 基于月度经营 CSV 生成包含业绩、人力、主管、组织和增员等场景的综合分析报告。
+  intent_examples:
+    - 生成五月业绩分析报告
+    - 看一下本月经营情况
+    - 做一份月度经营复盘
+
+parameters:
+  report_month: 五月
+  month_label: 5月
+  quarter_label: 二季度
+
+params_schema:
+  report_month:
+    type: string
+    required: false
+    description: 报告标题使用的中文月份，例如“五月”。
+  month_label:
+    type: string
+    required: false
+    description: CSV 列名使用的月份前缀，例如“5月”。
+  quarter_label:
+    type: string
+    required: false
+    description: CSV 列名使用的季度前缀，例如“二季度”。
+
+sections:
+  - scene: standard-premium
+  - scene: value
+  - scene: active-manpower
+  - scene: sunshine-manpower
+  - scene: supervisor-activity
+  - scene: supervisor-double-star
+  - scene: standard-team
+  - scene: recruitment
+  - scene: co-recruitment
+
+output:
+  format: markdown
+  heading_level: 1

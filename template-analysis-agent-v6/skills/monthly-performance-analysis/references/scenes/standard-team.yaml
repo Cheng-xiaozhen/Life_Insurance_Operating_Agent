@@ -1,0 +1,41 @@
+id: standard-team
+title: 标准组
+description: 分析标准组达成、同比和主管占比，识别同比下降或占比较低的机构。
+
+parameters:
+  low_yoy: -20
+  low_share: 30
+
+metrics:
+  in_service: {label: 在职主管, unit: 人}
+  standard_count: {label: 标准组达成, unit: 个}
+  standard_yoy: {label: 标准组同比}
+  standard_share: {label: 标准组占比}
+
+analysis:
+  - id: overall
+    type: summary
+    title: 全系统概况
+    fields:
+      - in_service
+      - standard_count
+      - standard_yoy
+      - standard_share
+
+  - id: low_standard_yoy
+    type: select
+    title: 标准组同比低于 ${low_yoy}% 的机构
+    where: {field: standard_yoy, operator: "<", value: "${low_yoy}"}
+    order_by: {field: standard_yoy, direction: asc}
+    display_field: standard_yoy
+
+  - id: low_standard_share
+    type: select
+    title: 标准组占比低于 ${low_share}% 的机构
+    where: {field: standard_share, operator: "<", value: "${low_share}"}
+    order_by: {field: standard_share, direction: asc}
+    display_field: standard_share
+
+narrative:
+  objective: 概括全系统标准组表现，并指出同比下降较多或标准组占比较低的机构。
+  style: 使用简洁的经营分析语言，先整体、后机构；只引用执行结果中的数字。

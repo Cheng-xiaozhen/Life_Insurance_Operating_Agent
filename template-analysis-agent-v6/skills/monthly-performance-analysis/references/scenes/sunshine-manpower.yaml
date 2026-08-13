@@ -1,0 +1,41 @@
+id: sunshine-manpower
+title: 阳光人力
+description: 分析阳光人力达成、同比和活动人力占比，识别达成率领先与落后机构。
+
+parameters:
+  high_rate: 90
+  low_rate: 70
+
+metrics:
+  sunshine_count: {label: 阳光人力达成, unit: 人}
+  sunshine_rate: {label: 阳光人力达成率}
+  sunshine_yoy: {label: 阳光人力同比}
+  sunshine_share: {label: 阳光占比活动}
+
+analysis:
+  - id: overall
+    type: summary
+    title: 全系统概况
+    fields:
+      - sunshine_count
+      - sunshine_rate
+      - sunshine_yoy
+      - sunshine_share
+
+  - id: high_sunshine_rate
+    type: select
+    title: 阳光人力达成率不低于 ${high_rate}% 的机构
+    where: {field: sunshine_rate, operator: ">=", value: "${high_rate}"}
+    order_by: {field: sunshine_rate, direction: desc}
+    display_field: sunshine_rate
+
+  - id: low_sunshine_rate
+    type: select
+    title: 阳光人力达成率低于 ${low_rate}% 的机构
+    where: {field: sunshine_rate, operator: "<", value: "${low_rate}"}
+    order_by: {field: sunshine_rate, direction: asc}
+    display_field: sunshine_rate
+
+narrative:
+  objective: 概括全系统阳光人力表现，并指出达成率明显领先或落后的机构。
+  style: 使用简洁的经营分析语言，先整体、后机构；只引用执行结果中的数字。

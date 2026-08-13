@@ -1,0 +1,62 @@
+id: standard-premium
+title: 标保
+description: 分析月度标保达成、同比表现和年度进度，识别领先与落后机构。
+
+parameters:
+  high_rate: 70
+  low_rate: 50
+  high_year_progress: 60
+  low_year_progress: 45
+
+metrics:
+  month_amount: {label: 月度标保达成, unit: 万}
+  month_rate: {label: 月度标保达成率}
+  month_yoy: {label: 月度标保同比}
+  year_amount: {label: 全年标保达成, unit: 万}
+  year_progress: {label: 全年标保进度}
+  year_yoy: {label: 全年标保同比}
+
+analysis:
+  - id: overall
+    type: summary
+    title: 全系统概况
+    fields:
+      - month_amount
+      - month_rate
+      - month_yoy
+      - year_amount
+      - year_progress
+      - year_yoy
+
+  - id: high_month_rate
+    type: select
+    title: 月度标保达成率高于 ${high_rate}% 的机构
+    where: {field: month_rate, operator: ">", value: "${high_rate}"}
+    order_by: {field: month_rate, direction: desc}
+    display_field: month_rate
+
+  - id: low_month_rate
+    type: select
+    title: 月度标保达成率低于 ${low_rate}% 的机构
+    where: {field: month_rate, operator: "<", value: "${low_rate}"}
+    order_by: {field: month_rate, direction: asc}
+    display_field: month_rate
+
+  - id: ahead_year_progress
+    type: select
+    title: 全年标保进度高于 ${high_year_progress}% 的机构
+    where: {field: year_progress, operator: ">", value: "${high_year_progress}"}
+    order_by: {field: year_progress, direction: desc}
+    display_field: year_progress
+
+  - id: behind_year_progress
+    type: select
+    title: 全年标保进度低于 ${low_year_progress}% 的机构
+    where: {field: year_progress, operator: "<", value: "${low_year_progress}"}
+    order_by: {field: year_progress, direction: asc}
+    display_field: year_progress
+
+narrative:
+  objective: 概括全系统标保表现，并指出月度达成和年度进度明显领先或落后的机构。
+  style: 使用简洁的经营分析语言，先整体、后机构；只引用执行结果中的数字。
+

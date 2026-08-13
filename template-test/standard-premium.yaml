@@ -1,0 +1,174 @@
+schema_version: 1
+kind: scene
+
+id: standard-premium
+title: 标保
+description: 分析月度标保达成、同比表现和年度进度，识别领先、达标与落后机构。
+
+# 业务阈值只在模板中声明，渲染器不得写死标保规则。
+parameters:
+  high_rate: 70
+  target_rate: 100
+  low_rate: 50
+  extremely_low_rate: 5
+  high_year_progress: 60
+  exceptional_year_progress: 80
+  low_year_progress: 45
+
+# value_type 供阈值和趋势 formatter 使用；unit 供汇总值展示使用。
+metrics:
+  month_amount: {label: 月度标保达成, value_type: number, unit: 万}
+  month_rate: {label: 月度标保达成率, value_type: percent}
+  month_yoy: {label: 月度标保同比, value_type: percent}
+  year_amount: {label: 全年标保达成, value_type: number, unit: 万}
+  year_progress: {label: 全年标保进度, value_type: percent}
+  year_yoy: {label: 全年标保同比, value_type: percent}
+
+# analysis 只负责生成 facts。select 不声明 order_by 时保持 CSV 源顺序。
+analysis:
+  - id: overall
+    type: summary
+    title: 全系统概况
+    fields:
+      - month_amount
+      - month_rate
+      - month_yoy
+      - year_amount
+      - year_progress
+      - year_yoy
+
+  - id: high_month_rate
+    type: select
+    title: 月度标保达成率高位机构
+    where: {field: month_rate, operator: ">", value: "${high_rate}"}
+    display_field: month_rate
+
+  - id: month_target_met
+    type: select
+    title: 月度标保目标达成机构
+    where: {field: month_rate, operator: ">=", value: "${target_rate}"}
+    display_field: month_rate
+
+  - id: low_month_rate
+    type: select
+    title: 月度标保达成率低位机构
+    where: {field: month_rate, operator: "<", value: "${low_rate}"}
+    display_field: month_rate
+
+  - id: extremely_low_month_rate
+    type: select
+    title: 月度标保达成率极低机构
+    where: {field: month_rate, operator: "<", value: "${extremely_low_rate}"}
+    display_field: month_rate
+
+  - id: ahead_year_progress
+    type: select
+    title: 全年标保进度领先机构
+    where: {field: year_progress, operator: ">", value: "${high_year_progress}"}
+    display_field: year_progress
+
+  - id: exceptional_year_progress
+    type: select
+    title: 全年标保进度突出机构
+    where: {field: year_progress, operator: ">", value: "${exceptional_year_progress}"}
+    display_field: year_progress
+
+  - id: behind_year_progress
+    type: select
+    title: 全年标保进度落后机构
+    where: {field: year_progress, operator: "<", value: "${low_year_progress}"}
+    display_field: year_progress
+
+# presentation 只描述 facts 的确定性展示，不包含函数、循环或任意表达式。
+presentation:
+  mode: deterministic
+  required_report_parameters:
+    - month_label
+    - cutoff_date
+
+  style:
+    bullet_marker: "-"
+    list_separator: "、"
+    clause_separator: "；"
+    colon: "："
+    label_value_separator: ""
+    comparison_value_separator: " "
+    trend_word_value_separator: " "
+
+  bullets:
+    - id: overall_summary
+      end: "。"
+      clauses:
+        - type: summary
+          fact_id: overall
+          prefix: "截至${cutoff_date}，全系统${month_label}标保共"
+          item_separator: "，"
+          items:
+            - {field: month_amount, label: 达成, formatter: metric}
+            - {field: month_rate, label: 达成率, formatter: metric}
+            - {field: month_yoy, label: 同比, formatter: trend}
+            - {field: year_amount, label: 全年达成, formatter: metric}
+            - {field: year_progress, label: 全年进度, formatter: metric}
+            - {field: year_yoy, label: 全年标保同比, formatter: trend}
+
+    - id: monthly_rate_distribution
+      clause_separator: "；"
+      end: "；"
+      clauses:
+        - type: selection
+          fact_id: high_month_rate
+          subject: "${month_label}标保达成率"
+          show_count: true
+          show_threshold: true
+          item_display: organization
+          empty: show_none
+
+        - type: annotation
+          fact_id: month_target_met
+          prefix: 其中
+          suffix: "达成${month_label}标保目标"
+          item_display: organization
+          empty: omit
+
+        - type: selection
+          fact_id: low_month_rate
+          subject: "${month_label}标保达成率"
+          show_count: true
+          show_threshold: true
+          item_display: organization
+          empty: show_none
+
+        - type: annotation
+          fact_id: extremely_low_month_rate
+          prefix: 其中
+          suffix: "达成率不足 ${extremely_low_rate}%"
+          item_display: organization
+          empty: omit
+
+    - id: annual_progress_distribution
+      clause_separator: "；"
+      end: "。"
+      clauses:
+        - type: selection
+          fact_id: ahead_year_progress
+          subject: 全年标保进度达成
+          show_count: true
+          show_threshold: true
+          item_display: organization
+          empty: show_none
+
+        - type: annotation
+          fact_id: exceptional_year_progress
+          prefix: 其中
+          suffix: "达成进度超 ${exceptional_year_progress}%"
+          item_display: organization
+          empty: omit
+
+        - type: selection
+          fact_id: behind_year_progress
+          subject: 全年标保进度达成
+          show_count: true
+          show_threshold: true
+          item_display: organization
+          empty: show_none
+

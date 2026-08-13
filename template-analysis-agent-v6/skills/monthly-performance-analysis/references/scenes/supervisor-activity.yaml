@@ -1,0 +1,41 @@
+id: supervisor-activity
+title: 主管活动
+description: 分析在职主管规模、主管活动人数和活动率，识别活动率领先与落后机构。
+
+parameters:
+  high_rate: 80
+  low_rate: 60
+
+metrics:
+  in_service: {label: 在职主管, unit: 人}
+  active_count: {label: 主管活动人数, unit: 人}
+  activity_rate: {label: 主管活动率}
+  activity_yoy: {label: 主管活动率同比}
+
+analysis:
+  - id: overall
+    type: summary
+    title: 全系统概况
+    fields:
+      - in_service
+      - active_count
+      - activity_rate
+      - activity_yoy
+
+  - id: high_activity_rate
+    type: select
+    title: 主管活动率高于 ${high_rate}% 的机构
+    where: {field: activity_rate, operator: ">", value: "${high_rate}"}
+    order_by: {field: activity_rate, direction: desc}
+    display_field: activity_rate
+
+  - id: low_activity_rate
+    type: select
+    title: 主管活动率低于 ${low_rate}% 的机构
+    where: {field: activity_rate, operator: "<", value: "${low_rate}"}
+    order_by: {field: activity_rate, direction: asc}
+    display_field: activity_rate
+
+narrative:
+  objective: 概括全系统主管活动表现，并指出主管活动率明显领先或落后的机构。
+  style: 使用简洁的经营分析语言，先整体、后机构；只引用执行结果中的数字。

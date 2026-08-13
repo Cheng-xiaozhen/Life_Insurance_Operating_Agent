@@ -1,0 +1,90 @@
+id: recruitment
+title: 新增
+description: 分析新增送训、达成、首阳和学历结构，并识别新增及本科目标表现。
+
+parameters:
+  high_rate: 80
+  target_rate: 100
+  low_rate: 40
+  bachelor_target_gap: 0
+  bachelor_excess_gap: 10
+
+metrics:
+  training_count: {label: 新增送训, unit: 人}
+  added_count: {label: 新增人数, unit: 人}
+  added_rate: {label: 新增达成率}
+  added_yoy: {label: 新增同比}
+  first_sun_count: {label: 起聘首阳人数, unit: 人}
+  first_sun_rate: {label: 起聘首阳率}
+  college_share: {label: 大专及以上学历占比}
+  college_yoy: {label: 大专及以上学历同比}
+  bachelor_share: {label: 本科及以上学历占比}
+  bachelor_gap: {label: 本科占比目标差额}
+
+analysis:
+  - id: overall
+    type: summary
+    title: 全系统概况
+    fields:
+      - training_count
+      - added_count
+      - added_rate
+      - added_yoy
+      - first_sun_count
+      - first_sun_rate
+      - college_share
+      - college_yoy
+      - bachelor_share
+      - bachelor_gap
+
+  - id: high_added_rate
+    type: select
+    title: 新增达成率高于 ${high_rate}% 的机构
+    where: {field: added_rate, operator: ">", value: "${high_rate}"}
+    order_by: {field: added_rate, direction: desc}
+    display_field: added_rate
+
+  - id: target_met
+    type: select
+    title: 新增达成率达到 ${target_rate}% 的机构
+    where: {field: added_rate, operator: ">=", value: "${target_rate}"}
+    order_by: {field: added_rate, direction: desc}
+    display_field: added_rate
+
+  - id: low_added_rate
+    type: select
+    title: 新增达成率低于 ${low_rate}% 的机构
+    where: {field: added_rate, operator: "<", value: "${low_rate}"}
+    order_by: {field: added_rate, direction: asc}
+    display_field: added_rate
+
+  - id: bachelor_target_met
+    type: select
+    title: 本科占比达到目标的机构
+    where: {field: bachelor_gap, operator: ">=", value: "${bachelor_target_gap}"}
+    order_by: {field: bachelor_gap, direction: desc}
+    display_field: bachelor_gap
+
+  - id: bachelor_excess
+    type: select
+    title: 本科占比超额 ${bachelor_excess_gap}pt 的机构
+    where: {field: bachelor_gap, operator: ">", value: "${bachelor_excess_gap}"}
+    order_by: {field: bachelor_gap, direction: desc}
+    display_field: bachelor_gap
+
+  - id: bachelor_target_not_met
+    type: select
+    title: 本科占比未达到目标的机构
+    where: {field: bachelor_gap, operator: "<", value: "${bachelor_target_gap}"}
+    order_by: {field: bachelor_gap, direction: asc}
+    display_field: bachelor_gap
+
+  - id: bachelor_gap_missing
+    type: select
+    title: 本科占比目标差额数据缺失的机构
+    where: {field: bachelor_gap, operator: is_empty}
+    display_field: bachelor_gap
+
+narrative:
+  objective: 概括全系统新增、首阳和学历结构，并指出新增达成及本科占比目标表现突出的机构。
+  style: 使用简洁的经营分析语言，先整体、后机构；只引用执行结果中的数字，并将数据缺失与未达标分开描述。

@@ -1,0 +1,4 @@
+interface:
+  display_name: "月度业绩分析"
+  short_description: "按声明式场景、CSV数据和报告编排生成月度业绩分析报告"
+  default_prompt: "Use $monthly-performance-analysis to generate a monthly performance report from the supplied CSV data."

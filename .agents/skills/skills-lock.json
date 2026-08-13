@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "data-analysis": {
+      "source": "claude-office-skills/skills",
+      "sourceType": "github",
+      "skillPath": "data-analysis/SKILL.md",
+      "computedHash": "7f00189579e1649769273fd363f22f2585e390a88331f0738e71561c28b665cf"
+    }
+  }
+}

@@ -1,0 +1,66 @@
+id: co-recruitment
+title: 同引
+description: 分析月度同引送训、季度同引达成和学历结构，并识别目标、中档及挂零机构。
+
+parameters:
+  target_rate: 100
+  high_rate: 50
+  zero: 0
+
+metrics:
+  month_training_count: {label: 月度同引送训, unit: 人}
+  month_training_yoy: {label: 月度同引送训同比}
+  quarter_target: {label: 季度同引目标, unit: 人}
+  quarter_achieved: {label: 季度同引达成, unit: 人}
+  quarter_rate: {label: 季度同引达成率}
+  quarter_yoy: {label: 季度同引同比}
+  quarter_college_share: {label: 季度同引大专及以上占比}
+  quarter_college_yoy: {label: 季度同引大专及以上同比}
+  quarter_bachelor_share: {label: 季度同引本科及以上占比}
+  quarter_bachelor_yoy: {label: 季度同引本科及以上同比}
+
+analysis:
+  - id: overall
+    type: summary
+    title: 全系统概况
+    fields:
+      - month_training_count
+      - month_training_yoy
+      - quarter_target
+      - quarter_achieved
+      - quarter_rate
+      - quarter_yoy
+      - quarter_college_share
+      - quarter_college_yoy
+      - quarter_bachelor_share
+      - quarter_bachelor_yoy
+
+  - id: target_met
+    type: select
+    title: 季度同引达成率达到 ${target_rate}% 的机构
+    where: {field: quarter_rate, operator: ">=", value: "${target_rate}"}
+    order_by: {field: quarter_rate, direction: desc}
+    display_field: quarter_rate
+
+  - id: high_quarter_rate
+    type: select
+    title: 季度同引达成率不低于 ${high_rate}% 的机构
+    where: {field: quarter_rate, operator: ">=", value: "${high_rate}"}
+    order_by: {field: quarter_rate, direction: desc}
+    display_field: quarter_rate
+
+  - id: month_training_zero
+    type: select
+    title: 月度同引送训挂零的机构
+    where: {field: month_training_count, operator: "=", value: "${zero}"}
+    display_field: month_training_count
+
+  - id: quarter_achieved_zero
+    type: select
+    title: 季度同引达成挂零的机构
+    where: {field: quarter_achieved, operator: "=", value: "${zero}"}
+    display_field: quarter_achieved
+
+narrative:
+  objective: 概括全系统月度送训、季度同引达成和学历结构，并指出目标达成、中档及挂零机构。
+  style: 使用简洁的经营分析语言，先整体、后机构；只引用执行结果中的数字。月度送训与季度达成挂零分别列示，不推断两者交集。

@@ -1,0 +1,107 @@
+id: monthly-csv
+type: csv
+encoding: utf-8-sig
+
+scenes:
+  standard-premium:
+    file: 标保.csv
+    organization_column: 机构
+    total_row: {column: 片区, value: 全系统}
+    fields:
+      month_amount: "{month_label}达成"
+      month_rate: "{month_label}达成率"
+      month_yoy: "{month_label}同比"
+      year_amount: 全年标保达成
+      year_progress: 全年进度
+      year_yoy: 全年同比
+
+  value:
+    file: 价值.csv
+    organization_column: 机构
+    total_row: {column: 片区, value: 全系统}
+    fields:
+      month_amount: "{month_label}达成"
+      month_rate: "{month_label}达成率"
+      month_yoy: "{month_label}同比"
+      year_progress: 全年进度
+      year_yoy: 全年同比
+
+  active-manpower:
+    file: 活动人力.csv
+    organization_column: 机构
+    total_row: {column: 片区, value: 全系统}
+    fields:
+      activity_count: 活动人力
+      activity_yoy: 同比
+      activity_rate: 活动人力达成率
+
+  sunshine-manpower:
+    file: 阳光人力.csv
+    organization_column: 机构
+    total_row: {column: 片区, value: 全系统}
+    fields:
+      sunshine_count: 阳光人力达成
+      sunshine_yoy: 同比
+      sunshine_rate: 阳光人力达成率
+      sunshine_share: 阳光占比活动
+
+  supervisor-activity:
+    file: 主管活动.csv
+    organization_column: 机构
+    total_row: {column: 分组, value: 全系统}
+    fields:
+      in_service: 在职主管
+      active_count: 活动人数
+      activity_rate: 活动率
+      activity_yoy: 活动率同比
+
+  supervisor-double-star:
+    file: 主管双星.csv
+    organization_column: 机构
+    total_row: {column: 分组, value: 全系统}
+    fields:
+      double_star_count: 双星人数
+      double_star_rate: 双星率
+      double_star_yoy: 双星率同比
+
+  standard-team:
+    file: 标准组.csv
+    organization_column: 机构
+    total_row: {column: 分组, value: 全系统}
+    fields:
+      in_service: 在职主管
+      standard_count: 达成
+      standard_yoy: 同比
+      standard_share: 占比
+
+  recruitment:
+    file: 新增.csv
+    organization_column: 机构
+    total_row: {column: 分组, value: 全系统}
+    fields:
+      training_count: 新增_送训
+      added_count: 新增_新增
+      added_rate: 新增_达成率
+      added_yoy: 新增_序时同比
+      first_sun_count: 首阳（起聘）_首阳
+      first_sun_rate: 首阳（起聘）_首阳率
+      college_share: 大专+_占比
+      college_yoy: 大专+_序时同比
+      bachelor_share: 本科+_占比
+      bachelor_gap: 本科+_差额
+
+  co-recruitment:
+    file: 同引.csv
+    organization_column: 机构
+    total_row: {column: 分组, value: 全系统}
+    fields:
+      month_training_count: "{month_label}送训_送训"
+      month_training_yoy: "{month_label}送训_同比"
+      quarter_target: "{quarter_label}同引_目标"
+      quarter_achieved: "{quarter_label}同引_达成"
+      quarter_rate: "{quarter_label}同引_达成率"
+      quarter_yoy: "{quarter_label}同引_同比"
+      quarter_college_share: "{quarter_label}大专+学历_占比"
+      quarter_college_yoy: "{quarter_label}大专+学历_同比"
+      quarter_bachelor_share: "{quarter_label}本科+学历_占比"
+      quarter_bachelor_yoy: "{quarter_label}本科+学历_同比"

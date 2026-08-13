@@ -1,0 +1,39 @@
+id: supervisor-double-star
+title: 主管双星
+description: 分析主管双星人数、双星率和同比，识别双星率领先与落后机构。
+
+parameters:
+  high_rate: 50
+  low_rate: 25
+
+metrics:
+  double_star_count: {label: 主管双星人数, unit: 人}
+  double_star_rate: {label: 主管双星率}
+  double_star_yoy: {label: 主管双星率同比}
+
+analysis:
+  - id: overall
+    type: summary
+    title: 全系统概况
+    fields:
+      - double_star_count
+      - double_star_rate
+      - double_star_yoy
+
+  - id: high_double_star_rate
+    type: select
+    title: 主管双星率高于 ${high_rate}% 的机构
+    where: {field: double_star_rate, operator: ">", value: "${high_rate}"}
+    order_by: {field: double_star_rate, direction: desc}
+    display_field: double_star_rate
+
+  - id: low_double_star_rate
+    type: select
+    title: 主管双星率低于 ${low_rate}% 的机构
+    where: {field: double_star_rate, operator: "<", value: "${low_rate}"}
+    order_by: {field: double_star_rate, direction: asc}
+    display_field: double_star_rate
+
+narrative:
+  objective: 概括全系统主管双星表现，并指出主管双星率明显领先或落后的机构。
+  style: 使用简洁的经营分析语言，先整体、后机构；只引用执行结果中的数字。
